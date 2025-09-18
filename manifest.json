@@ -3,8 +3,8 @@
   "short_name": "章鱼喷墨机",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff80ab",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
   "description": "一个有趣的网页应用",
   "icons": [
     {
@@ -30,5 +30,6 @@
   ]
 
 }
+
 
 
