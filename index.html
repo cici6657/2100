@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="https://i.postimg.cc/nzP9sgxr/chan-125.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <link rel="manifest" href="manifest.json">
 
     <style>
         /* --- 全局与主题样式 --- */
@@ -5084,7 +5085,7 @@
                     // Compress the data using Gzip
                     const compressionStream = new CompressionStream('gzip');
                     const compressedStream = dataBlob.stream().pipeThrough(compressionStream);
-                    const compressedBlob = await new Response(compressedStream).blob();
+                    const compressedBlob = await new Response(compressedStream, { headers: { 'Content-Type': 'application/octet-stream' } }).blob();
 
                     const url = URL.createObjectURL(compressedBlob);
                     const a = document.createElement('a');
@@ -8490,9 +8491,17 @@
 
     });
 </script>
-
-
-
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').then(registration => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+</script>
 </body>
 
 </html>
