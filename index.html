@@ -4139,6 +4139,7 @@
                 const iconEl = document.createElement('a');
                 iconEl.href = '#';
                 iconEl.className = 'app-icon';
+                iconEl.dataset.peekAppId = id; // 新增此行，为CSS选择器提供钩子
                 iconEl.innerHTML = `
                     <img src="${iconData.url}" alt="${iconData.name}" class="icon-img">
                     <span class="app-name">${iconData.name}</span>
