@@ -8051,7 +8051,9 @@
                     customIcons: data.customIcons || {},
                     apiPresets: data.apiPresets || [],
                     bubbleCssPresets: data.bubbleCssPresets || [],
-                    myPersonaPresets: data.myPersonaPresets || []
+                    myPersonaPresets: data.myPersonaPresets || [],
+                    globalCss: data.globalCss || '',
+                    globalCssPresets: data.globalCssPresets || []
                 };
 
                 let importStats = {
@@ -8128,6 +8130,12 @@
                 }
                 if(data.myPersonaPresets){
                     await dataStorage.saveData('myPersonaPresets', data.myPersonaPresets);
+                }
+                if(data.globalCssPresets){
+                    await dataStorage.saveData('globalCssPresets', data.globalCssPresets);
+                }
+                if(data.globalCss){
+                    await dataStorage.saveData('globalCss', data.globalCss);
                 }
                 // if(data.customIcons){
                 //     await dataStorage.saveData('customIcons', data.customIcons);
