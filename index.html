@@ -7,7 +7,7 @@
     <title>章鱼喷墨机</title>
     <meta name="theme-color" content="#FFFFFF"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/Fs2qbHpg/chan-59.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/nzP9sgxr/chan-125.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <link rel="manifest" href="manifest.json">
@@ -269,8 +269,27 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
+        #peek-screen .time-widget {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #peek-screen .time-widget .time {
+            font-size: 72px;
+            font-weight: 200;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        #peek-screen .time-widget .date {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+
         #peek-screen .app-grid {
-            margin-top: 210px;
+            margin-top: 20px;
         }
 
         .dock {
@@ -314,6 +333,7 @@
             color: var(--text-color);
             font-weight: 500;
         }
+
 
         .content {
             flex-grow: 1;
@@ -1059,10 +1079,18 @@
             padding: 0 10px 5px;
             display: flex;
             align-items: center;
-            background: transparent;
-            backdrop-filter: none;
-            gap: 5px;
-        }
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            gap: 2px; /* 修改：将间距从 5px 缩小到 2px */
+            overflow-x: auto; /* 新增：允许内容超出时横向滚动 */
+            flex-wrap: nowrap; /* 新增：确保所有按钮在同一行，不换行 */
+}
+
+/* (可选) 新增：为了在某些浏览器上获得更好的视觉效果，可以隐藏滚动条 */
+#sticker-bar::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条本身 */
+}
+
 
         .sticker-bar-btn {
             background: none;
@@ -1202,8 +1230,8 @@
             padding: 10px;
             padding-bottom: calc(10px + env(safe-area-inset-bottom));
             border-top: 1px solid #eee;
-            background: transparent;
-            backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
             flex-shrink: 0;
             gap: 10px;
             border-bottom-left-radius: var(--phone-corner-radius);
@@ -1709,6 +1737,14 @@
             margin-left: 10px;
         }
 
+        #peek-app-icons-settings .icon-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
         /* 主页自定义小部件样式 (*/
 .home-widget-container {
     position: relative;
@@ -1944,6 +1980,229 @@
             display: block;
         }
 
+    /* --- Peek Unlock Screen (Social Media) --- */
+    #peek-unlock-screen {
+        background-color: #fff;
+        color: #262626;
+    }
+
+    #peek-unlock-screen .app-header .title,
+    #peek-unlock-screen .app-header .back-btn,
+    #peek-unlock-screen .app-header .action-btn {
+        color: #262626;
+    }
+
+    #peek-unlock-screen .content {
+        padding: 0;
+    }
+
+    .unlock-profile-header {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+    }
+
+    .unlock-profile-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 28px;
+        object-fit: cover;
+    }
+
+    .unlock-profile-info {
+        flex-grow: 1;
+    }
+
+    .unlock-profile-username {
+        font-size: 22px;
+        font-weight: 300;
+        margin: 0 0 4px 0;
+    }
+
+    .unlock-profile-handle {
+        font-size: 14px;
+        color: #8e8e8e;
+        margin: 0;
+    }
+
+    .unlock-profile-bio {
+        padding: 0 16px 16px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .unlock-profile-stats {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        padding: 12px 0;
+        border-top: 1px solid #efefef;
+        border-bottom: 1px solid #efefef;
+    }
+
+    .unlock-profile-stat {
+        font-size: 14px;
+    }
+
+    .unlock-profile-stat .count {
+        font-weight: 600;
+        display: block;
+    }
+
+    .unlock-profile-stat .label {
+        color: #8e8e8e;
+    }
+
+    .unlock-post-feed {
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .unlock-post-card {
+        background-color: #fff;
+        border-bottom: 1px solid #efefef;
+        padding: 16px;
+    }
+
+    .unlock-post-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .unlock-post-card-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+    }
+
+    .unlock-post-card-author-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .unlock-post-card-author-info .username {
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    .unlock-post-card-author-info .timestamp {
+        font-size: 12px;
+        color: #8e8e8e;
+    }
+
+    .unlock-post-card-content {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+
+    .unlock-post-card-actions {
+        display: flex;
+        justify-content: space-around;
+        color: #8e8e8e;
+        font-size: 13px;
+        padding-top: 12px;
+        border-top: 1px solid #f5f5f5;
+    }
+
+    .unlock-post-card-actions .action {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .unlock-post-card-actions .action svg {
+        width: 20px;
+        height: 20px;
+        fill: #8e8e8e;
+    }
+
+    /* --- Peek Album Styles (偷看相册样式) --- */
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        padding: 2px;
+    }
+
+    .album-photo {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* 1:1 Aspect Ratio */
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+
+    .album-photo img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-indicator {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-indicator svg {
+        width: 14px;
+        height: 14px;
+        fill: white;
+        margin-left: 2px;
+    }
+
+    #peek-photo-modal .modal-window {
+        width: 90%;
+        max-width: 420px; /* 确保弹窗不会超过手机屏幕宽度 */
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 15px;
+    }
+
+    #peek-photo-image-container {
+        width: 100%;
+        max-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    #peek-photo-image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    #peek-photo-description {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+        text-align: left;
+        white-space: pre-wrap;
+        padding: 0 5px 5px 5px;
+        border-top: 1px solid #eee;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
         /* Peek Screen Specific Styles */
         #peek-messages-screen .list-item:hover,
         #peek-conversation-screen {
@@ -2498,6 +2757,718 @@
             font-size: 12px;
             color: #aaa;
         }
+        
+        /* --- 论坛 --- */
+        /* --- 论坛分享卡片 --- */
+.forum-share-card {
+    width: 250px; /* 卡片宽度 */
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 12px 15px;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+    margin: 0 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forum-share-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.forum-share-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.forum-share-header svg {
+    width: 18px;
+    height: 18px;
+    fill: #aaa;
+    flex-shrink: 0;
+}
+
+.forum-share-content .forum-share-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+    /* 最多显示两行，超出部分显示省略号 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.forum-share-content .forum-share-summary {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    /* 最多显示三行 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+#forum-binding-modal .modal-window {
+    max-width: 380px; /* 弹窗可以稍微宽一点 */
+}
+
+.forum-binding-tabs {
+    display: flex;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+}
+
+.forum-binding-tabs .tab-btn {
+    flex: 1;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.forum-binding-tabs .tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.forum-binding-tabs .tab-btn.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom-color: var(--primary-color);
+}
+
+#forum-binding-content-wrapper {
+    max-height: 50vh; /* 限制内容区域最大高度，超出则出现滚动条 */
+    overflow-y: auto; /* 垂直方向溢出时显示滚动条 */
+    padding-right: 10px; /* 为滚动条留出空间，防止内容被遮挡 */
+}
+
+.forum-binding-content {
+    display: none; /* 默认隐藏所有内容面板 */
+}
+
+.forum-binding-content.active {
+    display: block; /* 只显示激活的内容面板 */
+}
+
+.binding-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.binding-list-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.binding-list-item:last-child {
+    border-bottom: none;
+}
+
+.binding-list-item input[type="checkbox"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.binding-list-item label {
+    font-size: 15px;
+    color: var(--text-color);
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+/* --- 论坛帖子样式 --- */
+#forum-posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.forum-post-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.forum-post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.forum-post-card .post-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.forum-post-card .post-summary {
+    font-size: 14px;
+    color: #888;
+    margin: 0 0 12px 0;
+    border-left: 3px solid var(--primary-color, #ff80ab);
+    padding-left: 10px;
+}
+
+.forum-post-card .post-content {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.75;
+    white-space: pre-wrap; /* 这很重要，能保留AI生成内容里的换行 */
+    display: none; /* 默认隐藏详细内容 */
+}
+
+/* 当卡片被点击时，展开详细内容 */
+.forum-post-card.expanded .post-content {
+    display: block;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* --- Forum Post Detail Screen --- */
+#forum-post-detail-screen {
+    background-color: #f9f9f9;
+}
+
+#forum-post-detail-screen .content {
+    padding: 0;
+}
+
+.post-detail-card {
+    background-color: #fff;
+    margin: 15px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.post-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.post-author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.post-author-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.post-detail-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+}
+
+.post-detail-content {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #444;
+    white-space: pre-wrap;
+    margin-bottom: 25px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.post-action-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.post-action-item svg {
+    width: 22px;
+    height: 22px;
+    fill: #888;
+}
+
+/* --- 论坛详情页新样式 --- */
+#forum-post-detail-screen {
+    background-color: #f0f2f5; /* 类似贴吧和社交媒体的浅灰色背景 */
+}
+
+#forum-post-detail-screen .content {
+    padding: 10px; /* 页面边距 */
+}
+
+.post-detail-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.post-detail-main {
+    padding: 15px;
+}
+
+.post-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.post-meta-data {
+    font-size: 12px;
+    color: #999;
+}
+
+.post-detail-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+    color: #1a1a1a;
+}
+
+.post-detail-content-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #333;
+    white-space: pre-wrap;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.post-detail-actions {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.post-detail-actions .action-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.post-detail-actions .action-item:hover {
+    background-color: #f5f5f5;
+}
+
+.post-detail-actions .action-item svg {
+    width: 20px;
+    height: 20px;
+    fill: #888;
+}
+
+/* --- 评论区样式 --- */
+.comments-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 15px;
+}
+
+.comments-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.comment-body {
+    flex-grow: 1;
+}
+
+.comment-author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.comment-content {
+    font-size: 15px;
+    color: #333;
+    margin-top: 4px;
+    line-height: 1.6;
+}
+
+.comment-timestamp {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 6px;
+}
+
+/* --- 新的分离式柔和风格论坛搜索栏 --- */
+
+/* 这是整个搜索区域的容器，我们让它透明，只用来布局 */
+.forum-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* 增大输入框和按钮之间的空隙，让它们彻底分开 */
+    margin-bottom: 20px;
+    width: 100%; /* 你可以在这里调整整个搜索栏的宽度，比如改成 90% 或者 350px */
+
+    /* 核心改动：把之前的所有视觉样式（背景、边框、阴影）都去掉 */
+    background-color: transparent;
+    backdrop-filter: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    padding: 0; /* 现在不需要内边距了 */
+}
+
+/* 现在，我们单独给输入框加上样式，让它自己看起来像个完整的输入栏 */
+#forum-search-input {
+    flex-grow: 1; /* 让它自动占据大部分空间 */
+    min-width: 0; /* 允许输入框在flex布局中无限缩小，防止溢出 */
+    border: 1px solid rgba(255, 192, 203, 0.3); /* 一个非常淡的粉色边框 */
+    background-color: rgba(255, 255, 255, 0.7); /* 半透明白底 */
+    backdrop-filter: blur(8px);
+    padding: 12px 18px; /* 调整内边距让输入框更高更舒服 */
+    font-size: 15px;
+    border-radius: 22px; /* 非常圆润的边角 */
+    outline: none;
+    color: var(--text-color, #444);
+    box-shadow: 0 2px 10px rgba(200, 150, 160, 0.1); /* 淡淡的粉色阴影 */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* 增加点击时的过渡效果 */
+}
+
+#forum-search-input:focus {
+    border-color: rgba(255, 128, 171, 0.5); /* 点击输入框时，边框变成更明显的粉色 */
+    box-shadow: 0 3px 15px rgba(255, 128, 171, 0.15); /* 阴影也带一点点粉色 */
+}
+
+#forum-search-input::placeholder {
+    color: #b0aab3;
+}
+
+/* 单独给按钮设置样式，让它们看起来是独立的圆形按钮，并且没有边框 */
+.forum-search-bar .action-btn {
+    flex-shrink: 0;
+    width: 42px;  /* 按钮稍微大一点点，更可爱 */
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* 圆形 */
+    background-color: rgba(255, 255, 255, 0.7); /* 和输入框一样的背景 */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(200, 150, 160, 0.1); /* 和输入框一样的阴影 */
+    border: 1px solid rgba(255, 192, 203, 0.3); /* 和输入框一样的淡粉色边框 */
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+/* 图标颜色 */
+.forum-search-bar .action-btn svg {
+    fill: var(--primary-color, #ff80ab);
+}
+
+/* 鼠标悬停和点击时的效果 */
+.forum-search-bar .action-btn:hover {
+    transform: translateY(-2px); /* 轻轻向上浮动一点 */
+    box-shadow: 0 4px 12px rgba(200, 150, 160, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.forum-search-bar .action-btn:active {
+    transform: translateY(0); /* 点击时按下去 */
+    box-shadow: 0 1px 6px rgba(200, 150, 160, 0.12);
+}
+
+
+}
+/* --- 新增：折叠面板样式 --- */
+.collapsible-section {
+    background-color: #fff8fa;
+    border: 1px solid #fce4ec;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    overflow: hidden; /* 防止内容溢出圆角 */
+    transition: all 0.3s ease-in-out;
+}
+
+.collapsible-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none; /* 防止选中文本 */
+}
+
+.collapsible-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+.collapsible-arrow {
+    font-size: 14px;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease-in-out;
+}
+
+.collapsible-content {
+    max-height: 0; /* 默认折叠 */
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    padding: 0 20px; /* 左右留出边距 */
+}
+
+/* 当 .collapsible-section 拥有 .open 类时应用的样式 */
+.collapsible-section.open .collapsible-content {
+    max-height: 5000px; /* 一个足够大的值来完全显示内容 */
+    padding: 0 20px 20px; /* 展开时恢复底部内边距 */
+}
+
+.collapsible-section.open .collapsible-arrow {
+    transform: rotate(180deg); /* 箭头旋转 */
+}
+/* --- 新增样式结束 --- */
+.message-time { display: none; }
+ 
+ 
+/* --- Peek Steps App Styles (偷看步数应用样式) --- */
+#peek-steps-screen {
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+
+
+#peek-steps-screen .app-header {
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+#peek-steps-screen .app-header .title,
+#peek-steps-screen .app-header .back-btn {
+    color: #1c1e21;
+}
+
+#peek-steps-screen .content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.steps-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.steps-header-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.steps-header-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.steps-progress-container {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    flex-shrink: 0; /* 防止在flex布局中被压缩 */
+}
+
+.steps-progress-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        #4CAF50 0deg,
+        #4CAF50 calc(3.6deg * var(--steps-percentage, 0)),
+        #e6e6e6 calc(3.6deg * var(--steps-percentage, 0)),
+        #e6e6e6 360deg
+    );
+    transition: background 0.5s ease-in-out;
+}
+
+.steps-progress-inner {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    background-color: #f0f2f5;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps-count {
+    font-size: 42px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.steps-label {
+    font-size: 14px;
+    color: #65676b;
+    margin-top: 5px;
+}
+
+.steps-module {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.steps-module-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-track-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-track-item {
+    font-size: 15px;
+    color: #333;
+    padding: 8px 0;
+}
+
+.steps-annotation {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+}
     </style>
     <style id="global-css-style"></style>
 </head>
@@ -2536,7 +3507,7 @@
             </div>
             <div class="action-btn-group">
                 <button class="action-btn" id="peek-btn">
-                    <img src="https://i.postimg.cc/ZRCQJPY7/export202509181828139180.png" alt="偷看" style="width: 28px; height: 28px;">
+                    <img src="https://i.postimg.cc/m2DRpk7v/chan-39.png" alt="偷看" style="width: 28px; height: 28px;">
                 </button>
                 <button class="action-btn" id="chat-settings-btn"><img src="https://i.postimg.cc/nhwP4pQy/chan-73.png"
                                                                        alt="设置"></button>
@@ -2617,6 +3588,10 @@
                 <button id="cancel-edit-btn" class="icon-btn" style="background-color: #aaa;">✗</button>
             </div>
         </div>
+        
+        <div id="music-screen" class="screen"></div>
+
+        
         <div id="multi-select-bar"><span id="select-count">已选择 0 项</span>
             <button class="btn btn-danger" id="delete-selected-btn" style="width: auto; padding: 8px 16px;">删除已选
             </button>
@@ -3079,11 +4054,18 @@
             <div class="title-container">
                 <h1 class="title">回忆日记</h1>
             </div>
-            <button class="action-btn" id="generate-new-journal-btn" title="生成新日记">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                </svg>
-            </button>
+            <div class="action-btn-group">
+                <button class="action-btn" id="bind-journal-worldbook-btn" title="绑定世界书">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M17 7h-4v2h4c1.65 0 3 1.35 3 3s-1.35 3-3 3h-4v2h4c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-6 8H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-2zm-3-4h8v2H8v-2z"></path>
+                    </svg>
+                </button>
+                <button class="action-btn" id="generate-new-journal-btn" title="生成新日记">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                    </svg>
+                </button>
+            </div>
         </header>
         <main class="content">
             <ul class="list-container" id="journal-list-container">
@@ -3114,6 +4096,46 @@
         </main>
     </div>
 
+    <!-- Peek Steps App Screen -->
+    <div id="peek-steps-screen" class="screen">
+        <header class="app-header">
+            <button class="back-btn" data-target="peek-screen">‹</button>
+            <div class="title-container">
+                <h1 class="title">步数</h1>
+            </div>
+            <div class="placeholder"></div> <!-- To balance the header -->
+        </header>
+        <main class="content">
+            <div class="steps-header">
+                <img src="https://i.postimg.cc/Y96LPskq/o-o-2.jpg" alt="Char Avatar" class="steps-header-avatar" id="steps-char-avatar">
+                <span class="steps-header-name" id="steps-char-name">Char</span>
+            </div>
+
+            <div class="steps-progress-container">
+                <div class="steps-progress-circle" id="steps-progress-ring"></div>
+                <div class="steps-progress-inner">
+                    <div class="steps-count" id="steps-current-count">4321</div>
+                    <div class="steps-label">/ 6000 步</div>
+                </div>
+            </div>
+
+            <div class="steps-module">
+                <h3 class="steps-module-title">最近活动轨迹</h3>
+                <ul class="activity-track-list" id="activity-track-list">
+                    <li class="activity-track-item">10:00 AM - 咖啡馆</li>
+                    <li class="activity-track-item">01:30 PM - 市中心图书馆</li>
+                    <li class="activity-track-item">06:00 PM - 河边公园</li>
+                    <li class="activity-track-item">07:00 PM - 健身房</li>
+                    <li class="activity-track-item">08:30 PM - 超市</li>
+                    <li class="activity-track-item">09:00 PM - 回家</li>
+                </ul>
+            </div>
+            <div class="steps-annotation" id="steps-annotation-content">
+                “今天走了不少路，但感觉很充实。特别是下午在图书馆找到的那本书，感觉能看很久。”
+            </div>
+        </main>
+    </div>
+
     <div id="peek-screen" class="screen">
         <header class="app-header">
             <button class="back-btn" data-target="chat-room-screen">‹</button>
@@ -3126,8 +4148,45 @@
             <!-- Content rendered by renderPeekScreen() -->
         </main>
     </div>
-    <!-- Peek Messages Screen -->
-    <div id="peek-messages-screen" class="screen">
+
+   <div id="forum-screen" class="screen">
+    <header class="app-header">
+        <button class="back-btn" data-target="home-screen">←</button>
+        <div class="title-container">
+            <h1 class="title">论坛</h1>
+        </div>
+
+        <div class="action-btn-group"></div>
+    </header>
+    <main class="content" style="padding: 15px;">
+
+        <div class="forum-search-bar">
+            <button class="action-btn" id="forum-link-btn" title="绑定">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M17 7h-4v2h4c1.65 0 3 1.35 3 3s-1.35 3-3 3h-4v2h4c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-6 8H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-2zm-3-4h8v2H8v-2z"></path>
+                </svg>
+            </button>
+            <input type="text" id="forum-search-input" placeholder="搜索关键词">
+            <button class="action-btn" id="forum-refresh-btn" title="刷新">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+            </button>
+        </div>
+
+        <div id="forum-posts-container">
+            <p class="placeholder-text" style="margin-top: 50px;">点击右上角刷新按钮来生成帖子...</p>
+        </div>
+    </main>
+</div>
+
+
+
+<div id="forum-post-detail-screen" class="screen">
+
+</div>
+
+
+<div id="peek-messages-screen" class="screen">
+
         <header class="app-header">
             <button class="back-btn" data-target="peek-screen">‹</button>
             <div class="title-container">
@@ -3180,6 +4239,24 @@
     <!-- Peek Drafts Screen -->
     <div id="peek-drafts-screen" class="screen"></div>
 
+    <div id="peek-album-screen" class="screen">
+        <header class="app-header">
+            <button class="back-btn" data-target="peek-screen">‹</button>
+            <div class="title-container"><h1 class="title">相册</h1></div>
+            <button class="action-btn" id="refresh-album-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg></button>
+        </header>
+        <main class="content">
+            <div class="album-grid">
+                <p class="placeholder-text">正在生成相册内容...</p>
+            </div>
+        </main>
+    </div>
+ 
+    <!-- Peek Unlock Screen (Social Media) -->
+    <div id="peek-unlock-screen" class="screen">
+        <!-- Content will be dynamically rendered by renderPeekUnlock() -->
+    </div>
+ 
     <div id="peek-confirm-modal" class="modal-overlay">
         <div class="modal-window">
             <h3>要偷看ta的手机吗？</h3>
@@ -3191,17 +4268,82 @@
     </div>
     <!-- New Peek Wallpaper Modal -->
     <div id="peek-wallpaper-modal" class="modal-overlay">
+        <div class="modal-window" style="max-height: 80vh; overflow-y: auto;">
+            <h3>“偷看”页面自定义</h3>
+            <div class="collapsible-section open">
+                <div class="collapsible-header">
+                    <h4>页面壁纸</h4>
+                    <span class="collapsible-arrow">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <form id="peek-wallpaper-form">
+                        <div class="form-group">
+                            <label for="peek-wallpaper-url-input">壁纸URL</label>
+                            <input type="url" id="peek-wallpaper-url-input" class="form-group" placeholder="粘贴图片URL">
+                        </div>
+                        <p style="text-align:center; color:#888; margin: -10px 0 15px;">或</p>
+                        <input type="file" id="peek-wallpaper-upload" accept="image/*" style="display: none;">
+                        <label for="peek-wallpaper-upload" class="btn btn-secondary">从本地上传</label>
+                    </form>
+                </div>
+            </div>
+            <div class="collapsible-section">
+                <div class="collapsible-header">
+                    <h4>应用图标</h4>
+                    <span class="collapsible-arrow">▼</span>
+                </div>
+                <div class="collapsible-content" id="peek-app-icons-settings">
+                    <!-- App icon settings will be rendered here by JS -->
+                </div>
+            </div>
+             <div class="collapsible-section">
+                <div class="collapsible-header">
+                    <h4>微博(Unlock)小号</h4>
+                    <span class="collapsible-arrow">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="form-group">
+                        <label for="peek-unlock-avatar-url">头像URL</label>
+                        <input type="url" id="peek-unlock-avatar-url" class="form-group" placeholder="粘贴图片URL">
+                    </div>
+                </div>
+            </div>
+            <button id="save-peek-settings-btn" class="btn btn-primary" style="margin-top: 20px;">保存所有更改</button>
+        </div>
+    </div>
+    <div id="peek-photo-modal" class="modal-overlay">
         <div class="modal-window">
-            <h3>更换“偷看”页面壁纸</h3>
-            <form id="peek-wallpaper-form">
-                <div class="wallpaper-preview" id="peek-wallpaper-preview"><span>当前壁纸预览</span></div>
-                <input type="file" id="peek-wallpaper-upload" accept="image/*" style="display: none;">
-                <label for="peek-wallpaper-upload" class="btn btn-primary">从相册选择新壁纸</label>
-                <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">保存壁纸</button>
-            </form>
+            <div id="peek-photo-image-container">
+                <span class="placeholder-icon">🖼️</span>
+            </div>
+            <div id="peek-photo-description"></div>
         </div>
     </div>
 </div>
+ 
+    <div id="forum-binding-modal" class="modal-overlay">
+        <div class="modal-window">
+            <h3>绑定上下文</h3>
+            <div class="forum-binding-tabs">
+                <button class="tab-btn active" data-target="binding-content-worldbook">世界书</button>
+                <button class="tab-btn" data-target="binding-content-char">char</button>
+                <button class="tab-btn" data-target="binding-content-user">user</button>
+            </div>
+            <div id="forum-binding-content-wrapper">
+                <div id="binding-content-worldbook" class="forum-binding-content active">
+                    <ul id="forum-worldbook-list" class="binding-list"></ul>
+                </div>
+                <div id="binding-content-char" class="forum-binding-content">
+                    <ul id="forum-char-list" class="binding-list"></ul>
+                </div>
+                <div id="binding-content-user" class="forum-binding-content">
+                    <ul id="forum-user-list" class="binding-list"></ul>
+                </div>
+            </div>
+            <button id="confirm-forum-binding-btn" class="btn btn-primary" style="margin-top: 20px;">确认绑定</button>
+        </div>
+    </div>
+
 
 <!-- Generate Journal Modal -->
 <div id="generate-journal-modal" class="modal-overlay">
@@ -3219,6 +4361,17 @@
             </div>
             <button type="submit" class="btn btn-primary">生成</button>
         </form>
+    </div>
+</div>
+
+<!-- Journal World Book Selection Modal -->
+<div id="journal-worldbook-selection-modal" class="modal-overlay">
+    <div class="modal-window">
+        <h3>为日记绑定世界书</h3>
+        <ul id="journal-worldbook-selection-list" class="list-container" style="max-height: 40vh; overflow-y: auto; padding: 0; margin: 15px 0;">
+            <!-- World book items will be rendered here -->
+        </ul>
+        <button class="btn btn-primary" id="save-journal-worldbook-selection-btn" style="margin-top: 20px;">确认</button>
     </div>
 </div>
 
@@ -3241,10 +4394,26 @@
     </div>
 </div>
 
+<div id="share-post-modal" class="modal-overlay">
+    <div class="modal-window">
+        <h3>是否将分享给他人？</h3>
+        <div style="margin: 20px 0;">
+            <details>
+                <summary style="font-weight: 500; cursor: pointer; color: var(--primary-color);">选择分享对象</summary>
+                <ul id="share-char-list" class="binding-list" style="margin-top: 10px; max-height: 40vh; overflow-y: auto;">
+
+                </ul>
+            </details>
+        </div>
+        <button id="confirm-share-btn" class="btn btn-primary" style="margin-top: 15px;">确认发送</button>
+    </div>
+</div>
+
+
 <div id="delete-chunk-confirm-modal" class="modal-overlay">
     <div class="modal-window">
         <h3>确认删除</h3>
-        <p>将永久删除所选范围的消息，此操作不可撤销！以下为范围内最后5条消息预览</p>
+        <p>将永久删除以下范围的消息，此操作不可撤销！</p>
         <div id="delete-chunk-preview" style="max-height: 200px; overflow-y: auto; background: #f5f5f5; border-radius: 8px; padding: 10px; margin: 15px 0; font-size: 12px; line-height: 1.5;">
             <!-- Preview will be inserted here -->
         </div>
@@ -3259,6 +4428,7 @@
 <div id="mypersona-presets-modal" class="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);justify-content:center;align-items:center;z-index:9999;"><div class="modal-window" style="max-width:520px;background:var(--panel-bg,#fff);padding:14px;border-radius:10px;box-shadow:0 12px 36px rgba(10,10,20,0.12);"><h3 style="margin:0 0 10px 0;font-size:16px;">管理我的人设预设</h3><div id="mypersona-presets-list" style="max-height:340px; overflow:auto; margin-bottom:12px;"></div><div style="display:flex;gap:8px;justify-content:flex-end;"><button type="button" id="mypersona-close-modal" class="btn btn-primary" style="padding:8px 12px;border-radius:8px;">关闭</button></div></div></div>
 <div id="global-css-presets-modal" class="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);justify-content:center;align-items:center;z-index:9999;"><div class="modal-window" style="max-width:520px;background:var(--panel-bg,#fff);padding:14px;border-radius:10px;box-shadow:0 12px 36px rgba(10,10,20,0.12);"><h3 style="margin:0 0 10px 0;font-size:16px;">管理全局CSS预设</h3><div id="global-css-presets-list" style="max-height:340px; overflow:auto; margin-bottom:12px;"></div><div style="display:flex;gap:8px;justify-content:flex-end;"><button type="button" id="global-css-close-modal" class="btn btn-primary" style="padding:8px 12px;border-radius:8px;">关闭</button></div></div></div>
 <input type="file" id="import-data-input" accept=".ee" style="display: none;">
+
 <script>
     async function updateBatteryStatus() {
         // 首先检查浏览器是否支持电池API
@@ -3394,7 +4564,11 @@
         }
 
         // --- Initial HTML Injection ---
-        document.getElementById('api-settings-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="home-screen">‹</button><div class="title-container"><h1 class="title">API 设置</h1></div><div class="placeholder"></div></header><main class="content"><form id="api-form"><div class="form-group"><label for="api-provider">API 服务商</label><select id="api-provider" name="provider"><option value="newapi">NewAPI (自定义)</option><option value="deepseek">DeepSeek</option><option value="claude">Claude</option><option value="gemini">Gemini</option></select></div><div class="form-group"><label for="api-url">API 地址（后缀不用添加/v1）</label><input type="url" id="api-url" name="url" placeholder="选择服务商可自动填写" required></div><div class="form-group"><label for="api-key">密钥 (Key)</label><input type="password" id="api-key" name="key" placeholder="请输入你的API密钥" required></div><button type="button" class="btn btn-secondary" id="fetch-models-btn"><span class="btn-text">点击拉取模型</span><div class="spinner"></div></button><div class="form-group"><label for="api-model">选择模型</label><select id="api-model" name="model" required><option value="">请先拉取模型列表</option></select></div><button type="submit" class="btn btn-primary" id="save-btn"><span class="btn-text">保 存</span><div class="spinner"></div></button></form><div class="api-presets-embedded" style="margin-top:12px;"><div id="api-presets-control" style="margin:12px 0;padding:12px;border-radius:8px;border:1px solid var(--border-color, #eee);background:var(--panel-bg, #fff);box-shadow:var(--panel-shadow, none);"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><label style="min-width:86px;color:var(--muted,#666);">API 预设：</label><select id="api-preset-select" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd;"><option value="">— 选择 API 预设 —</option></select><button id="api-apply-preset" class="btn btn-primary" style="margin-left:8px;padding:6px 10px;">应用</button></div><div style="display:flex;gap:8px;align-items:center;"><button id="api-save-preset" class="btn" style="padding:6px 10px;">另存为</button><button id="api-manage-presets" class="btn" style="padding:6px 10px;">管理</button><div style="flex:1"></div><button id="api-import-presets" class="btn" style="padding:6px 10px;">导入</button><button id="api-export-presets" class="btn" style="padding:6px 10px;">导出</button></div></div><div id="api-presets-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:9999;align-items:center;justify-content:center;"><div style="width:640px;max-width:94%;background:var(--panel-bg,#fff);padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);"><h3 style="margin:0 0 12px 0;">API 预设管理</h3><div id="api-presets-list" style="max-height:360px;overflow:auto;border:1px solid #f0f0f0;padding:8px;border-radius:6px;"></div><div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;"><button id="api-close-modal" class="btn btn-primary">关闭</button></div></div></div></div></main>`;
+        document.getElementById('api-settings-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="home-screen">‹</button><div class="title-container"><h1 class="title">API 设置</h1></div><div class="placeholder"></div></header><main class="content"><form id="api-form"><div class="form-group"><label for="api-provider">API 服务商</label><select id="api-provider" name="provider"><option value="newapi">NewAPI (自定义)</option><option value="deepseek">DeepSeek</option><option value="claude">Claude</option><option value="gemini">Gemini</option></select></div><div class="form-group"><label for="api-url">API 地址（后缀不用添加/v1）</label><input type="url" id="api-url" name="url" placeholder="选择服务商可自动填写" required></div><div class="form-group"><label for="api-key">密钥 (Key)</label><input type="password" id="api-key" name="key" placeholder="请输入你的API密钥" required></div><button type="button" class="btn btn-secondary" id="fetch-models-btn"><span class="btn-text">点击拉取模型</span><div class="spinner"></div></button><div class="form-group"><label for="api-model">选择模型</label><select id="api-model" name="model" required><option value="">请先拉取模型列表</option></select></div><div class.blade.php="form-group" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #fce4ec; border-radius: 10px; background-color: #fff8fa;">
+    <label for="time-perception-switch" style="margin-bottom: 0; color: var(--secondary-color); font-weight: 600;">时间感知加强</label>
+    <input type="checkbox" id="time-perception-switch" style="width: auto; height: 20px; width: 20px;">
+</div>
+<button type="submit" class="btn btn-primary" id="save-btn"><span class="btn-text">保 存</span><div class="spinner"></div></button></form><div class="api-presets-embedded" style="margin-top:12px;"><div id="api-presets-control" style="margin:12px 0;padding:12px;border-radius:8px;border:1px solid var(--border-color, #eee);background:var(--panel-bg, #fff);box-shadow:var(--panel-shadow, none);"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><label style="min-width:86px;color:var(--muted,#666);">API 预设：</label><select id="api-preset-select" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd;"><option value="">— 选择 API 预设 —</option></select><button id="api-apply-preset" class="btn btn-primary" style="margin-left:8px;padding:6px 10px;">应用</button></div><div style="display:flex;gap:8px;align-items:center;"><button id="api-save-preset" class="btn" style="padding:6px 10px;">另存为</button><button id="api-manage-presets" class="btn" style="padding:6px 10px;">管理</button><div style="flex:1"></div><button id="api-import-presets" class="btn" style="padding:6px 10px;">导入</button><button id="api-export-presets" class="btn" style="padding:6px 10px;">导出</button></div></div><div id="api-presets-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:9999;align-items:center;justify-content:center;"><div style="width:640px;max-width:94%;background:var(--panel-bg,#fff);padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);"><h3 style="margin:0 0 12px 0;">API 预设管理</h3><div id="api-presets-list" style="max-height:360px;overflow:auto;border:1px solid #f0f0f0;padding:8px;border-radius:6px;"></div><div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;"><button id="api-close-modal" class="btn btn-primary">关闭</button></div></div></div></div></main>`;
         document.getElementById('wallpaper-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="home-screen">‹</button><div class="title-container"><h1 class="title">更换壁纸</h1></div><div class="placeholder"></div></header><main class="content"><div class="wallpaper-preview" id="wallpaper-preview"><span>当前壁纸预览</span></div><input type="file" id="wallpaper-upload" accept="image/*" style="display: none;"><label for="wallpaper-upload" class="btn btn-primary">从相册选择新壁纸</label></main>`;
         document.getElementById('font-settings-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="home-screen">‹</button><div class="title-container"><h1 class="title">字体设置</h1></div><div class="placeholder"></div></header><main class="content"><form id="font-settings-form"><div class="form-group"><label for="font-url">字体链接 (ttf, woff, woff2)</label><input type="url" id="font-url" placeholder="https://.../font.ttf" required></div><p style="font-size:12px; color:#888; text-align:center;">示例: https://lf3-static.bytednsdoc.com/obj/eden-cn/jplptk/ljhwZthlaukjlkulzlp/portal/fonts/HarmonyOS_Sans_SC_Regular.woff2</p><button type="submit" class="btn btn-primary">应用字体</button><button type="button" class="btn btn-neutral" id="restore-default-font-btn" style="margin-top: 15px;">恢复默认字体</button></form></main>`;
         document.getElementById('customize-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="home-screen">‹</button><div class="title-container"><h1 class="title">主屏幕自定义</h1></div><div class="placeholder"></div></header><main class="content"><form id="customize-form"></form></main>`;
@@ -3465,7 +4639,7 @@
             bottomLeft: { imageUrl: 'https://i.postimg.cc/3J8R8PMb/chan-101.png', text: '音乐' },
             bottomRight: { imageUrl: 'https://i.postimg.cc/QdpgTfV9/chan-112.png', text: '待办' }
         };
-        const defaultIcons = {
+               const defaultIcons = {
             'chat-list-screen': {name: '404', url: 'https://i.postimg.cc/VvQB8dQT/chan-143.png'},
             'api-settings-screen': {name: 'api', url: 'https://i.postimg.cc/50FqT8GL/chan-125.png'},
             'wallpaper-screen': {name: '壁纸', url: 'https://i.postimg.cc/3wqFttL3/chan-90.png'},
@@ -3473,9 +4647,14 @@
             'customize-screen': {name: '自定义', url: 'https://i.postimg.cc/vZVdC7gt/chan-133.png'},
             'font-settings-screen': {name: '字体', url: 'https://i.postimg.cc/FzVtC0x4/chan-21.png'},
             'tutorial-screen': {name: '教程', url: 'https://i.postimg.cc/6QgNzCFf/chan-118.png'},
-            'day-mode-btn': {name: '日间模式', url: 'https://i.postimg.cc/Jz0tYqnT/chan-145.png'},
-            'night-mode-btn': {name: '夜间模式', url: 'https://i.postimg.cc/htYvkdQK/chan-146.png'}
+            'day-mode-btn': {name: '白昼模式', url: 'https://i.postimg.cc/Jz0tYqnT/chan-145.png'},
+            'night-mode-btn': {name: '夜间模式', url: 'https://i.postimg.cc/htYvkdQK/chan-146.png'},
+            'forum-screen': {name: '论坛', url: 'https://i.postimg.cc/fyPVBZf1/1758451183605.png'},
+'music-screen': {name: '音乐', url: 'https://i.postimg.cc/ydd65txK/1758451018266.png'},
+'diary-screen': {name: '待开发', url: 'https://i.postimg.cc/bJBLzmFH/chan-70.png'},
+'piggy-bank-screen': {name: '待开发', url: 'https://i.postimg.cc/3RmWRRtS/chan-18.png'}
         };
+
 
         const peekScreenApps = {
             'messages': { name: '消息', url: 'https://i.postimg.cc/Kvs4tDh5/export202509181826424260.png' },
@@ -3483,7 +4662,10 @@
             'cart': { name: '购物车', url: 'https://i.postimg.cc/pLwT6VTh/export202509181830143960.png' },
             'transfer': { name: '中转站', url: 'https://i.postimg.cc/63wQBHCB/export202509181831140230.png' },
             'browser': { name: '浏览器', url: 'https://i.postimg.cc/SKcsF02Z/export202509181830445980.png' },
-            'drafts': { name: '草稿箱', url: 'https://i.postimg.cc/ZKqC9D2R/export202509181827225860.png' }
+            'drafts': { name: '草稿箱', url: 'https://i.postimg.cc/ZKqC9D2R/export202509181827225860.png' },
+            'album': { name: '相册', url: 'https://i.postimg.cc/qBcdpqNc/export202509221549335970.png' },
+            'steps': { name: '步数', url: 'https://i.postimg.cc/5NndFrq6/export202509181824532800.png' },
+            'unlock': { name: 'unlock！', url: 'https://i.postimg.cc/28zNyYWs/export202509221542593320.png' }
         };
 
         const simulatedMemos = [];
@@ -3501,12 +4683,15 @@
             apiPresets: [],
             bubbleCssPresets: [],
             myPersonaPresets: [],
-            peekScreenSettings: {
-                wallpaper: ''
-            },
+            forumPosts: [],
             globalCss: '',
             globalCssPresets: [],
             homeSignature: '编辑个性签名...',
+            forumBindings: { 
+                worldBookIds: [],
+                charIds: [],
+                userPersonaIds: []
+            },
         };
         let currentChatId = null, currentChatType = null, isGenerating = false, longPressTimer = null,
             isInMultiSelectMode = false, editingMessageId = null, currentPage = 1, currentTransferMessageId = null,
@@ -4218,6 +5403,13 @@
             if(dbData.homeScreenMode){
                 await dataStorage.saveData('homeScreenMode', dbData.homeScreenMode);
             }
+            
+            if(dbData.forumPosts){
+    await dataStorage.saveData('forumPosts', dbData.forumPosts);
+}
+
+return Promise.resolve();
+            
             if(dbData.wallpaper){
                 await dataStorage.saveData('wallpaper', dbData.wallpaper);
             }
@@ -4280,6 +5472,7 @@
             db.myPersonaPresets = await dataStorage.getData('myPersonaPresets') || [];
             db.globalCssPresets = await dataStorage.getData('globalCssPresets') || [];
             db.globalCss = await dataStorage.getData('globalCss') || '';
+            db.forumPosts = await dataStorage.getData('forumPosts') || [];
 
             // 重建characters和groups列表
             // 由于saveData时这两个字段被排除，需要从存储中重新构建
@@ -4308,9 +5501,13 @@
                     if (charData.customBubbleCss === undefined) charData.customBubbleCss = '';
                     if (charData.useCustomBubbleCss === undefined) charData.useCustomBubbleCss = false;
                     if (!charData.memoryJournals) charData.memoryJournals = []; // Ensure memoryJournals exists
-
-                    return charData;
-                }
+                    if (!charData.journalWorldBookIds) charData.journalWorldBookIds = []; // 新增：确保字段存在
+ 
+                    if (!charData.peekScreenSettings) {
+                       charData.peekScreenSettings = { wallpaper: '', customIcons: {}, unlockAvatar: '' };
+                    }
+                     return charData;
+                 }
                 return null;
             });
 
@@ -4358,8 +5555,20 @@
                 }
             }, 1000);
 
+
+
+            // 在 loadData 函数的末尾
+            if (!db.forumBindings) {
+                db.forumBindings = {
+                    worldBookIds: [],
+                    charIds: [],
+                    userPersonaIds: []
+                };
+            }
+
             return Promise.resolve();
         };
+
         const showToast = (message) => {
             toastElement.textContent = message;
             toastElement.classList.add('show');
@@ -4488,7 +5697,12 @@
                 const navLink = e.target.closest('.app-icon[data-target]');
                 if (navLink) {
                     e.preventDefault();
-                    switchScreen(navLink.getAttribute('data-target'));
+                    const target = navLink.getAttribute('data-target');
+                    if (target === 'music-screen' || target === 'diary-screen' || target === 'piggy-bank-screen') {
+                        showToast('该应用正在开发中，敬请期待！');
+                        return;
+                    }
+                    switchScreen(target);
                 }
             });
 
@@ -4520,6 +5734,9 @@
             setupChatExpansionPanel();
             setupMemoryJournalScreen(); // 新增：初始化回忆日记功能
             setupDeleteHistoryChunk();
+            setupForumBindingFeature();
+            setupForumFeature();
+            setupShareModal();
         };
 
         function setupMemoryJournalScreen() {
@@ -4528,8 +5745,44 @@
             const generateJournalForm = document.getElementById('generate-journal-form');
             const journalListContainer = document.getElementById('journal-list-container');
             const editDetailBtn = document.getElementById('edit-journal-detail-btn');
+            const bindWorldBookBtn = document.getElementById('bind-journal-worldbook-btn');
+            const journalWorldBookModal = document.getElementById('journal-worldbook-selection-modal');
+            const journalWorldBookList = document.getElementById('journal-worldbook-selection-list');
+            const saveJournalWorldBookBtn = document.getElementById('save-journal-worldbook-selection-btn');
 
-            // "生成新日记" 按钮 -> 弹出范围选择模态框
+            // 新增：绑定世界书按钮事件
+            bindWorldBookBtn.addEventListener('click', () => {
+                const character = db.characters.find(c => c.id === currentChatId);
+                if (!character) return;
+
+                journalWorldBookList.innerHTML = ''; // 清空列表
+                if (db.worldBooks.length === 0) {
+                    journalWorldBookList.innerHTML = '<li style="color: #888; text-align: center;">暂无世界书条目</li>';
+                } else {
+                    db.worldBooks.forEach(book => {
+                        const li = document.createElement('li');
+                        li.className = 'world-book-select-item';
+                        const isChecked = (character.journalWorldBookIds || []).includes(book.id);
+                        li.innerHTML = `<input type="checkbox" id="journal-wb-select-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}><label for="journal-wb-select-${book.id}">${book.name}</label>`;
+                        journalWorldBookList.appendChild(li);
+                    });
+                }
+                journalWorldBookModal.classList.add('visible');
+            });
+
+            // 新增：保存世界书绑定
+            saveJournalWorldBookBtn.addEventListener('click', async () => {
+                const character = db.characters.find(c => c.id === currentChatId);
+                if (!character) return;
+
+                const selectedIds = Array.from(journalWorldBookList.querySelectorAll('input:checked')).map(input => input.value);
+                character.journalWorldBookIds = selectedIds;
+                await saveData();
+                journalWorldBookModal.classList.remove('visible');
+                showToast('日记绑定的世界书已更新');
+            });
+
+             // "生成新日记" 按钮 -> 弹出范围选择模态框
             generateNewJournalBtn.addEventListener('click', () => {
                 const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
                 const totalMessages = chat ? chat.history.length : 0;
@@ -4708,6 +5961,22 @@
 
                 container.appendChild(card);
             });
+
+            // 为相册刷新按钮添加事件监听
+            const refreshAlbumBtn = document.getElementById('refresh-album-btn');
+            if(refreshAlbumBtn) {
+                refreshAlbumBtn.addEventListener('click', () => generateAndRenderPeekContent('album', { forceRefresh: true }));
+            }
+    
+            // 为照片详情模态框添加关闭事件
+            const photoModal = document.getElementById('peek-photo-modal');
+            if(photoModal) {
+                photoModal.addEventListener('click', (e) => {
+                    if (e.target === photoModal) {
+                        photoModal.classList.remove('visible');
+                    }
+                });
+            }
         }
 
         async function generateJournal(start, end) {
@@ -4730,8 +5999,22 @@
 
                 const messagesToSummarize = chat.history.slice(startIndex, endIndex);
                 
-                // Create a specific prompt for summarization, asking for JSON output
-                const summaryPrompt = `你是一个日记整理助手。请以角色 "${chat.remarkName || chat.name}" 的第一人称视角，总结以下聊天记录。请专注于重要的情绪、事件和细节。你的输出必须是一个JSON对象，包含 'title' (一个简洁的标题) 和 'content' (完整的日记正文) 两个字段。聊天记录如下：\n\n---\n${messagesToSummarize.map(m => m.content).join('\n')}\n---`;
+                // 使用为日记绑定的世界书
+                const journalWorldBooks = (chat.journalWorldBookIds || []).map(id => db.worldBooks.find(wb => wb.id === id)).filter(Boolean);
+                const worldBooksContent = journalWorldBooks.map(wb => wb.content).join('\n\n');
+
+                let summaryPrompt = `你是一个日记整理助手。请以角色 "${chat.remarkName || chat.name}" 的第一人称视角，总结以下聊天记录。请专注于重要的情绪、事件和细节，语言内省而克制，带有诗意与隐喻感，用冷静的笔触将对话片段凝练为思绪流动与寓言化的自白。\n\n`;
+                summaryPrompt += "为了更好地理解角色和背景，请参考以下信息：\n";
+                summaryPrompt += "=====\n";
+
+                if (worldBooksContent) {
+                    summaryPrompt += `世界观设定:\n${worldBooksContent}\n\n`;
+                }
+
+                summaryPrompt += `你的角色设定:\n- 角色名: ${chat.realName}\n- 人设: ${chat.persona || "一个友好、乐于助人的伙伴。"}\n\n`;
+                summaryPrompt += `我的角色设定:\n- 我的称呼: ${chat.myName}\n- 我的人设: ${chat.myPersona || "无特定人设。"}\n\n`;
+                summaryPrompt += "=====\n";
+                summaryPrompt += `请基于以上所有背景信息，总结以下聊天记录。你的输出必须是一个JSON对象，包含 'title' (一个简洁的标题) 和 'content' (完整的日记正文) 两个字段。聊天记录如下：\n\n---\n${messagesToSummarize.map(m => m.content).join('\n')}\n---`;
 
                 const { url, key, model, provider } = db.apiSettings;
                 if (!url || !key || !model) {
@@ -4813,16 +6096,7 @@
 
             // New simplified settings functionality
             peekSettingsBtn?.addEventListener('click', () => {
-                // Load current wallpaper into preview
-                const currentWallpaper = db.peekScreenSettings.wallpaper;
-                if (currentWallpaper) {
-                    peekWallpaperPreview.style.backgroundImage = `url(${currentWallpaper})`;
-                    peekWallpaperPreview.textContent = '';
-                } else {
-                    peekWallpaperPreview.style.backgroundImage = 'none';
-                    peekWallpaperPreview.textContent = '当前无壁纸';
-                }
-                peekWallpaperPreview.dataset.newWallpaper = '';
+                renderPeekSettings();
                 peekWallpaperModal.classList.add('visible');
             });
 
@@ -4831,25 +6105,61 @@
                 if (file) {
                     try {
                         const compressedUrl = await compressImage(file, { quality: 0.85, maxWidth: 1080, maxHeight: 1920 });
-                        peekWallpaperPreview.style.backgroundImage = `url(${compressedUrl})`;
-                        peekWallpaperPreview.textContent = '';
-                        peekWallpaperPreview.dataset.newWallpaper = compressedUrl;
+                        document.getElementById('peek-wallpaper-url-input').value = compressedUrl;
+                        showToast('图片已压缩并填入URL输入框');
                     } catch (error) {
                         showToast('壁纸压缩失败，请重试');
                     }
                 }
             });
 
-            peekWallpaperForm?.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newWallpaper = peekWallpaperPreview.dataset.newWallpaper;
-                if (newWallpaper) {
-                    db.peekScreenSettings.wallpaper = newWallpaper;
-                    await saveData();
-                    renderPeekScreen(); // Re-render to apply new wallpaper
-                    showToast('壁纸已更换！');
+            // Combined save button for all peek settings
+            document.getElementById('save-peek-settings-btn')?.addEventListener('click', async () => {
+                const character = db.characters.find(c => c.id === currentChatId);
+                if (!character) {
+                    showToast('错误：未找到当前角色');
+                    return;
                 }
+
+                if (!character.peekScreenSettings) {
+                    character.peekScreenSettings = { wallpaper: '', customIcons: {}, unlockAvatar: '' };
+                }
+
+                // Save wallpaper
+                character.peekScreenSettings.wallpaper = document.getElementById('peek-wallpaper-url-input').value.trim();
+
+                // Save custom app icons
+                const iconInputs = document.querySelectorAll('#peek-app-icons-settings input[type="url"]');
+                iconInputs.forEach(input => {
+                    const appId = input.dataset.appId;
+                    const newUrl = input.value.trim();
+                    if (newUrl) {
+                        if (!character.peekScreenSettings.customIcons) {
+                            character.peekScreenSettings.customIcons = {};
+                        }
+                        character.peekScreenSettings.customIcons[appId] = newUrl;
+                    } else {
+                        if (character.peekScreenSettings.customIcons) {
+                            delete character.peekScreenSettings.customIcons[appId];
+                        }
+                    }
+                });
+                
+                // Save unlock avatar
+                character.peekScreenSettings.unlockAvatar = document.getElementById('peek-unlock-avatar-url').value.trim();
+
+                await saveData();
+                renderPeekScreen(); // Re-render to apply all changes
+                showToast('已保存！');
                 peekWallpaperModal.classList.remove('visible');
+            });
+
+            // Add collapsible functionality
+            peekWallpaperModal.addEventListener('click', (e) => {
+                const header = e.target.closest('.collapsible-header');
+                if (header) {
+                    header.parentElement.classList.toggle('open');
+                }
             });
 
             const peekMessagesScreen = document.getElementById('peek-messages-screen');
@@ -4867,17 +6177,178 @@
                             showToast('找不到对话记录');
                         }
                     }
+                } else if (e.target.closest('.action-btn')) {
+                    generateAndRenderPeekContent('messages', { forceRefresh: true });
                 }
             });
-            
-            // Add refresh listeners for static peek screens
-            document.querySelector('#peek-messages-screen .action-btn').addEventListener('click', () => generateAndRenderPeekContent('messages', { forceRefresh: true }));
-            document.querySelector('#peek-conversation-screen .action-btn').addEventListener('click', () => {
-                // Refreshing a conversation should re-fetch the whole message list
-                generateAndRenderPeekContent('messages', { forceRefresh: true });
+
+            const peekConversationScreen = document.getElementById('peek-conversation-screen');
+            peekConversationScreen.addEventListener('click', (e) => {
+                if (e.target.closest('.action-btn')) {
+                    generateAndRenderPeekContent('messages', { forceRefresh: true });
+                }
+            });
+
+            // 为相册刷新按钮添加事件监听
+            const refreshAlbumBtn = document.getElementById('refresh-album-btn');
+            if(refreshAlbumBtn) {
+                refreshAlbumBtn.addEventListener('click', () => generateAndRenderPeekContent('album', { forceRefresh: true }));
+            }
+    
+            // 为照片详情模态框添加关闭事件
+            const photoModal = document.getElementById('peek-photo-modal');
+            if(photoModal) {
+                photoModal.addEventListener('click', (e) => {
+                    if (e.target === photoModal) {
+                        photoModal.classList.remove('visible');
+                    }
+                });
+            }
+        }
+
+        function renderPeekAlbum(photos) {
+            const screen = document.getElementById('peek-album-screen');
+            const grid = screen.querySelector('.album-grid');
+            grid.innerHTML = ''; // Clear previous content
+    
+            if (!photos || photos.length === 0) {
+                grid.innerHTML = '<p class="placeholder-text">正在生成相册内容...</p>';
+                return;
+            }
+    
+            photos.forEach(photo => {
+                const photoEl = document.createElement('div');
+                photoEl.className = 'album-photo';
+                photoEl.dataset.imageDescription = photo.imageDescription;
+                photoEl.dataset.description = photo.description;
+    
+                const img = document.createElement('img');
+                img.src = 'https://i.postimg.cc/1tH6ds9g/1752301200490.jpg'; // 使用一个静态占位图
+                img.alt = "相册照片";
+                photoEl.appendChild(img);
+    
+                if (photo.type === 'video') {
+                    const videoIndicator = document.createElement('div');
+                    videoIndicator.className = 'video-indicator';
+                    videoIndicator.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>`;
+                    photoEl.appendChild(videoIndicator);
+                }
+                
+                photoEl.addEventListener('click', () => {
+                    const modal = document.getElementById('peek-photo-modal');
+                    const imgContainer = document.getElementById('peek-photo-image-container');
+                    const descriptionEl = document.getElementById('peek-photo-description');
+                    
+                    // 将AI生成的图片文字描述展示出来，而不是真的图片
+                    imgContainer.innerHTML = `<div style="padding: 20px; text-align: left; color: #555; font-size: 16px; line-height: 1.6; height: 100%; overflow-y: auto;">${photo.imageDescription}</div>`;
+                    // 显示角色对照片的批注
+                    descriptionEl.textContent = `批注：${photo.description}`;
+                    
+                    modal.classList.add('visible');
+                });
+    
+                grid.appendChild(photoEl);
             });
         }
 
+        function renderPeekUnlock(data) {
+            const screen = document.getElementById('peek-unlock-screen');
+            if (!screen) return;
+
+            // Handle loading/empty state
+            if (!data) {
+                screen.innerHTML = `
+                    <header class="app-header">
+                        <button class="back-btn" data-target="peek-screen">‹</button>
+                        <div class="title-container"><h1 class="title">...</h1></div>
+                        <button class="action-btn">···</button>
+                    </header>
+                    <main class="content"><p class="placeholder-text">正在生成小号内容...</p></main>
+                `;
+                return;
+            }
+
+            const { nickname, handle, bio, posts } = data;
+            const character = db.characters.find(c => c.id === currentChatId);
+            const peekSettings = character?.peekScreenSettings || { unlockAvatar: '' };
+            const fixedAvatar = peekSettings.unlockAvatar || 'https://i.postimg.cc/SNwL1XwR/chan-11.png';
+
+            // Random numbers for stats
+            const randomFollowers = (Math.random() * 5 + 1).toFixed(1) + 'k';
+            const randomFollowing = Math.floor(Math.random() * 500) + 50;
+
+            let postsHtml = '';
+            if (posts && posts.length > 0) {
+                posts.forEach(post => {
+                    const randomComments = Math.floor(Math.random() * 100);
+                    const randomLikes = Math.floor(Math.random() * 500);
+                    postsHtml += `
+                        <div class="unlock-post-card">
+                            <div class="unlock-post-card-header">
+                                <img src="${fixedAvatar}" alt="Profile Avatar">
+                                <div class="unlock-post-card-author-info">
+                                    <span class="username">${nickname}</span>
+                                    <span class="timestamp">${post.timestamp}</span>
+                                </div>
+                            </div>
+                            <div class="unlock-post-card-content">
+                                ${post.content.replace(/\n/g, '<br>')}
+                            </div>
+                            <div class="unlock-post-card-actions">
+                                <div class="action"><svg viewBox="0 0 24 24"><path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z"></path></svg> <span>分享</span></div>
+                                <div class="action"><svg viewBox="0 0 24 24"><path d="M20,2H4C2.9,0,2,0.9,2,2v18l4-4h14c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M18,14H6v-2h12V14z M18,11H6V9h12V11z M18,8H6V6h12V8z"></path></svg> <span>${randomComments}</span></div>
+                                <div class="action"><svg viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36,2,12.27,2,8.5C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z"></path></svg> <span>${randomLikes}</span></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            screen.innerHTML = `
+                <header class="app-header">
+                    <button class="back-btn" data-target="peek-screen">‹</button>
+                    <div class="title-container">
+                        <h1 class="title">${nickname}</h1>
+                    </div>
+                    <button class="action-btn" id="refresh-unlock-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg></button>
+                </header>
+                <main class="content">
+                    <div class="unlock-profile-header">
+                        <img src="${fixedAvatar}" alt="Profile Avatar" class="unlock-profile-avatar">
+                        <div class="unlock-profile-info">
+                            <h2 class="unlock-profile-username">${nickname}</h2>
+                            <p class="unlock-profile-handle">${handle}</p>
+                        </div>
+                    </div>
+                    <div class="unlock-profile-bio">
+                        <p>${bio.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <div class="unlock-profile-stats">
+                        <div class="unlock-profile-stat">
+                            <span class="count">${posts.length}</span>
+                            <span class="label">帖子</span>
+                        </div>
+                        <div class="unlock-profile-stat">
+                            <span class="count">${randomFollowers}</span>
+                            <span class="label">粉丝</span>
+                        </div>
+                        <div class="unlock-profile-stat">
+                            <span class="count">${randomFollowing}</span>
+                            <span class="label">关注</span>
+                        </div>
+                    </div>
+                    <div class="unlock-post-feed">
+                        ${postsHtml}
+                    </div>
+                </main>
+            `;
+
+            // Add event listener for the new refresh button
+            screen.querySelector('#refresh-unlock-btn').addEventListener('click', () => {
+                generateAndRenderPeekContent('unlock', { forceRefresh: true });
+            });
+        }
+ 
         function renderPeekConversation(history, partnerName) {
             const titleEl = document.getElementById('peek-conversation-title');
             const messageAreaEl = document.getElementById('peek-message-area');
@@ -4931,12 +6402,15 @@
                 <div class="app-grid"></div>
             `;
 
+            const character = db.characters.find(c => c.id === currentChatId);
+            const peekSettings = character?.peekScreenSettings || { wallpaper: '', customIcons: {} };
+
             // Apply wallpaper to the parent screen element
-            const wallpaper = db.peekScreenSettings.wallpaper;
+            const wallpaper = peekSettings.wallpaper;
             if (wallpaper) {
                 peekScreen.style.backgroundImage = `url(${wallpaper})`;
             } else {
-                peekScreen.style.backgroundImage = `url(${db.wallpaper})`;
+                peekScreen.style.backgroundImage = `url(${db.wallpaper})`; // Fallback to global wallpaper
             }
             peekScreen.style.backgroundSize = 'cover';
             peekScreen.style.backgroundPosition = 'center';
@@ -4948,9 +6422,11 @@
                 const iconEl = document.createElement('a');
                 iconEl.href = '#';
                 iconEl.className = 'app-icon';
-                iconEl.dataset.peekAppId = id; // 新增此行，为CSS选择器提供钩子
+                iconEl.dataset.peekAppId = id;
+                const customIconUrl = peekSettings.customIcons?.[id];
+                const iconUrl = customIconUrl || iconData.url;
                 iconEl.innerHTML = `
-                    <img src="${iconData.url}" alt="${iconData.name}" class="icon-img">
+                    <img src="${iconUrl}" alt="${iconData.name}" class="icon-img">
                     <span class="app-name">${iconData.name}</span>
                 `;
                 iconEl.addEventListener('click', (e) => {
@@ -5722,12 +7198,28 @@
                         <a href="#" class="app-icon" data-target="tutorial-screen"><img src="${getIcon('tutorial-screen')}" alt="Tutorial" class="icon-img"><span class="app-name">${defaultIcons['tutorial-screen'].name}</span></a>
                     </div>
                 </div>
+
                 <div class="home-screen-page">
-                     <div class="placeholder-text" style="padding-top: 100px;">
-                        <p>第二页</p>
-                        <p>可以放置更多应用</p>
-                    </div>
+                     <div class="app-grid">
+                        <a href="#" class="app-icon" data-target="forum-screen">
+                            <img src="${getIcon('forum-screen')}" alt="论坛" class="icon-img">
+                            <span class="app-name">${defaultIcons['forum-screen'].name}</span>
+                        </a>
+                        <a href="#" class="app-icon" data-target="music-screen">
+    <img src="${getIcon('music-screen')}" alt="音乐" class="icon-img">
+    <span class="app-name">${defaultIcons['music-screen'].name}</span>
+</a>
+                        <a href="#" class="app-icon" data-target="diary-screen">
+                            <img src="${getIcon('diary-screen')}" alt="日记本" class="icon-img">
+                            <span class="app-name">${defaultIcons['diary-screen'].name}</span>
+                        </a>
+                        <a href="#" class="app-icon" data-target="piggy-bank-screen">
+                            <img src="${getIcon('piggy-bank-screen')}" alt="存钱罐" class="icon-img">
+                            <span class="app-name">${defaultIcons['piggy-bank-screen'].name}</span>
+                        </a>
+                     </div>
                 </div>
+
             </div>
             <div class="page-indicator">
                 <span class="dot active" data-page="0"></span>
@@ -5854,6 +7346,15 @@
                 touchStartX = 0;
                 touchEndX = 0;
             }
+
+            // 新增：处理签名失焦的逻辑
+            homeScreen.addEventListener('click', (e) => {
+                const signatureWidget = document.getElementById('widget-signature');
+                // 如果点击的目标不是签名框，并且签名框当前是激活编辑状态
+                if (e.target !== signatureWidget && document.activeElement === signatureWidget) {
+                    signatureWidget.blur(); // 手动触发失焦
+                }
+            });
         }
 
         function applyWallpaper(url) {
@@ -5924,15 +7425,56 @@
                     }
                 }
             });
+
+         customizeForm.addEventListener('change', async (e) => {
+             if (e.target.matches('.widget-upload-input')) {
+                 const file = e.target.files[0];
+                 if (!file) return;
+ 
+                 const widgetPart = e.target.dataset.widgetTarget;
+                 const widgetProp = e.target.dataset.widgetProp;
+ 
+                 try {
+                     const compressedUrl = await compressImage(file, { quality: 0.8, maxWidth: 400, maxHeight: 400 });
+                     
+                     let targetInput;
+                     if (widgetProp) {
+                         targetInput = document.getElementById(`widget-input-${widgetPart}-${widgetProp}`);
+                     } else {
+                         targetInput = document.getElementById(`widget-input-${widgetPart}`);
+                     }
+ 
+                     if (targetInput) {
+                         targetInput.value = compressedUrl;
+                         // Manually trigger an input event to save the data
+                         targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+                         showToast('图片已上传并压缩');
+                     }
+                 } catch (error) {
+                     console.error('Widget image compression failed:', error);
+                     showToast('图片压缩失败，请重试');
+                 } finally {
+                     e.target.value = null; // Reset file input
+                 }
+             }
+         });
         }
 
-        function renderCustomizeForm() {
-            customizeForm.innerHTML = '';
+                function renderCustomizeForm() {
+            customizeForm.innerHTML = ''; // 清空旧内容
 
-            // --- 应用图标自定义部分 (稍微调整) ---
-             Object.entries(defaultIcons).forEach(([id, {name, url}]) => {
+            // --- 1. 应用图标自定义部分 ---
+            const iconOrder = [
+                'chat-list-screen', 'api-settings-screen', 'wallpaper-screen',
+                'world-book-screen', 'customize-screen', 'tutorial-screen',
+                'font-settings-screen', 'day-mode-btn', 'night-mode-btn', 'forum-screen', 'music-screen', 'diary-screen', 'piggy-bank-screen'
+            ];
+
+            let iconsContentHTML = '';
+            iconOrder.forEach(id => {
+                const { name, url } = defaultIcons[id];
                 const currentIcon = (db.customIcons && db.customIcons[id]) || url;
-                const itemHTML = `
+                iconsContentHTML += `
                 <div class="icon-custom-item">
                     <img src="${currentIcon}" alt="${name}" class="icon-preview" id="icon-preview-${id}">
                     <div class="icon-details">
@@ -5941,99 +7483,120 @@
                     </div>
                     <button type="button" class="reset-icon-btn" data-id="${id}">重置</button>
                 </div>`;
-                customizeForm.insertAdjacentHTML('beforeend', itemHTML);
             });
 
-            // --- 主页小部件自定义部分 (这是新增的) ---
+            const iconsSectionHTML = `
+            <div class="collapsible-section">
+                <div class="collapsible-header">
+                    <h4>应用图标</h4>
+                    <span class="collapsible-arrow">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    ${iconsContentHTML}
+                </div>
+            </div>
+            `;
+            customizeForm.insertAdjacentHTML('beforeend', iconsSectionHTML);
+
+            // --- 2. 主页小部件自定义部分 ---
             const widgetSettings = db.homeWidgetSettings || defaultWidgetSettings;
             const widgetSectionHTML = `
-                <hr style="border:none; border-top:1px solid #eee; margin: 30px 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h4 style="margin: 0; color: var(--primary-color);">主页小部件设置</h4>
-                    <button type="button" id="reset-widget-btn" class="btn btn-neutral btn-small">恢复默认</button>
+            <div class="collapsible-section">
+                <div class="collapsible-header">
+                    <h4>主页小部件</h4>
+                    <span class="collapsible-arrow">▼</span>
                 </div>
-
-                <div class="form-group">
-                    <label>中央大圆图片URL</label>
-                    <input type="url" class="form-group" placeholder="粘贴图片URL" value="${widgetSettings.centralCircleImage}" data-widget-part="centralCircleImage">
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                    <div>
-                        <div class="form-group">
-                            <label>左上角文字</label>
-                            <input type="text" class="form-group" value="${widgetSettings.topLeft.text}" data-widget-part="topLeft" data-widget-prop="text">
-                        </div>
-                        <div class="form-group">
-                            <label>左上角图片URL</label>
-                            <input type="url" class="form-group" value="${widgetSettings.topLeft.imageUrl}" data-widget-part="topLeft" data-widget-prop="imageUrl">
-                        </div>
+                <div class="collapsible-content">
+                    <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px;">
+                        <button type="button" id="reset-widget-btn" class="btn btn-neutral btn-small">恢复默认</button>
                     </div>
-                    <div>
-                        <div class="form-group">
-                            <label>右上角文字</label>
-                            <input type="text" class="form-group" value="${widgetSettings.topRight.text}" data-widget-part="topRight" data-widget-prop="text">
-                        </div>
-                        <div class="form-group">
-                            <label>右上角图片URL</label>
-                            <input type="url" class="form-group" value="${widgetSettings.topRight.imageUrl}" data-widget-part="topRight" data-widget-prop="imageUrl">
-                        </div>
+                    <div class="form-group">
+                        <label>中心圆圈图片URL</label>
+                        <input type="url" class="form-group" placeholder="粘贴图片URL" value="${widgetSettings.centralCircleImage}" data-widget-part="centralCircleImage" id="widget-input-centralCircleImage">
+                        <input type="file" id="widget-upload-centralCircleImage" data-widget-target="centralCircleImage" class="widget-upload-input" accept="image/*" style="display:none;">
+                        <label for="widget-upload-centralCircleImage" class="btn btn-secondary btn-small" style="margin-top: 5px;">本地上传</label>
                     </div>
-                    <div>
-                        <div class="form-group">
-                            <label>左下角文字</label>
-                            <input type="text" class="form-group" value="${widgetSettings.bottomLeft.text}" data-widget-part="bottomLeft" data-widget-prop="text">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div>
+                            <div class="form-group"><label>左上角文字</label><input type="text" class="form-group" value="${widgetSettings.topLeft.text}" data-widget-part="topLeft" data-widget-prop="text"></div>
+                            <div class="form-group"><label>左上角图片URL</label><input type="url" class="form-group" value="${widgetSettings.topLeft.imageUrl}" data-widget-part="topLeft" data-widget-prop="imageUrl" id="widget-input-topLeft-imageUrl">
+                                <input type="file" id="widget-upload-topLeft-imageUrl" data-widget-target="topLeft" data-widget-prop="imageUrl" class="widget-upload-input" accept="image/*" style="display:none;">
+                                <label for="widget-upload-topLeft-imageUrl" class="btn btn-secondary btn-small" style="margin-top: 5px;">本地上传</label>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>左下角图片URL</label>
-                            <input type="url" class="form-group" value="${widgetSettings.bottomLeft.imageUrl}" data-widget-part="bottomLeft" data-widget-prop="imageUrl">
+                        <div>
+                            <div class="form-group"><label>右上角文字</label><input type="text" class="form-group" value="${widgetSettings.topRight.text}" data-widget-part="topRight" data-widget-prop="text"></div>
+                            <div class="form-group"><label>右上角图片URL</label><input type="url" class="form-group" value="${widgetSettings.topRight.imageUrl}" data-widget-part="topRight" data-widget-prop="imageUrl" id="widget-input-topRight-imageUrl">
+                                <input type="file" id="widget-upload-topRight-imageUrl" data-widget-target="topRight" data-widget-prop="imageUrl" class="widget-upload-input" accept="image/*" style="display:none;">
+                                <label for="widget-upload-topRight-imageUrl" class="btn btn-secondary btn-small" style="margin-top: 5px;">本地上传</label>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label>右下角文字</label>
-                            <input type="text" class="form-group" value="${widgetSettings.bottomRight.text}" data-widget-part="bottomRight" data-widget-prop="text">
+                        <div>
+                            <div class="form-group"><label>左下角文字</label><input type="text" class="form-group" value="${widgetSettings.bottomLeft.text}" data-widget-part="bottomLeft" data-widget-prop="text"></div>
+                            <div class="form-group"><label>左下角图片URL</label><input type="url" class="form-group" value="${widgetSettings.bottomLeft.imageUrl}" data-widget-part="bottomLeft" data-widget-prop="imageUrl" id="widget-input-bottomLeft-imageUrl">
+                                <input type="file" id="widget-upload-bottomLeft-imageUrl" data-widget-target="bottomLeft" data-widget-prop="imageUrl" class="widget-upload-input" accept="image/*" style="display:none;">
+                                <label for="widget-upload-bottomLeft-imageUrl" class="btn btn-secondary btn-small" style="margin-top: 5px;">本地上传</label>
+                            </div>
                         </div>
-                         <div class="form-group">
-                            <label>右下角图片URL</label>
-                            <input type="url" class="form-group" value="${widgetSettings.bottomRight.imageUrl}" data-widget-part="bottomRight" data-widget-prop="imageUrl">
+                        <div>
+                            <div class="form-group"><label>右下角文字</label><input type="text" class="form-group" value="${widgetSettings.bottomRight.text}" data-widget-part="bottomRight" data-widget-prop="text"></div>
+                            <div class="form-group"><label>右下角图片URL</label><input type="url" class="form-group" value="${widgetSettings.bottomRight.imageUrl}" data-widget-part="bottomRight" data-widget-prop="imageUrl" id="widget-input-bottomRight-imageUrl">
+                                <input type="file" id="widget-upload-bottomRight-imageUrl" data-widget-target="bottomRight" data-widget-prop="imageUrl" class="widget-upload-input" accept="image/*" style="display:none;">
+                                <label for="widget-upload-bottomRight-imageUrl" class="btn btn-secondary btn-small" style="margin-top: 5px;">本地上传</label>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             `;
             customizeForm.insertAdjacentHTML('beforeend', widgetSectionHTML);
 
-            // --- 全局CSS部分 ---
+            // --- 3. 全局CSS美化部分 ---
             const globalCssSectionHTML = `
-                <hr style="border:none; border-top:1px solid #eee; margin: 20px 0;">
-                <div class="form-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <label for="global-beautification-css" style="font-weight: bold; font-size: 1.1em; color: var(--primary-color); margin-bottom: 0;">全局美化CSS设置</label>
-                        <button type="button" id="apply-global-css-now-btn" class="btn btn-primary btn-small">应用</button>
-                    </div>
-                    <textarea id="global-beautification-css" class="form-group" rows="8" placeholder="在此输入CSS代码... 这里的代码优先度最高。"></textarea>
+            <div class="collapsible-section">
+                <div class="collapsible-header">
+                    <h4>全局CSS美化</h4>
+                    <span class="collapsible-arrow">▼</span>
                 </div>
-                <div class="panel panel-sm" style="padding:12px;border-radius:10px;border:1px solid var(--border-color,#e8e8ef);background:var(--panel-bg,#fff);box-shadow:var(--panel-shadow,0 4px 12px rgba(20,20,30,0.04));margin:10px 0;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                        <label for="global-css-preset-select" style="width:auto;color:var(--muted,#667);font-size:13px; font-weight: bold;">全局美化预设管理</label>
-                        <select id="global-css-preset-select" style="flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--input-border,#e6e6ea);background:var(--input-bg,#fff);font-size:14px;"><option value="">— 选择预设 —</option></select>
+                <div class="collapsible-content">
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <label for="global-beautification-css" style="font-weight: bold; font-size: 1.1em; color: var(--primary-color); margin-bottom: 0;">全局美化CSS代码</label>
+                            <button type="button" id="apply-global-css-now-btn" class="btn btn-primary btn-small">立即应用</button>
+                        </div>
+                        <textarea id="global-beautification-css" class="form-group" rows="8" placeholder="在此输入CSS代码... 您的创造力没有边界！"></textarea>
                     </div>
-                    <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;justify-content: flex-end;">
-                        <button type="button" id="global-css-apply-btn" class="btn btn-primary" style="padding:7px 10px;border-radius:8px;">应用预设</button>
-                        <button type="button" id="global-css-save-btn" class="btn" style="padding:7px 10px;border-radius:8px;">另存为</button>
-                        <button type="button" id="global-css-manage-btn" class="btn" style="padding:7px 10px;border-radius:8px;">管理</button>
+                    <div class="panel panel-sm" style="padding:12px;border-radius:10px;border:1px solid var(--border-color,#e8e8ef);background:var(--panel-bg,#fff);box-shadow:var(--panel-shadow,0 4px 12px rgba(20,20,30,0.04));margin:10px 0;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                            <label for="global-css-preset-select" style="width:auto;color:var(--muted,#667);font-size:13px; font-weight: bold;">全局样式预设库</label>
+                            <select id="global-css-preset-select" style="flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--input-border,#e6e6ea);background:var(--input-bg,#fff);font-size:14px;"><option value="">-- 选择预设 --</option></select>
+                        </div>
+                        <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;justify-content: flex-end;">
+                            <button type="button" id="global-css-apply-btn" class="btn btn-primary" style="padding:7px 10px;border-radius:8px;">应用预设</button>
+                            <button type="button" id="global-css-save-btn" class="btn" style="padding:7px 10px;border-radius:8px;">存为预设</button>
+                            <button type="button" id="global-css-manage-btn" class="btn" style="padding:7px 10px;border-radius:8px;">管理</button>
+                        </div>
                     </div>
                 </div>
+            </div>
             `;
             customizeForm.insertAdjacentHTML('beforeend', globalCssSectionHTML);
+
+            // 填充预设下拉框
             populateGlobalCssPresetSelect();
 
-            // --- Logic for Global CSS Section ---
+            // --- 新增：为所有折叠标题添加一个点击事件监听器 ---
+            customizeForm.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', () => {
+                   header.parentElement.classList.toggle('open');
+                });
+            });
+
+            // 重新绑定之前已有的事件监听器
             const globalCssTextarea = document.getElementById('global-beautification-css');
             if (globalCssTextarea) {
                 globalCssTextarea.value = db.globalCss || '';
             }
-
             const applyGlobalCssNowBtn = document.getElementById('apply-global-css-now-btn');
             if (applyGlobalCssNowBtn) {
                 applyGlobalCssNowBtn.addEventListener('click', async () => {
@@ -6044,11 +7607,7 @@
                     showToast('全局样式已应用');
                 });
             }
-
             const globalCssApplyBtn = document.getElementById('global-css-apply-btn');
-            const globalCssSaveBtn = document.getElementById('global-css-save-btn');
-            const globalCssManageBtn = document.getElementById('global-css-manage-btn');
-
             if (globalCssApplyBtn) {
                 globalCssApplyBtn.addEventListener('click', () => {
                     const select = document.getElementById('global-css-preset-select');
@@ -6064,12 +7623,12 @@
                     }
                 });
             }
-
+            const globalCssSaveBtn = document.getElementById('global-css-save-btn');
             if (globalCssSaveBtn) {
-                globalCssSaveBtn.addEventListener('click', () => {
+                 globalCssSaveBtn.addEventListener('click', () => {
                     const css = globalCssTextarea.value.trim();
                     if (!css) return showToast('CSS内容为空，无法保存');
-                    const name = prompt('请输入预设名称（同名将覆盖）:');
+                    const name = prompt('请输入此预设的名称（同名将覆盖）:');
                     if (!name) return;
                     if (!db.globalCssPresets) db.globalCssPresets = [];
                     const existingIndex = db.globalCssPresets.findIndex(p => p.name === name);
@@ -6083,11 +7642,12 @@
                     showToast('全局CSS预设已保存');
                 });
             }
-
+            const globalCssManageBtn = document.getElementById('global-css-manage-btn');
             if (globalCssManageBtn) {
-                globalCssManageBtn.addEventListener('click', openGlobalCssManageModal);
+                 globalCssManageBtn.addEventListener('click', openGlobalCssManageModal);
             }
         }
+
 
         function setupTutorialApp() {
             tutorialContentArea.addEventListener('click', (e) => {
@@ -6264,11 +7824,19 @@
                 action: async () => {
                     if (confirm(`确定要删除与“${itemName}”的聊天记录吗？此操作不可恢复。`)) {
                         if (chatType === 'private') {
+                            // 从数据库中删除角色数据和消息历史
+                            await dataStorage.removeData(`character_${chatId}`);
+                            await dataStorage.clearChatMessages(chatId, 'private');
+                            // 从内存中移除
                             db.characters = db.characters.filter(c => c.id !== chatId);
                         } else {
+                            // 从数据库中删除群组数据和消息历史
+                            await dataStorage.removeData(`group_${chatId}`);
+                            await dataStorage.clearChatMessages(chatId, 'group');
+                            // 从内存中移除
                             db.groups = db.groups.filter(g => g.id !== chatId);
                         }
-                        await saveData();
+                        await saveData(); // 保存更改后的角色/群组列表
                         renderChatList();
                         showToast('聊天已删除');
                     }
@@ -6323,8 +7891,20 @@
                             lastMessageText = '[互动]';
                         } else {
                             const textMatch = lastMsg.content.match(/\[.*?的消息：([\s\S]+)\]/);
-                            let text = textMatch ? textMatch[1].trim() : lastMsg.content.trim();
-                            lastMessageText = urlRegex.test(text) ? '[图片]' : text;
+                            // ...
+let text = lastMsg.content.trim();
+const plainTextMatch = text.match(/^\[.*?：([\s\S]*)\]$/);
+if (plainTextMatch && plainTextMatch[1]) {
+    text = plainTextMatch[1].trim();
+}
+text = text.replace(/\[发送时间:.*?\]/g, '').trim();
+
+const htmlRegex = /<[a-z][\s\S]*>/i;
+if (htmlRegex.test(text)) {
+    lastMessageText = '[互动]';
+} else {
+    lastMessageText = urlRegex.test(text) ? '[图片]' : text;
+}
                         }
                     } else {
                         const lastEverMsg = chat.history[chat.history.length - 1];
@@ -6381,8 +7961,11 @@
                     worldBookIds: [],
                     useCustomBubbleCss: false,
                     customBubbleCss: '',
-                    memoryJournals: []
-                };
+                    memoryJournals: [],
+                    journalWorldBookIds: [], // 新增
+                    peekScreenSettings: { wallpaper: '', customIcons: {}, unlockAvatar: '' }, // 新增
+ lastUserMessageTimestamp: null, // 新增：用于记录最后消息时间
+               };
                 db.characters.push(newChar);
                 await saveData();
                 renderChatList();
@@ -6524,11 +8107,20 @@
             exitMultiSelectMode();
             editingMessageId = messageId;
             const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
-            const message = chat.history.find(m => m.id === messageId);
-            if (!message) return;
-            const match = message.content.match(/\[.*?的消息：([\s\S]+)\]/);
-            const contentToEdit = match ? match[1].trim() : message.content;
-            messageEditInput.value = contentToEdit;
+           //...
+const message = chat.history.find(m => m.id === messageId);
+if (!message) return;
+
+// --- 从这里开始是替换后的新代码 ---
+let contentToEdit = message.content;
+const plainTextMatch = contentToEdit.match(/^\[.*?：([\s\S]*)\]$/);
+if (plainTextMatch && plainTextMatch[1]) {
+    contentToEdit = plainTextMatch[1].trim();
+}
+// --- 到这里结束 ---
+contentToEdit = contentToEdit.replace(/\[发送时间:.*?\]/g, '').trim(); // <--- 加上这一行
+messageEditInput.value = contentToEdit;
+
             messageInputDefault.style.display = 'none';
             messageEditBar.style.display = 'flex';
             messageEditInput.focus();
@@ -6538,16 +8130,32 @@
             const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
             const messageIndex = chat.history.findIndex(m => m.id === editingMessageId);
             if (messageIndex === -1) return;
-            const newText = messageEditInput.value.trim();
-            if (newText) {
-                const oldContent = chat.history[messageIndex].content;
-                const prefixMatch = oldContent.match(/(\[.*?的消息：)[\s\S]+\]/);
-                const prefix = prefixMatch ? prefixMatch[1] : '';
-                const newContent = `${prefix}${newText}]`;
-                chat.history[messageIndex].content = newContent;
-                if (chat.history[messageIndex].parts) {
-                    chat.history[messageIndex].parts = [{type: 'text', text: newContent}];
-                }
+           // ...
+const newTextRaw = messageEditInput.value.trim();
+if (newTextRaw) {
+    let newText = newTextRaw; // 先把干净的文字存起来
+
+    // 如果开启了时间感知，就把新的时间戳加上
+    if (db.apiSettings && db.apiSettings.timePerceptionEnabled) {
+        newText += `[发送时间: ${getFormattedTimestamp(new Date())}]`;
+    }
+
+    const oldContent = chat.history[messageIndex].content;
+    const prefixMatch = oldContent.match(/(\[.*?的消息：)[\s\S]+\]/);
+    let newContent;
+
+    if (prefixMatch && prefixMatch[1]) {
+        const prefix = prefixMatch[1];
+        newContent = `${prefix}${newText}]`;
+    } else {
+        newContent = newTextRaw;
+    }
+
+    chat.history[messageIndex].content = newContent;
+
+    if (chat.history[messageIndex].parts) {
+        chat.history[messageIndex].parts = [{type: 'text', text: newContent}];
+    }
                 await saveData();
                 currentPage = 1;
                 renderMessages(false, true);
@@ -6694,7 +8302,7 @@
             const timeSkipMatch = content.match(timeSkipRegex);
             const inviteMatch = content.match(inviteRegex);
             const renameMatch = content.match(renameRegex);
-            const invisibleRegex = /\[.*?(?:接收|退回).*?的转账\]|\[.*?更新状态为：.*?\]|\[.*?已接收礼物\]|\[system:.*?\]/;
+            const invisibleRegex = /\[.*?(?:接收|退回).*?的转账\]|\[.*?更新状态为：.*?\]|\[.*?已接收礼物\]|\[system:.*?\]|\[系统情景通知：.*?\]/;
             if (invisibleRegex.test(content)) {
                 return null;
             }
@@ -6820,7 +8428,30 @@
                 descriptionDiv.className = 'gift-card-description';
                 descriptionDiv.textContent = description;
                 wrapper.appendChild(descriptionDiv);
-            } else if (voiceMatch) {
+                       } else if (content.startsWith('[论坛分享]')) {
+                const forumShareRegex = /\[论坛分享\]标题：([\s\S]+?)\n摘要：([\s\S]+)/;
+                const forumShareMatch = content.match(forumShareRegex);
+
+                if (forumShareMatch) {
+                    const title = forumShareMatch[1].trim();
+                    const summary = forumShareMatch[2].trim();
+
+                    bubbleElement = document.createElement('div');
+                    bubbleElement.className = 'forum-share-card';
+
+                    // 这是卡片内部的HTML结构
+                    bubbleElement.innerHTML = `
+                        <div class="forum-share-header">
+                            <svg viewBox="0 0 24 24"><path d="M21,3H3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3M21,19H3V5H21V19M8,11H16V9H8V11M8,15H13V13H8V15Z" /></svg>
+                            <span>来自论坛的分享</span>
+                        </div>
+                        <div class="forum-share-content">
+                            <div class="forum-share-title">${title}</div>
+                            <div class="forum-share-summary">${summary}</div>
+                        </div>
+                    `;
+                }
+ } else if (voiceMatch) {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = 'voice-bubble';
                 if (!chat.useCustomBubbleCss) {
@@ -6878,7 +8509,14 @@
             } else if (textMatch) {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
-                bubbleElement.textContent = textMatch[1].trim();
+
+let userText = textMatch[1].trim().replace(/\[发送时间:.*?\]/g, '').trim();
+const htmlRegex = /<[a-z][\s\S]*>/i;
+if (htmlRegex.test(userText)) {
+    bubbleElement.innerHTML = userText;
+} else {
+    bubbleElement.textContent = userText;
+}
                 if (!chat.useCustomBubbleCss) {
                     bubbleElement.style.backgroundColor = bubbleTheme.bg;
                     bubbleElement.style.color = bubbleTheme.text;
@@ -6890,7 +8528,19 @@
             } else {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
-                bubbleElement.textContent = content;
+                let displayedContent = content;
+                const plainTextMatch = content.match(/^\[.*?：([\s\S]*)\]$/);
+                if (plainTextMatch && plainTextMatch[1]) {
+                    displayedContent = plainTextMatch[1].trim();
+                }
+                displayedContent = displayedContent.replace(/\[发送时间:.*?\]/g, '').trim();
+
+                const htmlRegex = /<[a-z][\s\S]*>/i;
+                if (htmlRegex.test(displayedContent)) {
+                    bubbleElement.innerHTML = displayedContent;
+                } else {
+                    bubbleElement.textContent = displayedContent;
+                }
                 if (!chat.useCustomBubbleCss) {
                     bubbleElement.style.backgroundColor = bubbleTheme.bg;
                     bubbleElement.style.color = bubbleTheme.text;
@@ -6969,40 +8619,98 @@
         }
 
         async function sendMessage() {
-            const text = messageInput.value.trim();
-            if (!text || isGenerating) return;
-            const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
-            let messageContent;
-            const systemRegex = /\[system:.*?\]|\[system-display:.*?\]/;
-            const inviteRegex = /\[.*?邀请.*?加入了群聊\]/;
-            const renameRegex = /\[(.*?)修改群名为：(.*?)\]/;
-            const myName = (currentChatType === 'private') ? chat.myName : chat.me.nickname;
-            if (renameRegex.test(text)) {
-                const match = text.match(renameRegex);
-                chat.name = match[2];
-                chatRoomTitle.textContent = chat.name;
-                messageContent = `[${chat.me.nickname}修改群名为：${chat.name}]`;
-            } else if (systemRegex.test(text) || inviteRegex.test(text)) {
-                messageContent = text;
-            } else {
-                messageContent = `[${myName}的消息：${text}]`;
-            }
-            const message = {
-                id: `msg_${Date.now()}`,
-                role: 'user',
-                content: messageContent,
-                parts: [{type: 'text', text: messageContent}],
-                timestamp: Date.now()
+    const text = messageInput.value.trim();
+    if (!text || isGenerating) return;
+    messageInput.value = ''; // Clear input immediately for better UX
+    const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);// --- 时间感知功能注入点 开始 ---
+if (db.apiSettings && db.apiSettings.timePerceptionEnabled) {
+    const now = new Date();
+
+    // 功能2：情景唤醒机制
+    const lastMessageTime = chat.lastUserMessageTimestamp;
+    if (lastMessageTime) {
+        const timeGap = now.getTime() - lastMessageTime;
+        const thirtyMinutes = 30 * 60 * 1000; // 30分钟的毫秒数
+
+        if (timeGap > thirtyMinutes) {
+            const systemNoticeContent = `[系统情景通知：与用户的上一次互动发生在${formatTimeGap(timeGap)}前。当前时刻是${getFormattedTimestamp(now)}。话题可能已经不连续。]`;
+            const systemNoticeMessage = {
+                id: `msg_system_${Date.now()}`,
+                role: 'user', // 作为user消息发送给AI，但不会显示
+                content: systemNoticeContent,
+                parts: [{ type: 'text', text: systemNoticeContent }],
+                timestamp: now.getTime() - 1 // 比用户消息早一点点
             };
             if (currentChatType === 'group') {
-                message.senderId = 'user_me';
+                systemNoticeMessage.senderId = 'user_me';
             }
-            chat.history.push(message);
-            addMessageBubble(message);
-            await saveData();
-            renderChatList();
-            messageInput.value = '';
+            chat.history.push(systemNoticeMessage);
         }
+    }
+    // 更新最后一次用户消息的时间戳
+    chat.lastUserMessageTimestamp = now.getTime();
+}
+// --- 时间感知功能注入点 结束 ---
+
+let messageContent;
+const systemRegex = /\[system:.*?\]|\[system-display:.*?\]/;
+const inviteRegex = /\[.*?邀请.*?加入群聊\]/;
+const renameRegex = /\[(.*?)修改群名为“(.*?)”\]/;
+const myName = (currentChatType === 'private') ? chat.myName : chat.me.nickname;
+
+if (renameRegex.test(text)) {
+    const match = text.match(renameRegex);
+    chat.name = match[2];
+    chatRoomTitle.textContent = chat.name;
+    messageContent = `[${chat.me.nickname}修改群名为“${chat.name}”]`;
+} else if (systemRegex.test(text) || inviteRegex.test(text)) {
+    messageContent = text;
+} else {
+    let userText = text;
+    // 功能1：即时时间邮戳
+    if (db.apiSettings && db.apiSettings.timePerceptionEnabled) {
+        userText += `[发送时间: ${getFormattedTimestamp(new Date())}]`;
+    }
+    messageContent = `[${myName}的消息：${userText}]`;
+}
+
+const message = {
+    id: `msg_${Date.now()}`,
+    role: 'user',
+    content: messageContent,
+    parts: [{type: 'text', text: messageContent}],
+    timestamp: Date.now()
+};
+if (currentChatType === 'group') {
+    message.senderId = 'user_me';
+}
+chat.history.push(message);
+addMessageBubble(message);
+await saveData();
+renderChatList();
+}
+// 辅助函数1：格式化时间戳 YYYY-MM-DD HH:MM:SS
+function getFormattedTimestamp(date) {
+    const Y = date.getFullYear();
+    const M = String(date.getMonth() + 1).padStart(2, '0');
+    const D = String(date.getDate()).padStart(2, '0');
+    const h = String(date.getHours()).padStart(2, '0');
+    const m = String(date.getMinutes()).padStart(2, '0');
+    const s = String(date.getSeconds()).padStart(2, '0');
+    return `${Y}-${M}-${D} ${h}:${m}:${s}`;
+}
+
+// 辅助函数2：格式化时间差
+function formatTimeGap(milliseconds) {
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);if (days > 0) return `${days}天${hours % 24}小时`;
+if (hours > 0) return `${hours}小时${minutes % 60}分钟`;
+if (minutes > 0) return `${minutes}分钟`;
+return `${seconds}秒`;
+}
+
 
         async function sendImageForRecognition(base64Data) {
             if (!base64Data || isGenerating) return;
@@ -7366,27 +9074,40 @@
 
             // 最终结果数组
             const results = [];
-            const regex = /<orange(?:\s+char="([^"]*)")?>([\s\S]*?)<\/orange>|(\[.*?\])/g;
+            const regex = /<(orange|div)(?:\s+char="([^"]*)")?>([\s\S]*?)<\/\1>|(\[[\s\S]*?\])/g;
 
+            let lastIndex = 0;
             let match;
-            // 使用 exec() 循环遍历所有匹配项，以确保顺序
+
             while ((match = regex.exec(responseData)) !== null) {
-                // match[1] 是 char 的值, match[2] 是 <orange> 的内容
-                if (match[1] !== undefined || match[2] !== undefined) {
+                // 捕获两个匹配项之间的普通文本
+                if (match.index > lastIndex) {
+                    const textPart = responseData.substring(lastIndex, match.index).trim();
+                    if (textPart) {
+                        results.push({ type: 'text', content: `[unknown的消息：${textPart}]` });
+                    }
+                }
+
+                if (match[3] !== undefined) { // Matched <orange> or <div> content
                     results.push({
                         type: 'html',
-                        // 如果 char 属性不存在, match[1] 会是 undefined, 我们将其设为 null
-                        char: match[1] || null,
-                        // match[2] 是 HTML 内容, trim() 用于移除首尾空白
-                        content: match[2].trim()
+                        char: match[2] || null,
+                        content: match[3].trim()
                     });
-                }
-                // match[3] 是 [...] 的内容
-                else if (match[3]) {
+                } else if (match[4]) { // Matched [...]
                     results.push({
                         type: 'text',
-                        content: match[3]
+                        content: match[4]
                     });
+                }
+                lastIndex = regex.lastIndex;
+            }
+
+            // 捕获最后一个匹配项之后的剩余文本
+            if (lastIndex < responseData.length) {
+                const textPart = responseData.substring(lastIndex).trim();
+                if (textPart) {
+                     results.push({ type: 'text', content: `[unknown的消息：${textPart}]` });
                 }
             }
 
@@ -7438,11 +9159,12 @@
     a) 接收转账: [${character.realName}接收${character.myName}的转账]
     b) 退回转账: [${character.realName}退回${character.myName}的转账]
 7. ✨重要✨ 你也可以主动给我转账或送礼物。转账格式必须为：[${character.realName}的转账：xxx元；备注：xxx]。送礼物格式必须为：[${character.realName}送来的礼物：xxx]。
-8. ✨重要✨ 你可以随时更新你的在线状态，以反映你当前的行为或心情。这会让互动更真实。格式为：[${character.realName}更新状态为：xxx]。例如：[${character.realName}更新状态为：正在看电影...]。这条指令不会显示为聊天消息，只会更新你在我界面上的状态。
+8. ✨重要✨ 你需要在对话中**积极地**改变你的状态。比如，聊到一半你可能会说“我先去洗个澡”，然后更新你的状态，以反映你当前的行为或心情。这会让互动更真实。格式为：[${character.realName}更新状态为：xxx]。例如：[${character.realName}更新状态为：正在看电影...]。这条指令不会显示为聊天消息，只会更新你在我界面上的状态。
 9. 你的所有回复都必须直接是聊天内容，绝对不允许包含任何如[心理活动]、(动作)、*环境描写*等多余的、在括号或星号里的叙述性文本。
 `;
             prompt += `10. 你拥有发送表情包的能力。这是一个可选功能，你可以根据对话氛围和内容，自行判断是否需要发送表情包来辅助表达。你不必在每次回复中都包含表情包。格式为：[${character.realName}发送的表情包：图片URL]。\n`;
-            prompt += `11. 你的输出格式必须严格遵循以下几种之一，可以组合使用：
+            
+            let outputFormats = `
     a) 普通消息: [${character.realName}的消息：{消息内容}]
     b) 送我的礼物: [${character.realName}送来的礼物：{礼物描述}]
     c) 语音消息: [${character.realName}的语音：{语音内容}]
@@ -7451,9 +9173,15 @@
     f) 表情包/图片: [${character.realName}发送的表情包：{表情包路径}]。注意：这里的路径不需要包含"https://i.postimg.cc/"，只需要提供后面的部分，例如 "害羞vHLfrV3K/1.jpg"。
     g) 对我礼物的回应(此条不显示): [${character.realName}已接收礼物]
     h) 对我转账的回应(此条不显示): [${character.realName}接收${character.myName}的转账] 或 [${character.realName}退回${character.myName}的转账]
-    i) 更新状态(此条不显示): [${character.realName}更新状态为：{新状态}]
-`;
-            prompt += `12. 你的每次回复可以生成3到8条消息。这些消息应以普通文本消息为主，可以偶尔、选择性地穿插一条特殊消息（如礼物、语音、图片、表情包等），特殊消息的位置应随机。大部分回复应该只包含文本消息。\n`;
+    i) 更新状态(此条不显示): [${character.realName}更新状态为：{新状态}]`;
+
+           const allWorldBookContent = worldBooksBefore + '\n' + worldBooksAfter;
+           if (allWorldBookContent.includes('<orange>')) {
+               outputFormats += `\n     j) HTML模块: <orange>{HTML内容}</orange>。这是一种特殊的、用于展示丰富样式的小卡片消息，你可以用它来创造更有趣的互动。`;
+           }
+
+            prompt += `11. 你的输出格式必须严格遵循以下几种之一，可以组合使用：${outputFormats}\n`;
+            prompt += `12. **对话节奏**: 你需要模拟真人的聊天习惯，你可以一次性生成多条短消息。每次要回复至少3-8条消息。\n`;
             prompt += `13. 不要主动结束对话，除非我明确提出。保持你的人设，自然地进行对话。`;
             return prompt;
         }
@@ -7490,11 +9218,18 @@
             prompt += `   - \`[${group.me.nickname}的表情包：...]\`, \`[${group.me.nickname}的语音：...]\`, \`[${group.me.nickname}发来的照片/视频：...]\`: 我发送了特殊类型的消息，群成员可以对此发表评论。\n`;
             prompt += `   - \`[system: ...]\`, \`[...邀请...加入了群聊]\`, \`[...修改群名为...]\`: 系统通知或事件，群成员应据此作出反应，例如欢迎新人、讨论新群名等。\n\n`;
 
-            prompt += `4. **你的输出格式 (极其重要)**: 你生成的每一条消息都 **必须** 严格遵循以下格式之一。每条消息占一行。请用成员的 **真名** 填充格式中的 \`{成员真名}\`。\n`;
-            prompt += `   - **普通消息**: \`[{成员真名}的消息：{消息内容}]\`\n`;
-            prompt += `   - **表情包**: \`[{成员真名}发送的表情包：{表情包路径}]\`。注意：这里的路径不需要包含"https://i.postimg.cc/"，只需要提供后面的部分，例如 "害羞vHLfrV3K/1.jpg"。\n`;
-            prompt += `   - **语音**: \`[{成员真名}的语音：{语音转述的文字}]\`\n`;
-            prompt += `   - **照片/视频**: \`[{成员真名}发来的照片/视频：{内容描述}]\`\n`;
+            let outputFormats = `
+  - **普通消息**: \`[{成员真名}的消息：{消息内容}]\`
+  - **表情包**: \`[{成员真名}发送的表情包：{表情包路径}]\`。注意：这里的路径不需要包含"https://i.postimg.cc/"，只需要提供后面的部分，例如 "害羞vHLfrV3K/1.jpg"。
+  - **语音**: \`[{成员真名}的语音：{语音转述的文字}]\`
+  - **照片/视频**: \`[{成员真名}发来的照片/视频：{内容描述}]\``;
+           
+           const allWorldBookContent = worldBooksBefore + '\n' + worldBooksAfter;
+           if (allWorldBookContent.includes('<orange>')) {
+               outputFormats += `\n   - **HTML消息**: \`<orange char="{成员真名}">{HTML内容}</orange>\`。这是一种特殊的、用于展示丰富样式的小卡片消息，你可以用它来创造更有趣的互动。注意要用成员的 **真名** 填充 \`char\` 属性。`;
+           }
+           
+            prompt += `4. **你的输出格式 (极其重要)**: 你生成的每一条消息都 **必须** 严格遵循以下格式之一。每条消息占一行。请用成员的 **真名** 填充格式中的 \`{成员真名}\`。\n${outputFormats}\n\n`;
             prompt += `   - **重要**: 群聊不支持AI成员接收/退回转账或接收礼物的特殊指令，也不支持更新状态。你只需要通过普通消息来回应我发送的转账或礼物即可。\n\n`;
 
             prompt += `5. **模拟群聊氛围**: 为了让群聊看起来真实、活跃且混乱，你的每一次回复都必须遵循以下随机性要求：\n`;
@@ -7610,7 +9345,7 @@
             }
         }
 
-        async function processStream(response, chat, apiType) {
+                async function processStream(response, chat, apiType) {
             const reader = response.body.getReader(), decoder = new TextDecoder();
             let fullResponse = "", accumulatedChunk = "";
             for (; ;) {
@@ -7644,90 +9379,70 @@
                 }
             }
             if (fullResponse) {
-                if (currentChatType === 'private') {
-                    const character = chat;
-                    const myName = character.myName;
+                // ▼▼▼▼▼▼▼▼▼▼ 核心修改从这里开始 ▼▼▼▼▼▼▼▼▼▼
 
-                    const messageRegex = new RegExp(`\\[${character.realName}(?:的(?:消息|语音|转账|表情包)|发送的表情包|发来的照片\\/视频|送来的礼物)：[\\s\\S]+?\\]|\\[${character.realName}(?:接收|退回)${myName}的转账\\]|\\[${character.realName}已接收礼物\\]|\\[${character.realName}更新状态为：.*?\\]`, "g");
-                    // const messages = fullResponse.match(messageRegex) || [];
-                    const messages = getMixedContent(fullResponse)
-                    if (messages.length > 0) {
-                        messages.forEach(item => {
-                            const receivedTransferRegex = new RegExp(`\\[${character.realName}的转账：.*?元；备注：.*?\\]`);
-                            const giftRegex = new RegExp(`\\[${character.realName}送来的礼物：.*?\\]`);
-                            const message = {
-                                id: `msg_${Date.now()}_${Math.random()}`,
-                                role: 'assistant',
-                                content: item.content.trim(),
-                                parts: [{type: item.type, text: item.content.trim()}],
-                                timestamp: Date.now(),
-                            };
-                            if (receivedTransferRegex.test(message.content)) {
-                                message.transferStatus = 'pending';
-                            } else if (giftRegex.test(message.content)) {
-                                message.giftStatus = 'sent';
-                            }
-                            chat.history.push(message);
-                            addMessageBubble(message);
-                        });
-                    } else {
-                        const simpleMessage = {
+                // 从完整的回复中，拆分出所有消息（包括普通文本和HTML小剧场），并过滤掉空消息
+                const messages = getMixedContent(fullResponse).filter(item => item.content.trim() !== '');
+
+                let firstMessageProcessed = false; // 用于标记是否是第一条消息
+
+                // **变化 1**: 我们把 forEach 换成了 for...of 循环，这样才能在里面使用 await
+                for (const item of messages) {
+
+                    const delay = firstMessageProcessed ? (900 + Math.random() * 1300) : (400 + Math.random() * 400);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    firstMessageProcessed = true;
+
+
+                    if (currentChatType === 'private') {
+                        const character = chat;
+                        const myName = character.myName;
+
+                        const receivedTransferRegex = new RegExp(`\\[${character.realName}的转账：.*?元；备注：.*?\\]`);
+                        const giftRegex = new RegExp(`\\[${character.realName}送来的礼物：.*?\\]`);
+
+                        const message = {
                             id: `msg_${Date.now()}_${Math.random()}`,
                             role: 'assistant',
-                            content: fullResponse,
-                            parts: [{type: 'text', text: fullResponse}],
-                            timestamp: Date.now()
+                            content: item.content.trim(),
+                            parts: [{type: item.type, text: item.content.trim()}],
+                            timestamp: Date.now(),
                         };
-                        chat.history.push(simpleMessage);
-                        await addMessageBubble(simpleMessage);
-                    }
-                } else if (currentChatType === 'group') {
-                    const group = chat;
-                    const memberRealNames = group.members.map(m => m.realName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
-                    const memberRegex = new RegExp(`\\[(${memberRealNames.join('|')})(?:的消息|的语音|发送的表情包|发来的照片\\/视频)：[\\s\\S]+?\\]`, "g");
-                    // const messages = fullResponse.match(memberRegex) || [];
-                    const messages = getMixedContent(fullResponse)
-                    let r = /\[(.*?)((?:的消息|的语音|发送的表情包|发来的照片\/视频))：/
-                    if (messages.length > 0) {
-                        messages.forEach(item => {
-                            const nameMatch = item.content.match(r);
-                            if (nameMatch || item.char) {
-                                const senderName = item.char || (nameMatch[1]);
-                                const sender = group.members.find(m => (m.realName === senderName || m.groupNickname === senderName));
-                                console.log(sender)
-                                if (sender) {
-                                    const message = {
-                                        id: `msg_${Date.now()}_${Math.random()}`,
-                                        role: 'assistant',
-                                        content: item.content.trim(),
-                                        parts: [{type: item.type, text: item.content.trim()}],
-                                        timestamp: Date.now(),
-                                        senderId: sender.id
-                                    };
-                                    // console.log(message)
-                                    group.history.push(message);
-                                    addMessageBubble(message);
-                                }
+
+                        if (receivedTransferRegex.test(message.content)) {
+                            message.transferStatus = 'pending';
+                        } else if (giftRegex.test(message.content)) {
+                            message.giftStatus = 'sent';
+                        }
+
+                        chat.history.push(message);
+                        addMessageBubble(message);
+
+                    } else if (currentChatType === 'group') {
+                        const group = chat;
+                        const r = /\[(.*?)((?:的消息|的语音|发送的表情包|发来的照片\/视频))：/;
+                        const nameMatch = item.content.match(r);
+                        if (nameMatch || item.char) {
+                            const senderName = item.char || (nameMatch[1]);
+                            const sender = group.members.find(m => (m.realName === senderName || m.groupNickname === senderName));
+                            console.log(sender)
+                            if (sender) {
+                                const message = {
+                                    id: `msg_${Date.now()}_${Math.random()}`,
+                                    role: 'assistant',
+                                    content: item.content.trim(),
+                                    parts: [{type: item.type, text: item.content.trim()}],
+                                    timestamp: Date.now(),
+                                    senderId: sender.id
+                                };
+                                // console.log(message)
+                                group.history.push(message);
+                                addMessageBubble(message);
                             }
-                        });
-                    } else {
-                        console.warn("AI response did not match expected group format, treating as single message:", fullResponse);
-                        const firstMember = group.members[Math.floor(Math.random() * group.members.length)];
-                        if (firstMember) {
-                            const simpleMessageContent = `[${firstMember.realName}的消息：${fullResponse}]`;
-                            const simpleMessage = {
-                                id: `msg_${Date.now()}_${Math.random()}`,
-                                role: 'assistant',
-                                content: simpleMessageContent,
-                                parts: [{type: 'text', text: simpleMessageContent}],
-                                timestamp: Date.now(),
-                                senderId: firstMember.id
-                            };
-                            group.history.push(simpleMessage);
-                            await addMessageBubble(simpleMessage);
                         }
                     }
                 }
+ 
                 await saveData();
                 renderChatList();
             }
@@ -8594,6 +10309,8 @@
                     gemini: 'https://generativelanguage.googleapis.com'
                 };
             db.apiSettings && (n.value = db.apiSettings.provider || 'newapi', r.value = db.apiSettings.url || '', s.value = db.apiSettings.key || '', db.apiSettings.model && (a.innerHTML = `<option value="${db.apiSettings.model}">${db.apiSettings.model}</option>`));
+            if (db.apiSettings && typeof db.apiSettings.timePerceptionEnabled !== 'undefined') { document.getElementById('time-perception-switch').checked = db.apiSettings.timePerceptionEnabled; }
+
             populateApiSelect();
             n.addEventListener('change', () => {
                 r.value = c[n.value] || ''
@@ -8622,12 +10339,19 @@
                 }
             });
             e.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if (!a.value) return showToast('请选择模型后保存！');
-                db.apiSettings = {provider: n.value, url: r.value, key: s.value, model: a.value};
-                await saveData();
-                showToast('API设置已保存！')
-            })
+    e.preventDefault();
+    if (!a.value) return showToast('请选择模型后保存！');
+    // 在这里，我们把开关的状态也一起保存进去
+    db.apiSettings = {
+        provider: n.value,
+        url: r.value,
+        key: s.value,
+        model: a.value,
+        timePerceptionEnabled: document.getElementById('time-perception-switch').checked
+    };
+    await saveData();
+    showToast('API设置已保存！')
+})
         }
        function setupPresetFeatures() {
            // API Presets
@@ -9453,8 +11177,605 @@
             // 保存其他数据
             return originalSaveData(data);
         };
+        
+                function setupForumBindingFeature() {
+            const forumLinkBtn = document.getElementById('forum-link-btn');
+            const modal = document.getElementById('forum-binding-modal');
+            const tabs = modal.querySelectorAll('.tab-btn');
+            const contentPanes = modal.querySelectorAll('.forum-binding-content');
+            const confirmBtn = document.getElementById('confirm-forum-binding-btn');
+
+            // 1. 打开弹窗的事件监听
+            forumLinkBtn.addEventListener('click', () => {
+                openForumBindingModal();
+            });
+
+            // 2. 弹窗内的标签页切换逻辑
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 移除所有标签和内容的 active 状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contentPanes.forEach(p => p.classList.remove('active'));
+
+                    // 为点击的标签和对应内容添加 active 状态
+                    tab.classList.add('active');
+                    const targetId = tab.dataset.target;
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+
+            // 3. 确认绑定按钮的事件监听
+            confirmBtn.addEventListener('click', async () => {
+                const worldBookList = document.getElementById('forum-worldbook-list');
+                const charList = document.getElementById('forum-char-list');
+                const userList = document.getElementById('forum-user-list');
+
+                // 收集所有选中的ID
+                const selectedWorldBookIds = Array.from(worldBookList.querySelectorAll('input:checked')).map(input => input.value);
+                const selectedCharIds = Array.from(charList.querySelectorAll('input:checked')).map(input => input.value);
+                const selectedUserPersonaIds = Array.from(userList.querySelectorAll('input:checked')).map(input => input.value);
+
+                // 保存到db对象
+                db.forumBindings = {
+                    worldBookIds: selectedWorldBookIds,
+                    charIds: selectedCharIds,
+                    userPersonaIds: selectedUserPersonaIds,
+                };
+
+                await saveData();
+                showToast('论坛绑定已更新');
+                modal.classList.remove('visible');
+            });
+
+            function openForumBindingModal() {
+                const worldBookList = document.getElementById('forum-worldbook-list');
+                const charList = document.getElementById('forum-char-list');
+                const userList = document.getElementById('forum-user-list');
+
+                // 清空旧内容
+                worldBookList.innerHTML = '';
+                charList.innerHTML = '';
+                userList.innerHTML = '';
+
+                const currentBindings = db.forumBindings || { worldBookIds: [], charIds: [], userPersonaIds: [] };
+
+                // 填充世界书列表
+                if (db.worldBooks.length > 0) {
+                    db.worldBooks.forEach(book => {
+                        const isChecked = currentBindings.worldBookIds.includes(book.id);
+                        const li = document.createElement('li');
+                        li.className = 'binding-list-item';
+                        li.innerHTML = `
+                            <input type="checkbox" id="wb-bind-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}>
+                            <label for="wb-bind-${book.id}">${book.name}</label>
+                        `;
+                        worldBookList.appendChild(li);
+                    });
+                } else {
+                    worldBookList.innerHTML = '<li>暂无世界书设定</li>';
+                }
+
+                // 填充Char列表
+                if (db.characters.length > 0) {
+                    db.characters.forEach(char => {
+                        const isChecked = currentBindings.charIds.includes(char.id);
+                        const li = document.createElement('li');
+                        li.className = 'binding-list-item';
+                        li.innerHTML = `
+                            <input type="checkbox" id="char-bind-${char.id}" value="${char.id}" ${isChecked ? 'checked' : ''}>
+                            <label for="char-bind-${char.id}">${char.remarkName}</label>
+                        `;
+                        charList.appendChild(li);
+                    });
+                } else {
+                    charList.innerHTML = '<li>暂无Char设定</li>';
+                }
+
+                // 填充User人设列表
+                if (db.myPersonaPresets.length > 0) {
+                    db.myPersonaPresets.forEach(preset => {
+                        // user人设的ID就是它的name
+                        const isChecked = currentBindings.userPersonaIds.includes(preset.name);
+                        const li = document.createElement('li');
+                        li.className = 'binding-list-item';
+                        li.innerHTML = `
+                            <input type="checkbox" id="user-bind-${preset.name.replace(/\s/g, '_')}" value="${preset.name}" ${isChecked ? 'checked' : ''}>
+                            <label for="user-bind-${preset.name.replace(/\s/g, '_')}">${preset.name}</label>
+                        `;
+                        userList.appendChild(li);
+                    });
+                } else {
+                    userList.innerHTML = '<li>暂无User人设预设</li>';
+                }
+
+                // 重置标签页到第一个
+                tabs.forEach((tab, index) => {
+                    tab.classList.toggle('active', index === 0);
+                });
+                contentPanes.forEach((pane, index) => {
+                    pane.classList.toggle('active', index === 0);
+                });
+
+
+                // 显示弹窗
+                modal.classList.add('visible');
+            }
+        }
+
+// 在 setupForumFeature 函数的下面，新增这个函数
+// 请用这个新版本完整替换旧的 renderPostDetail 函数
+function renderPostDetail(post) {
+    const detailScreen = document.getElementById('forum-post-detail-screen');
+    if (!detailScreen || !post) return;
+
+    // 为评论区的NPC生成随机头像颜色
+    const npcColors = ["#FFB6C1", "#87CEFA", "#98FB98", "#F0E68C", "#DDA0DD", "#FFDAB9", "#B0E0E6"];
+    const getRandomColor = () => npcColors[Math.floor(Math.random() * npcColors.length)];
+
+    // --- 评论HTML生成 ---
+    let commentsHtml = '';
+    if (post.comments && post.comments.length > 0) {
+        post.comments.forEach(comment => {
+            const firstChar = comment.username.charAt(0).toUpperCase();
+            commentsHtml += `
+              <li class="comment-item">
+                  <div class="comment-author-avatar" style="background-color: ${getRandomColor()}">${firstChar}</div>
+                  <div class="comment-body">
+                      <div class="comment-author-name">${comment.username}</div>
+                      <div class="comment-content">${comment.content.replace(/\n/g, '<br>')}</div>
+                      <div class="comment-timestamp">${comment.timestamp}</div>
+                  </div>
+              </li>
+            `;
+        });
+    }
+
+    // --- 整体页面HTML结构 ---
+    const authorFirstChar = post.username.charAt(0).toUpperCase();
+    detailScreen.innerHTML = `
+    <header class="app-header">
+        <button class="back-btn" data-target="forum-screen">‹</button>
+        <div class="title-container">
+            <h1 class="title">帖子详情</h1>
+        </div>
+        <button class="action-btn" id="header-share-btn" title="分享">
+             <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z"></path></svg>
+        </button>
+    </header>
+    <main class="content">
+        <div class="post-detail-container">
+            <div class="post-detail-main">
+                <div class="post-author-info">
+                    <div class="author-avatar">${authorFirstChar}</div>
+                    <div class="author-details">
+                        <span class="author-name">${post.username}</span>
+                        <span class="post-meta-data">${new Date(post.id.split('_')[1] * 1).toLocaleString()}</span>
+                    </div>
+                </div>
+                <h2 class="post-detail-title">${post.title}</h2>
+                <div class="post-detail-content-body">${post.content.replace(/\n/g, '<br>')}</div>
+                <div class="post-detail-actions">
+                    <div class="action-item">
+                        <svg viewBox="0 0 24 24"><path d="M20,8H4V6H20V8M18,10H6V12H18V10M16,14H8V16H16V14M22,4V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V4A2,2 0 0,1 4,2H20A2,2 0 0,1 22,4Z" /></svg>
+                        <span>${post.comments ? post.comments.length : 0}</span>
+                    </div>
+                    <div class="action-item">
+                        <svg viewBox="0 0 24 24"><path d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.35H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" /></svg>
+                        <span>${post.likeCount}</span>
+                    </div>
+                    <div class="action-item">
+                        <svg viewBox="0 0 24 24"><path d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" /></svg>
+                         <span>收藏</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comments-section">
+            <div class="comments-header">全部评论 (${post.comments ? post.comments.length : 0})</div>
+            <ul class="comment-list">
+                ${commentsHtml}
+            </ul>
+        </div>
+    </main>`;
+
+    // --- 给新生成的分享按钮绑定事件 ---
+    const shareBtn = detailScreen.querySelector('#header-share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+            openSharePostModal(post.id);
+        });
+    }
+}
+
+
+
+
+function setupForumFeature() {
+    const refreshBtn = document.getElementById('forum-refresh-btn');
+    const postsContainer = document.getElementById('forum-posts-container');
+    const forumScreen = document.getElementById('forum-screen');
+    const detailScreen = document.getElementById('forum-post-detail-screen');
+
+    // 1. 刷新按钮的点击事件 (不变)
+    refreshBtn.addEventListener('click', () => {
+        handleForumRefresh();
+    });
+
+    // 2. 帖子列表卡片的点击事件 (不变)
+    if (postsContainer) {
+        postsContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('.forum-post-card[data-id]');
+            if (card) {
+                const postId = card.dataset.id;
+                const post = db.forumPosts.find(p => p.id === postId);
+                if (post) {
+                    renderPostDetail(post);
+                    switchScreen('forum-post-detail-screen');
+                }
+            }
+        });
+    }
+
+    // 3. (修改) 监听详情页内部的点击事件，特别是右上角分享按钮
+    if (detailScreen) {
+        detailScreen.addEventListener('click', e => {
+            // 监听新的分享按钮
+            if (e.target.closest('#header-share-btn')) {
+                const card = detailScreen.querySelector('.post-detail-card');
+                const postId = card ? card.dataset.postId : null;
+                if(postId) {
+                    openSharePostModal(postId);
+                }
+            }
+        });
+    }
+
+    // 4. 观察论坛屏幕的激活状态 (不变)
+    const observer = new MutationObserver((mutations) => {
+        for (let mutation of mutations) {
+            if (mutation.attributeName === 'class') {
+                const isActive = forumScreen.classList.contains('active');
+                if (isActive) {
+                    if (db.forumPosts && db.forumPosts.length > 0) {
+                        renderForumPosts(db.forumPosts);
+                    } else {
+                        postsContainer.innerHTML = '<p class="placeholder-text" style="margin-top: 50px;">这里空空也...<br>点击右上角刷新按钮加载帖子吧！</p>';
+                    }
+                }
+            }
+        }
+    });
+
+    if (forumScreen) {
+        observer.observe(forumScreen, { attributes: true });
+    }
+}
+
+function setupShareModal() {
+    const modal = document.getElementById('share-post-modal');
+    const confirmBtn = document.getElementById('confirm-share-btn');
+    const charList = document.getElementById('share-char-list');
+
+    confirmBtn.addEventListener('click', async () => {
+        const selectedCharIds = Array.from(charList.querySelectorAll('input:checked')).map(input => input.value);
+
+        if (selectedCharIds.length === 0) {
+            showToast('请至少选择一个分享对象。');
+            return;
+        }
+
+        const postTitle = modal.dataset.postTitle;
+        const postSummary = modal.dataset.postSummary;
+
+        if (!postTitle || !postSummary) {
+            showToast('无法获取帖子信息，分享失败。');
+            return;
+        }
+
+        selectedCharIds.forEach(charId => {
+            const character = db.characters.find(c => c.id === charId);
+            if (character) {
+                // 构建符合 AI 理解格式的文本消息
+                const messageContent = `[论坛分享]标题：${postTitle}\n摘要：${postSummary}`;
+
+                const message = {
+                    id: `msg_${Date.now()}_${Math.random()}`,
+                    role: 'user', // 作为用户发送的消息
+                    content: messageContent,
+                    parts: [{ type: 'text', text: messageContent }],
+                    timestamp: Date.now()
+                };
+
+                character.history.push(message);
+            }
+        });
+
+        await saveData();
+        renderChatList(); // 刷新聊天列表以显示新消息预览
+        modal.classList.remove('visible');
+        showToast(`成功分享给 ${selectedCharIds.length} 位联系人！`);
+    });
+}
+
+function openSharePostModal(postId) {
+    const post = db.forumPosts.find(p => p.id === postId);
+    if (!post) {
+        showToast('找不到该帖子信息。');
+        return;
+    }
+
+    const modal = document.getElementById('share-post-modal');
+    const charList = document.getElementById('share-char-list');
+    const detailsElement = modal.querySelector('details');
+
+    // 将帖子信息存储在弹窗的 dataset 中
+    modal.dataset.postTitle = post.title;
+    modal.dataset.postSummary = post.summary;
+
+    charList.innerHTML = ''; // 清空列表
+
+    if (db.characters.length > 0) {
+        db.characters.forEach(char => {
+            const li = document.createElement('li');
+            li.className = 'binding-list-item';
+            li.innerHTML = `
+                <input type="checkbox" id="share-to-${char.id}" value="${char.id}">
+                <label for="share-to-${char.id}" style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${char.avatar}" alt="${char.remarkName}" style="width: 32px; height: 32px; border-radius: 50%;">
+                    ${char.remarkName}
+                </label>
+            `;
+            charList.appendChild(li);
+        });
+    } else {
+        charList.innerHTML = '<li style="color: #888;">暂无可以分享的角色。</li>';
+    }
+
+    if(detailsElement) detailsElement.open = false;
+
+    modal.classList.add('visible');
+}
+
+
+function getForumGenerationContext() {
+    let context = "以下是论坛社区的背景设定和主要角色信息：\n\n";
+    const bindings = db.forumBindings || { worldBookIds: [], charIds: [], userPersonaIds: [] };
+
+    // 1. 添加世界观设定
+    if (bindings.worldBookIds && bindings.worldBookIds.length > 0) {
+        context += "===== 世界观设定 =====\n";
+        bindings.worldBookIds.forEach(id => {
+            const book = db.worldBooks.find(wb => wb.id === id);
+            if (book) {
+                context += `设定名: ${book.name}\n内容: ${book.content}\n\n`;
+            }
+        });
+    }
+
+    // 2. 添加角色人设
+    if (bindings.charIds && bindings.charIds.length > 0) {
+        context += "===== 主要角色人设 =====\n";
+        bindings.charIds.forEach(id => {
+            const char = db.characters.find(c => c.id === id);
+            if (char) {
+                context += `角色名: ${char.realName} (昵称: ${char.remarkName})\n人设: ${char.persona}\n\n`;
+            }
+        });
+    }
+
+    // 3. 添加用户人设
+    if (bindings.userPersonaIds && bindings.userPersonaIds.length > 0) {
+        context += "=====  (你) 的人设 =====\n";
+        bindings.userPersonaIds.forEach(presetName => {
+            const preset = db.myPersonaPresets.find(p => p.name === presetName);
+            if (preset) {
+                context += `人设名: ${preset.name}\n人设描述: ${preset.persona}\n\n`;
+            }
+        });
+    }
+
+    if (context.length < 50) { // 如果什么都没选
+        return "没有提供任何特定的背景设定，请自由发挥，创作一些通用的、有趣有网感的论坛帖子。禁止以user或者char的视角制作帖子，发帖人只能是NPC";
+    }
+
+    return context;
+}
+
+async function handleForumRefresh() {
+    const { url, key, model } = db.apiSettings;
+    if (!url || !key || !model) {
+        showToast('请先在API设置中配置好接口信息');
+        switchScreen('api-settings-screen');
+        return;
+    }
+    const refreshBtn = document.getElementById('forum-refresh-btn');
+    const postsContainer = document.getElementById('forum-posts-container');
+
+    // 新增：获取搜索输入框的引用
+    const searchInput = document.getElementById('forum-search-input');
+
+    refreshBtn.disabled = true;
+    const spinner = `<div class="spinner" style="display: block; margin: 0 auto; border-top-color: var(--primary-color);"></div>`;
+    postsContainer.innerHTML = `<p class="placeholder-text" style="margin-top: 50px;">正在生成论坛内容，请稍候...<br>${spinner}</p>`;
+
+    try {
+        const context = getForumGenerationContext();
+
+        // 新增：获取搜索关键词
+        const keywords = searchInput.value.trim();
+
+        let systemPrompt = `你是一位专业的论坛内容生成专家，专门为指定世界观生成论坛帖子。
+背景信息如下：
+${context}
+
+你的任务是读取背景世界观生成6到8篇风格各异、内容有趣的论坛帖子，每条帖子下面生成4~8条评论，每个帖子评论数量应该不一样，注意区分真实姓名和网名，注意user隐私，你的角色是“世界构建者”和“社区模拟器”，你需要分析char设定和user人设所处世界的世界观而不是“角色扮演者”，发帖人应该是该角色所处世界观下的其他NPC，发帖人不能是user。ABSOLUTELY DO NOT。若角色为普通人或需保密等神秘身份就禁止提及角色真实姓名，可以用代称或者暗号，只有当user或者char是公众人物名气大时才可以提及真实姓名。char的备注或者昵称是仅供user使用的，NPC不知道也禁止提及char的备注。若user和char不在一个地区就禁止有NPC目睹二人同框。
+
+请严格按照下面的JSON格式返回，不要包含任何多余的解释和注释，仅返回JSON内容本身。禁止以user的视角进行创作。
+
+返回格式示例:
+{
+  "posts": [
+    {
+      "title": "一个引人注目的帖子标题",
+      "summary": "对帖子内容的客观的重点摘要，大约100字左右，DO NOT use first-person “我”",
+      "content": "帖子的详细内容，150~300字。\\n可以使用换行符来分段落，注意排版。",
+      "comments": [
+        {
+          "username": "路人（随机姓名）",
+          "content": "这是第一条评论的内容，表达一个观点。",
+          "timestamp": "5分钟前"
+        },
+        {
+          "username": "（随机姓名）",
+          "content": "这是第二条评论，可能反驳楼主或楼上的观点。",
+          "timestamp": "3分钟前"
+        }
+      ]
+    }
+  ]
+}`;
+
+        // 新增：如果关键词存在，就把它加到系统指令里
+        if (keywords) {
+            systemPrompt += `\n\n重要指令：本次生成的所有帖子标题必须和以下关键词相关：【${keywords}】，同时也需要和之前绑定的设定相关。禁止相似帖子过多，不要特地把关键词标注出来。`;
+        }
+
+
+        const requestBody = {
+            model: model,
+            messages: [{ role: "user", content: systemPrompt }],
+            temperature: 0.8,
+            response_format: { type: "json_object" },
+        };
+
+        const endpoint = `${url}/v1/chat/completions`;
+        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` };
+
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            throw new Error(`API 请求失败: ${response.status} ${await response.text()}`);
+        }
+
+        const result = await response.json();
+        const contentStr = result.choices[0].message.content;
+
+        const jsonData = JSON.parse(contentStr);
+        if (jsonData && Array.isArray(jsonData.posts)) {
+            const enhancedPosts = jsonData.posts.map(post => ({
+              ...post,
+              id: `post_${Date.now()}_${Math.random()}`,
+              username: `楼主${Math.floor(100 + Math.random() * 900)}`, // 随机楼主
+              likeCount: Math.floor(Math.random() * 200),
+              shareCount: Math.floor(Math.random() * 50),
+              comments: post.comments || []
+   
+            }));
+
+            db.forumPosts = enhancedPosts;
+            await saveData();
+            renderForumPosts(db.forumPosts);
+
+        } else {
+            throw new Error("AI返回的数据格式不正确");
+        }
+
+    } catch (error) {
+        console.error('刷新论坛内容失败:', error);
+        postsContainer.innerHTML = `<p class="placeholder-text" style="margin-top: 50px;">生成失败了...<br><span style="font-size: 12px; color: #aaa;">${error.message}</span></p>`;
+    } finally {
+        refreshBtn.disabled = false;
+    }
+}
+
+
+// 找到 renderForumPosts 函数，并用下面的代码替换它
+
+function renderForumPosts(posts) {
+    const postsContainer = document.getElementById('forum-posts-container');
+    postsContainer.innerHTML = ''; // 清空旧内容
+
+    if (!posts || posts.length === 0) {
+        postsContainer.innerHTML = '<p class="placeholder-text" style="margin-top: 50px;">AI还没生成任何帖子，请点击刷新按钮。';
+        return;
+    }
+
+    posts.forEach(post => {
+        const card = document.createElement('div');
+        card.className = 'forum-post-card';
+
+        // --- 这就是关键的修复 ---
+        // 为每个帖子卡片添加 data-id 属性
+        card.dataset.id = post.id;
+        // -----------------------
+
+        // 使用 textContent 防止XSS攻击
+        const titleEl = document.createElement('h3');
+        titleEl.className = 'post-title';
+        titleEl.textContent = post.title || '无标题';
+
+        const summaryEl = document.createElement('p');
+        summaryEl.className = 'post-summary';
+        summaryEl.textContent = post.summary || '无摘要';
+
+        // 注意：这里不再需要 post-content 元素，因为它在新页面显示
+        // const contentEl = document.createElement('div');
+        // contentEl.className = 'post-content';
+        // contentEl.textContent = post.content || '无内容';
+
+        card.appendChild(titleEl);
+        card.appendChild(summaryEl);
+        // card.appendChild(contentEl); // 移除这一行
+
+        postsContainer.appendChild(card);
+    });
+}
+
+
 
         init();
+
+        function renderPeekSteps(data) {
+            const screen = document.getElementById('peek-steps-screen');
+            const char = db.characters.find(c => c.id === currentChatId);
+            if (!char) return; // 如果找不到角色，则不渲染
+
+            const avatarEl = screen.querySelector('#steps-char-avatar');
+            const nameEl = screen.querySelector('#steps-char-name');
+            const currentStepsEl = screen.querySelector('#steps-current-count');
+            const goalStepsEl = screen.querySelector('.steps-label');
+            const progressRingEl = screen.querySelector('#steps-progress-ring');
+            const trackListEl = screen.querySelector('#activity-track-list');
+            const annotationEl = screen.querySelector('#steps-annotation-content');
+
+            // 无论AI数据是否返回，都先渲染固定信息
+            avatarEl.src = char.avatar;
+            nameEl.textContent = char.realName;
+            goalStepsEl.textContent = '/ 6000 步';
+
+            if (!data) {
+                // Display loading or empty state for dynamic content
+                currentStepsEl.textContent = '----';
+                trackListEl.innerHTML = '<li class="activity-track-item">正在生成活动轨迹...</li>';
+                annotationEl.textContent = '正在生成角色批注...';
+                progressRingEl.style.setProperty('--steps-percentage', 0);
+                return;
+            }
+
+            // 填充AI返回的动态内容
+            currentStepsEl.textContent = data.currentSteps;
+            
+            const percentage = (data.currentSteps / 6000) * 100;
+            progressRingEl.style.setProperty('--steps-percentage', percentage);
+
+            trackListEl.innerHTML = data.trajectory.map(item => `<li class="activity-track-item">${item}</li>`).join('');
+            annotationEl.textContent = data.annotation;
+        }
 
         function generatePeekContentPrompt(char, appType, mainChatContext) {
             const appNameMapping = {
@@ -9488,6 +11809,32 @@
                       ]
                    }
                    请为 ${char.realName} 编造3-5个最近的对话。对话内容需要强烈反映Ta的人设以及和我的聊天上下文。`;
+                    break;
+                case 'steps':
+                    prompt += `
+                    {
+                      "currentSteps": 8102,
+                      "trajectory": [
+                        "08:30 AM - 公司楼下咖啡馆",
+                        "10:00 AM - 宠物用品店",
+                        "12:00 PM - 附近日料店",
+                        "03:00 PM - 回家路上的甜品店",
+                        "04:00 PM - 楼下的便利店",
+                        "06:30 PM - 健身房"
+                      ],
+                      "annotation": "角色对自己今天运动情况的批注"
+                    }
+                    请为 ${char.realName} 生成今天的步数信息。你只需要生成Ta的当前步数(currentSteps)，Ta的6条运动轨迹(trajectory)（禁止照搬示例）以及批注(annotation)。内容需要与Ta的人设和我们的聊天上下文高度相关。`;
+                    break;
+                case 'album':
+                    prompt += `
+                    {
+                      "photos": [
+                        { "type": "photo", "imageDescription": "对一张照片的详细文字描述，例如：一张傍晚在海边的自拍，背景是橙色的晚霞和归来的渔船。", "description": "角色对这张照片的一句话批注，例如：那天的风很舒服。" },
+                        { "type": "video", "imageDescription": "对一段视频的详细文字描述，例如：一段在猫咖撸猫的视频，视频里有一只橘猫在打哈欠。", "description": "角色对这段视频的一句话批注，例如：下次还来这里！" }
+                      ]
+                    }
+                    请为 ${char.realName} 的相册生成5-8个条目（照片或视频）。内容需要与Ta的人设和我们的聊天上下文高度相关。'imageDescription' 是对这张照片/视频的详细文字描述，它将代替真实的图片展示给用户。'description' 是 ${char.realName} 自己对这张照片/视频的一句话批注，会显示在描述下方。`;
                     break;
                 case 'memos':
                     prompt += `
@@ -9536,6 +11883,21 @@
                    break;
                 default:
                     prompt += `{"error": "Unknown app type"}`;
+                    break;
+                case 'unlock':
+                    prompt += `
+                    {
+                      "nickname": "角色的微博昵称",
+                      "handle": "@角色的微博ID",
+                      "bio": "角色的个性签名，可以包含换行符\\n",
+                      "posts": [
+                        { "timestamp": "2小时前", "content": "第一条微博正文内容，140字以内。" },
+                        { "timestamp": "昨天", "content": "第二条微博正文内容。" },
+                        { "timestamp": "3天前", "content": "第三条微博正文内容。" }
+                      ]
+                    }
+                    请为 ${char.realName} 生成一个符合其人设的微博小号。你需要生成昵称、ID、个性签名，以及3-4条最近的微博。微博内容要生活化、碎片化，符合小号的风格，并与Ta的人设和我们的聊天上下文高度相关。`;
+                    break;
             }
             return prompt;
         }
@@ -9556,9 +11918,17 @@
                         renderPeekChatList(cachedData.conversations);
                         switchScreen('peek-messages-screen');
                         break;
+                    case 'album':
+                        renderPeekAlbum(cachedData.photos);
+                        switchScreen('peek-album-screen');
+                        break;
                     case 'memos':
                         renderMemosList(cachedData.memos);
                         switchScreen('peek-memos-screen');
+                        break;
+                    case 'album':
+                        renderPeekAlbum(cachedData.photos);
+                        switchScreen('peek-album-screen');
                         break;
                    case 'transfer':
                        renderPeekTransferStation(cachedData.entries);
@@ -9576,9 +11946,17 @@
                         renderPeekDrafts(cachedData.draft);
                         switchScreen('peek-drafts-screen');
                         break;
-                }
-                return; // Stop execution since we used cache
-            }
+                   case 'steps':
+                      renderPeekSteps(cachedData);
+                      switchScreen('peek-steps-screen');
+                      break;
+                   case 'unlock':
+                       renderPeekUnlock(cachedData);
+                       switchScreen('peek-unlock-screen');
+                       break;
+               }
+               return; // Stop execution since we used cache
+           }
 
             const char = db.characters.find(c => c.id === currentChatId);
             if (!char) return showToast('无法找到当前角色');
@@ -9598,6 +11976,10 @@
                     switchScreen('peek-messages-screen');
                     targetContainer = document.getElementById('peek-chat-list-container');
                     targetContainer.innerHTML = '<p class="placeholder-text">正在生成对话列表...</p>';
+                    break;
+                case 'album':
+                    switchScreen('peek-album-screen');
+                    renderPeekAlbum([]); // 渲染空状态，会显示“正在生成...”
                     break;
                 case 'memos':
                     switchScreen('peek-memos-screen');
@@ -9619,11 +12001,19 @@
                     switchScreen('peek-drafts-screen');
                     renderPeekDrafts(null);
                     break;
-                default:
-                    showToast('无法打开');
-                    generatingPeekApps.delete(appType); // Unlock if app is invalid
-                    return;
-            }
+                case 'steps':
+                    switchScreen('peek-steps-screen');
+                    renderPeekSteps(null); // Render empty state
+                    break;
+               case 'unlock':
+                   switchScreen('peek-unlock-screen');
+                   renderPeekUnlock(null); // Render empty/loading state
+                   break;
+               default:
+                   showToast('无法打开');
+                   generatingPeekApps.delete(appType); // Unlock if app is invalid
+                   return;
+           }
 
             try {
                 const mainChatContext = char.history.slice(-10).map(m => m.content).join('\n');
@@ -9655,10 +12045,13 @@
                 switch (appType) {
                     case 'messages': isValid = generatedData && Array.isArray(generatedData.conversations); break;
                     case 'memos': isValid = generatedData && Array.isArray(generatedData.memos); break;
+                    case 'album': isValid = generatedData && Array.isArray(generatedData.photos); break;
                     case 'cart': isValid = generatedData && Array.isArray(generatedData.items); break;
                     case 'transfer': isValid = generatedData && Array.isArray(generatedData.entries); break;
                     case 'browser': isValid = generatedData && Array.isArray(generatedData.history); break;
                     case 'drafts': isValid = generatedData && generatedData.draft; break;
+                    case 'steps': isValid = generatedData && generatedData.currentSteps !== undefined; break;
+                    case 'unlock': isValid = generatedData && generatedData.nickname && Array.isArray(generatedData.posts); break;
                     default: isValid = false;
                 }
 
@@ -9675,6 +12068,8 @@
                     renderPeekChatList(generatedData.conversations);
                 } else if (appType === 'memos') {
                     renderMemosList(generatedData.memos);
+                } else if (appType === 'album') {
+                    renderPeekAlbum(generatedData.photos);
                 } else if (appType === 'transfer') {
                    renderPeekTransferStation(generatedData.entries);
                 } else if (appType === 'cart') {
@@ -9683,6 +12078,10 @@
                     renderPeekBrowser(generatedData.history);
                 } else if (appType === 'drafts') {
                     renderPeekDrafts(generatedData.draft);
+                } else if (appType === 'steps') {
+                    renderPeekSteps(generatedData);
+                } else if (appType === 'unlock') {
+                    renderPeekUnlock(generatedData);
                 }
 
             } catch (error) {
@@ -9691,11 +12090,75 @@
                 delete peekContentCache[appType];
                 const errorMessage = "内容生成失败，AI返回格式错误，请手动刷新重试。";
                 showToast(errorMessage);
-                if (targetContainer) {
+                if (appType === 'album') {
+                    document.querySelector('#peek-album-screen .album-grid').innerHTML = `<p class="placeholder-text">内容生成失败，请刷新重试</p>`;
+                } else if (appType === 'unlock') {
+                    document.getElementById('peek-unlock-screen').innerHTML = `<header class="app-header"><button class="back-btn" data-target="peek-screen">‹</button><div class="title-container"><h1 class="title">错误</h1></div><button class="action-btn">···</button></header><main class="content"><p class="placeholder-text">${errorMessage}</p></main>`;
+                } else if (targetContainer) {
                     targetContainer.innerHTML = `<p class="placeholder-text">${errorMessage}</p>`;
                 }
             } finally {
                 generatingPeekApps.delete(appType); // Release the lock for this specific app
+            }
+        }
+
+        function renderPeekSettings() {
+            const character = db.characters.find(c => c.id === currentChatId);
+            if (!character) return;
+
+            const peekSettings = character.peekScreenSettings || { wallpaper: '', customIcons: {}, unlockAvatar: '' };
+
+            // Populate wallpaper
+            document.getElementById('peek-wallpaper-url-input').value = peekSettings.wallpaper || '';
+
+            const iconsContainer = document.getElementById('peek-app-icons-settings');
+            iconsContainer.innerHTML = '';
+
+            Object.keys(peekScreenApps).forEach(appId => {
+                const app = peekScreenApps[appId];
+                const currentIcon = peekSettings.customIcons?.[appId] || app.url;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'icon-custom-item';
+                itemEl.innerHTML = `
+                    <img src="${currentIcon}" alt="${app.name}" class="icon-preview">
+                    <div class="icon-details">
+                        <p>${app.name}</p>
+                        <input type="url" class="form-group" data-app-id="${appId}" placeholder="粘贴新的图标URL" value="${peekSettings.customIcons?.[appId] || ''}">
+                    </div>
+                    <input type="file" id="peek-icon-upload-${appId}" data-app-id="${appId}" accept="image/*" style="display:none;">
+                    <label for="peek-icon-upload-${appId}" class="btn btn-small btn-neutral" style="font-size: 12px;">上传</label>
+                `;
+                iconsContainer.appendChild(itemEl);
+            });
+
+            // Add event listeners for all new upload buttons
+            iconsContainer.querySelectorAll('input[type="file"]').forEach(uploadInput => {
+                uploadInput.addEventListener('change', handlePeekIconUpload);
+            });
+            
+            // Populate unlock avatar url
+            document.getElementById('peek-unlock-avatar-url').value = peekSettings.unlockAvatar || '';
+        }
+
+        async function handlePeekIconUpload(e) {
+            const file = e.target.files[0];
+            const appId = e.target.dataset.appId;
+            if (file && appId) {
+                try {
+                    const compressedUrl = await compressImage(file, { quality: 0.8, maxWidth: 120, maxHeight: 120 });
+                    const urlInput = document.querySelector(`#peek-app-icons-settings input[data-app-id="${appId}"]`);
+                    const previewImg = urlInput.closest('.icon-custom-item').querySelector('.icon-preview');
+                    if (urlInput) {
+                        urlInput.value = compressedUrl;
+                    }
+                    if (previewImg) {
+                        previewImg.src = compressedUrl;
+                    }
+                    showToast(`${peekScreenApps[appId].name} 图标已上传并压缩`);
+                } catch (error) {
+                    showToast('图标压缩失败，请重试');
+                }
             }
         }
 
@@ -9711,8 +12174,8 @@
             });
         });
     }
+    
 </script>
 </body>
 
 </html>
-
