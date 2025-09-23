@@ -109,8 +109,8 @@
             font-weight: bold;
             color: var(--primary-color);
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -130,7 +130,7 @@
         .app-header .action-btn-group {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px;
         }
 
         .app-header .action-btn-group .action-btn {
@@ -7926,7 +7926,10 @@ if (htmlRegex.test(text)) {
                             lastMessageText = '新成员加入了群聊';
                         } else if (renameRegex.test(lastEverMsg.content)) {
                             lastMessageText = '群聊名称已修改';
+                            } else {
+                            lastMessageText = 'ta正在等你';
                         }
+                        
                     }
                 }
                 const li = document.createElement('li');
@@ -9076,7 +9079,7 @@ return `${seconds}秒`;
 
             // 最终结果数组
             const results = [];
-            const regex = /<(orange|div)(?:\s+char="([^"]*)")?>([\s\S]*?)<\/\1>|(\[[\s\S]*?\])/g;
+            const regex = /<(orange|div)(?:[^>]*?\s+char="([^"]*)"[^>]*?|[^>]*?)>([\s\S]*?)<\/\1>|(\[[\s\S]*?\])/g;
 
             let lastIndex = 0;
             let match;
@@ -9183,7 +9186,7 @@ return `${seconds}秒`;
            }
 
             prompt += `11. 你的输出格式必须严格遵循以下几种之一，可以组合使用：${outputFormats}\n`;
-            prompt += `12. **对话节奏**: 你需要模拟真人的聊天习惯，你可以一次性生成多条短消息。每次要回复至少3-8条消息。\n`;
+            prompt += `12. **对话节奏**: 你需要模拟真人的聊天习惯，你可以一次性生成多条短消息。每次要回复至少3-8条消息。并根据当前行为/心情/地点变化实时更新状态。\n`;
             prompt += `13. 不要主动结束对话，除非我明确提出。保持你的人设，自然地进行对话。`;
             return prompt;
         }
