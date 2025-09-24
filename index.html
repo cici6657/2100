@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" href="https://i.postimg.cc/nzP9sgxr/chan-125.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="https://unpkg.com/dompurify@2.3.8/dist/purify.min.js"></script>
     <link rel="manifest" href="manifest.json">
 
     <style>
@@ -134,19 +135,6 @@
         }
 
         .app-header .action-btn-group .action-btn {
-            font-size: 16px;
-            font-weight: 600;
-            width: auto;
-            padding: 6px 12px;
-            border-radius: 10px;
-        }
-
-        .app-header .action-btn-group #create-group-btn {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-        }
-
-        .app-header .action-btn-group #add-chat-btn {
             font-size: 28px;
             padding: 0;
             width: 40px;
@@ -154,6 +142,19 @@
             background-color: transparent;
             color: var(--primary-color);
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none; /* Ensure no border */
+            cursor: pointer; /* Ensure cursor is pointer */
+        }
+
+        .app-header .action-btn-group .action-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary-color);
+            stroke-width: 2;
+            fill: none;
         }
 
         .app-header .action-btn img {
@@ -527,8 +528,11 @@
         .item-details-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            /* align-items: center;  <-- 删除这一行 */
+            align-items: flex-start; /* <-- 修改成这一行 */
         }
+
+
 
         .item-name {
             font-weight: 600;
@@ -1502,23 +1506,154 @@
 
         .toast {
             position: absolute;
-            bottom: 80px;
+            top: -120px; /* Start off-screen */
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 15px;
+            width: 90%;
+            max-width: 380px;
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #333;
+            padding: 12px;
+            border-radius: 20px;
             font-size: 14px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s, visibility 0.5s;
+            transition: top 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .toast.show {
+            top: 20px; /* Slide down to this position */
             opacity: 1;
             visibility: visible;
+        }
+
+        /* --- 未读消息红点样式 --- */
+.unread-badge {
+    position: absolute; /* 关键：使用绝对定位 */
+    top: 60%;          /* 距离顶部12px */
+    right: 20px;        /* 距离右侧20px */
+    background-color: #ff3b30;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    padding: 0 5px;
+    text-align: center;
+    z-index: 2; /* 确保红点在其他元素之上 */
+
+    /* 使用透明度和缩放来实现平滑的显示/隐藏，避免布局抖动 */
+    opacity: 0;
+    transform: translateY(-60%) scale(0.5);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.unread-badge.visible {
+    opacity: 1;
+    transform: translateY(-60%) scale(1);
+}
+/* --- 样式添加结束 --- */
+
+
+.unread-badge {
+    background-color: #ff3b30; /* 鲜艳的红色 */
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px; /* 让文字垂直居中 */
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px; /* 圆角 */
+    padding: 0 5px; /* 左右留白，这样单个数字时也好看 */
+    text-align: center;
+    display: none; /* 默认隐藏 */
+}
+
+.unread-badge.visible {
+    display: inline-block; /* 当有未读消息时显示 */
+}
+/* --- 样式添加结束 --- */
+
+.item-time {
+    font-size: 12px;
+    color: #aaa;
+    white-space: nowrap; /* 防止时间换行 */
+}
+
+        /* --- 这是您需要添加的代码 --- */
+
+        /* 用于底部简单提示的样式 */
+        .toast.simple {
+            top: auto; /* 取消顶部的定位 */
+            bottom: 90px; /* 直接定位在最终位置 */
+            background-color: rgba(255, 255, 255, 0.7); /* 深色背景，更像系统提示 */
+            color: white; /* 白色文字 */
+            max-width: 250px; /* 可以让它窄一点 */
+            backdrop-filter: none; /* 简单提示不需要毛玻璃效果 */
+            -webkit-backdrop-filter: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* 调整阴影 */
+            /* 只对透明度进行过渡，实现淡入淡出 */
+            transition: opacity 0.4s ease-out;
+        }
+
+        /* 简单提示显示时的位置 */
+        .toast.simple.show {
+            top: auto; /* 确保覆盖 .toast.show 的 top 样式 */
+            /* bottom 属性不再需要，因为它已经在 .toast.simple 中设置好了 */
+        }
+
+        /* 简单提示不需要头像，让文字居中 */
+        .toast.simple .toast-avatar {
+            display: none;
+        }
+        .toast.simple .toast-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- 添加代码结束 --- */
+
+
+        /* --- 添加代码结束 --- */
+
+        .toast-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #eee;
+        }
+
+        .toast-content {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            gap: 2px;
+        }
+
+        .toast-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #000;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: #444;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #world-book-selection-modal,
@@ -3488,8 +3623,158 @@ margin-top: 10px;
 margin-top: 0;
 border-top: none;
 }
+
+/* --- 世界书分类选择样式 --- */
+.world-book-category-group {
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 5px;
+}
+.world-book-category-group:last-child {
+    border-bottom: none;
+}
+
+.world-book-category-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.world-book-category-header .category-checkbox {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.world-book-category-header .category-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    flex-grow: 1;
+}
+
+.world-book-category-header .category-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.world-book-category-group.open .category-arrow {
+    transform: rotate(180deg);
+}
+
+.world-book-items-list {
+    list-style: none;
+    padding: 0 0 0 25px; /* 左侧缩进 */
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.world-book-category-group.open .world-book-items-list {
+    max-height: 1000px; /* 一个足够大的值 */
+    padding-bottom: 10px;
+}
+/* --- 聊天室顶栏按钮优化 --- */
+#chat-room-header-default .action-btn-group {
+    gap: 4px; /* 减小按钮之间的间距 */
+}
+
+#chat-room-header-default .action-btn-group .action-btn {
+    width: 34px;  /* 缩小按钮宽度 */
+    height: 34px; /* 缩小按钮高度 */
+    padding: 5px; /* 调整内边距以适应新尺寸 */
+}
+
+#chat-room-header-default .action-btn-group .action-btn img {
+    width: 24px;  /* 缩小图标宽度 */
+    height: 24px; /* 缩小图标高度 */
+}
+
     </style>
     <style id="global-css-style"></style>
+    <style>
+        /* --- 引用消息样式 --- */
+        #reply-preview-bar {
+            display: none; /* 默认隐藏 */
+            padding: 8px 12px;
+            background-color: rgba(240, 240, 240, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        #reply-preview-bar.visible {
+            display: flex;
+        }
+
+        .reply-preview-content {
+            flex-grow: 1;
+            overflow: hidden;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 8px;
+        }
+
+        .reply-preview-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .reply-preview-text {
+            font-size: 14px;
+            color: #666;
+            margin: 2px 0 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #cancel-reply-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .quoted-message {
+            background-color: rgba(0, 0, 0, 0.04);
+            padding: 6px 10px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .quoted-sender {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .quoted-text {
+            font-size: 14px;
+            color: #555;
+            margin: 2px 0 0 0;
+            white-space: pre-wrap; /* Allow line breaks */
+            word-wrap: break-word;
+            /* Limit to 3 lines with ellipsis */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
 
 <body>
@@ -3502,7 +3787,12 @@ border-top: none;
                 <h1 class="title">聊天</h1>
             </div>
             <div class="action-btn-group">
-                <button class="action-btn" id="create-group-btn">群聊</button>
+                <button class="action-btn" id="create-group-btn" title="群聊">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </button>
+                <button class="action-btn" id="import-character-card-btn" title="导入">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                </button>
                 <button class="action-btn" id="add-chat-btn">+</button>
             </div>
         </header>
@@ -3591,6 +3881,13 @@ border-top: none;
                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                     </svg>
                 </button>
+            </div>
+            <div id="reply-preview-bar">
+                <div class="reply-preview-content">
+                    <span class="reply-preview-name"></span>
+                    <p class="reply-preview-text"></p>
+                </div>
+                <button id="cancel-reply-btn">×</button>
             </div>
             <div class="message-input-area" id="message-input-default">
                 <input type="text" id="message-input" placeholder="输入消息...">
@@ -3691,7 +3988,13 @@ border-top: none;
     <div id="font-settings-screen" class="screen"></div>
     <div id="customize-screen" class="screen"></div>
     <div id="tutorial-screen" class="screen"></div>
-    <div id="toast-notification" class="toast"></div>
+    <div id="toast-notification" class="toast">
+        <img class="toast-avatar" src="" alt="avatar">
+        <div class="toast-content">
+            <div class="toast-name"></div>
+            <div class="toast-message"></div>
+        </div>
+    </div>
     <input type="file" id="image-upload-input" accept="image/*" style="display:none;">
     <div id="add-char-modal" class="modal-overlay">
         <div class="modal-window">
@@ -4451,6 +4754,7 @@ border-top: none;
 <div id="mypersona-presets-modal" class="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);justify-content:center;align-items:center;z-index:9999;"><div class="modal-window" style="max-width:520px;background:var(--panel-bg,#fff);padding:14px;border-radius:10px;box-shadow:0 12px 36px rgba(10,10,20,0.12);"><h3 style="margin:0 0 10px 0;font-size:16px;">管理我的人设预设</h3><div id="mypersona-presets-list" style="max-height:340px; overflow:auto; margin-bottom:12px;"></div><div style="display:flex;gap:8px;justify-content:flex-end;"><button type="button" id="mypersona-close-modal" class="btn btn-primary" style="padding:8px 12px;border-radius:8px;">关闭</button></div></div></div>
 <div id="global-css-presets-modal" class="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);justify-content:center;align-items:center;z-index:9999;"><div class="modal-window" style="max-width:520px;background:var(--panel-bg,#fff);padding:14px;border-radius:10px;box-shadow:0 12px 36px rgba(10,10,20,0.12);"><h3 style="margin:0 0 10px 0;font-size:16px;">管理全局CSS预设</h3><div id="global-css-presets-list" style="max-height:340px; overflow:auto; margin-bottom:12px;"></div><div style="display:flex;gap:8px;justify-content:flex-end;"><button type="button" id="global-css-close-modal" class="btn btn-primary" style="padding:8px 12px;border-radius:8px;">关闭</button></div></div></div>
 <input type="file" id="import-data-input" accept=".ee" style="display: none;">
+<input type="file" id="character-card-input" accept="image/png,application/json" style="display: none;">
 
 <script>
     async function updateBatteryStatus() {
@@ -4720,6 +5024,7 @@ border-top: none;
             isInMultiSelectMode = false, editingMessageId = null, currentPage = 1, currentTransferMessageId = null,
             currentEditingWorldBookId = null, currentStickerActionTarget = null,
             currentJournalDetailId = null,
+            currentQuoteInfo = null, // 新增：用于存储引用信息
             currentGroupAction = {type: null, recipients: []};
         let isStickerManageMode = false;
         let selectedStickerIds = new Set();
@@ -5597,11 +5902,61 @@ return Promise.resolve();
             return Promise.resolve();
         };
 
-        const showToast = (message) => {
-            toastElement.textContent = message;
-            toastElement.classList.add('show');
-            setTimeout(() => toastElement.classList.remove('show'), 3000);
-        };
+        let notificationQueue = [];
+        let isToastVisible = false;
+
+        function processToastQueue() {
+            if (isToastVisible || notificationQueue.length === 0) {
+                return;
+            }
+
+        isToastVisible = true;
+        const notification = notificationQueue.shift(); // 取出队列中的第一个通知
+
+        const toastElement = document.getElementById('toast-notification');
+        const avatarEl = toastElement.querySelector('.toast-avatar');
+        const nameEl = toastElement.querySelector('.toast-name');
+        const messageEl = toastElement.querySelector('.toast-message');
+
+        const isRichNotification = typeof notification === 'object' && notification !== null && notification.name;
+
+        if (isRichNotification) {
+            toastElement.classList.remove('simple');
+            avatarEl.style.display = 'block';
+            nameEl.style.display = 'block';
+            messageEl.style.textAlign = 'left';
+            avatarEl.src = notification.avatar || 'https://i.postimg.cc/Y96LPskq/o-o-2.jpg';
+            nameEl.textContent = notification.name;
+            messageEl.textContent = notification.message;
+        } else {
+            toastElement.classList.add('simple');
+            avatarEl.style.display = 'none';
+            nameEl.style.display = 'none';
+            messageEl.style.textAlign = 'center';
+            messageEl.textContent = notification;
+        }
+
+        toastElement.classList.add('show');
+
+        // 设置定时器，在通知显示一段时间后将其隐藏
+        setTimeout(() => {
+            toastElement.classList.remove('show');
+            
+            // 等待隐藏动画（0.5秒）结束后，处理下一个通知
+            setTimeout(() => {
+                isToastVisible = false;
+                processToastQueue(); // 尝试处理队列中的下一个通知
+            }, 500);
+
+        }, 1500); // 通知显示时间（1.5秒）
+    }
+    const showToast = (notification) => {
+        notificationQueue.push(notification); // 将通知加入队列
+        processToastQueue(); // 尝试处理队列
+    };
+
+
+
         const switchScreen = (targetId) => {
             screens.forEach(screen => screen.classList.remove('active'));
             document.getElementById(targetId)?.classList.add('active');
@@ -5782,19 +6137,7 @@ return Promise.resolve();
             bindWorldBookBtn.addEventListener('click', () => {
                 const character = db.characters.find(c => c.id === currentChatId);
                 if (!character) return;
-
-                journalWorldBookList.innerHTML = ''; // 清空列表
-                if (db.worldBooks.length === 0) {
-                    journalWorldBookList.innerHTML = '<li style="color: #888; text-align: center;">暂无世界书条目</li>';
-                } else {
-                    db.worldBooks.forEach(book => {
-                        const li = document.createElement('li');
-                        li.className = 'world-book-select-item';
-                        const isChecked = (character.journalWorldBookIds || []).includes(book.id);
-                        li.innerHTML = `<input type="checkbox" id="journal-wb-select-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}><label for="journal-wb-select-${book.id}">${book.name}</label>`;
-                        journalWorldBookList.appendChild(li);
-                    });
-                }
+                renderCategorizedWorldBookList(journalWorldBookList, db.worldBooks, character.journalWorldBookIds || [], 'journal-wb-select');
                 journalWorldBookModal.classList.add('visible');
             });
 
@@ -5803,7 +6146,7 @@ return Promise.resolve();
                 const character = db.characters.find(c => c.id === currentChatId);
                 if (!character) return;
 
-                const selectedIds = Array.from(journalWorldBookList.querySelectorAll('input:checked')).map(input => input.value);
+                const selectedIds = Array.from(journalWorldBookList.querySelectorAll('.item-checkbox:checked')).map(input => input.value);
                 character.journalWorldBookIds = selectedIds;
                 await saveData();
                 journalWorldBookModal.classList.remove('visible');
@@ -7179,6 +7522,270 @@ return Promise.resolve();
         }
 
         // --- App Setup Functions ---
+        
+        // ==================================================================================================================
+        // ========================================== 角色卡导入 (CHARACTER IMPORT) ==========================================
+        // ==================================================================================================================
+        
+        /**
+         * 处理角色卡文件导入
+         * @param {File} file - 用户选择的文件
+         */
+        async function handleCharacterImport(file) {
+            if (!file) return;
+
+            showToast('正在导入角色卡...');
+
+            try {
+                if (file.name.endsWith('.png')) {
+                    await parseCharPng(file);
+                } else if (file.name.endsWith('.json')) {
+                    await parseCharJson(file);
+                } else {
+                    throw new Error('不支持的文件格式。请选择 .png 或 .json 文件。');
+                }
+            } catch (error) {
+                console.error('角色卡导入失败:', error);
+                showToast(`导入失败: ${error.message}`);
+            }
+        }
+
+        /**
+         * 解析PNG角色卡
+         * @param {File} file - PNG文件
+         */
+        function parseCharPng(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsArrayBuffer(file);
+                reader.onload = (e) => {
+                    try {
+                        const buffer = e.target.result;
+                        const view = new DataView(buffer);
+
+                        // 1. 验证PNG文件签名 (PNG signature)
+                        const signature = [137, 80, 78, 71, 13, 10, 26, 10];
+                        for (let i = 0; i < signature.length; i++) {
+                            if (view.getUint8(i) !== signature[i]) {
+                                return reject(new Error('文件不是一个有效的PNG。'));
+                            }
+                        }
+
+                        let offset = 8; // 跳过8字节的签名
+                        let charaData = null;
+
+                        // 2. 遍历PNG数据块 (chunks)
+                        while (offset < view.byteLength) {
+                            const length = view.getUint32(offset); // 数据块内容的长度
+                            const type = String.fromCharCode(view.getUint8(offset + 4), view.getUint8(offset + 5), view.getUint8(offset + 6), view.getUint8(offset + 7));
+                            
+                            // 3. 寻找tEXt文本块
+                            if (type === 'tEXt') {
+                                const textChunk = new Uint8Array(buffer, offset + 8, length);
+                                
+                                // 寻找关键字和数据之间的空字符分隔符
+                                let separatorIndex = -1;
+                                for(let i = 0; i < textChunk.length; i++) {
+                                    if (textChunk[i] === 0) {
+                                        separatorIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                if (separatorIndex !== -1) {
+                                    const keyword = new TextDecoder('utf-8').decode(textChunk.slice(0, separatorIndex));
+                                    
+                                    // 4. 检查关键字是否为 'chara'
+                                    if (keyword === 'chara') {
+                                        const base64Data = new TextDecoder('utf-8').decode(textChunk.slice(separatorIndex + 1));
+                                        
+                                        // 5. 解码Base64数据
+                                        try {
+                                            const decodedString = atob(base64Data);
+                                            const bytes = new Uint8Array(decodedString.length);
+                                            for (let i = 0; i < decodedString.length; i++) {
+                                                bytes[i] = decodedString.charCodeAt(i);
+                                            }
+                                            const utf8Decoder = new TextDecoder('utf-8');
+                                            charaData = JSON.parse(utf8Decoder.decode(bytes));
+                                            break; // 找到数据后就停止遍历
+                                        } catch (decodeError) {
+                                            return reject(new Error(`解析角色数据失败: ${decodeError.message}`));
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // 移动到下一个数据块 (长度 + 类型 + 内容 + CRC校验 = 4 + 4 + length + 4)
+                            offset += 12 + length;
+                        }
+
+                        if (charaData) {
+                            // 6. 将PNG文件本身转换为头像的Data URL
+                            const imageReader = new FileReader();
+                            imageReader.readAsDataURL(file);
+                            imageReader.onload = (imgEvent) => {
+                                createCharacterFromData(charaData, imgEvent.target.result);
+                                resolve();
+                            };
+                            imageReader.onerror = () => {
+                                // 即使头像转换失败，也用默认头像创建角色
+                                createCharacterFromData(charaData, 'https://i.postimg.cc/Y96LPskq/o-o-2.jpg');
+                                resolve();
+                            };
+                        } else {
+                            reject(new Error('在PNG中未找到有效的角色数据 (tEXt chunk not found or invalid)。'));
+                        }
+                    } catch (error) {
+                        reject(new Error(`解析PNG失败: ${error.message}`));
+                    }
+                };
+                reader.onerror = () => reject(new Error('读取PNG文件失败。'));
+            });
+        }
+
+        /**
+         * 解析JSON角色卡
+         * @param {File} file - JSON文件
+         */
+        function parseCharJson(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                // 强制使用UTF-8解码
+                reader.readAsText(file, 'UTF-8');
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        // JSON卡没有内置头像，使用默认头像
+                        createCharacterFromData(data, 'https://i.postimg.cc/Y96LPskq/o-o-2.jpg');
+                        resolve();
+                    } catch (error) {
+                        reject(new Error(`解析JSON失败: ${error.message}`));
+                    }
+                };
+                reader.onerror = () => reject(new Error('读取JSON文件失败。'));
+            });
+        }
+
+        /**
+         * 根据导入的数据创建新角色
+         * @param {object} data - 从卡片解析出的角色数据
+         * @param {string} avatar - Base64格式的头像数据
+         */
+        async function createCharacterFromData(data, avatar) {
+            // 优先使用 data.data 结构（针对哈基米.json格式），同时保留对根级别数据的兼容
+            const charData = data.data || data;
+
+            if (!charData || !charData.name) {
+                throw new Error('角色卡数据无效，缺少角色名称。');
+            }
+
+            // 数据映射：将导入卡片的字段映射到本应用的字段
+            const newChar = {
+                id: `char_${Date.now()}`,
+                realName: charData.name || '未命名',
+                remarkName: charData.name || '未命名',
+                persona: charData.description || charData.persona || '',
+                avatar: avatar || 'https://i.postimg.cc/Y96LPskq/o-o-2.jpg',
+                myName: '',
+                myPersona: '',
+                myAvatar: 'https://i.postimg.cc/GtbTnxhP/o-o-1.jpg',
+                theme: 'white_pink',
+                maxMemory: 10,
+                chatBg: '',
+                history: [],
+                isPinned: false,
+                status: '在线',
+                worldBookIds: [],
+                useCustomBubbleCss: false,
+                customBubbleCss: '',
+                unreadCount: 0,
+                memoryJournals: [],
+                journalWorldBookIds: [],
+                peekScreenSettings: { wallpaper: '', customIcons: {}, unlockAvatar: '' },
+                lastUserMessageTimestamp: null,
+            };
+
+            // --- 新增：处理世界书 (兼容两种格式) ---
+            const importedWorldBookIds = [];
+            
+            // 格式一：处理哈基米.json中的 character_book
+            if (charData.character_book && Array.isArray(charData.character_book.entries)) {
+                const categoryName = data.name || charData.name; // 优先使用根级的name作为分类名
+                charData.character_book.entries.forEach(entry => {
+                    const name = entry.comment;
+                    const content = entry.content;
+                    if (name && content) {
+                        const existingBook = db.worldBooks.find(wb => wb.name.toLowerCase() === name.toLowerCase());
+                        if (existingBook) {
+                            if (!importedWorldBookIds.includes(existingBook.id)) {
+                                importedWorldBookIds.push(existingBook.id);
+                            }
+                        } else {
+                            const newBook = {
+                                id: `wb_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+                                name: name,
+                                content: content,
+                                position: 'after',
+                                category: categoryName
+                            };
+                            db.worldBooks.push(newBook);
+                            importedWorldBookIds.push(newBook.id);
+                        }
+                    }
+                });
+            }
+            // 格式二：处理通用格式的 world_info / wi
+            else {
+                const worldInfo = charData.world_info || charData.wi || '';
+                if (worldInfo && typeof worldInfo === 'string' && worldInfo.trim() !== '') {
+                    const entries = worldInfo.split(/\n\s*\n/).filter(entry => entry.trim() !== '');
+                    entries.forEach(entryText => {
+                        const lines = entryText.trim().split('\n');
+                        if (lines.length > 0) {
+                            const name = lines[0].trim();
+                            const content = lines.slice(1).join('\n').trim();
+                            if (name && content) {
+                                const existingBook = db.worldBooks.find(wb => wb.name.toLowerCase() === name.toLowerCase());
+                                if (existingBook) {
+                                    if (!importedWorldBookIds.includes(existingBook.id)) {
+                                        importedWorldBookIds.push(existingBook.id);
+                                    }
+                                } else {
+                                    const newBook = {
+                                        id: `wb_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+                                        name: name,
+                                        content: content,
+                                        position: 'after',
+                                        category: '导入的角色设定'
+                                    };
+                                    db.worldBooks.push(newBook);
+                                    importedWorldBookIds.push(newBook.id);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            
+            if (importedWorldBookIds.length > 0) {
+                newChar.worldBookIds = importedWorldBookIds;
+                setTimeout(() => {
+                    showToast(`同时导入了 ${importedWorldBookIds.length} 条世界书设定。`);
+                }, 1600);
+            }
+            // --- 新增逻辑结束 ---
+
+            db.characters.push(newChar);
+            await saveData();
+            renderChatList();
+            showToast(`角色“${newChar.remarkName}”导入成功！`);
+        }
+
+        // ==================================================================================================================
+        // ========================================== END CHARACTER IMPORT ==================================================
+        // ==================================================================================================================
+
         let currentPageIndex = 0;
         function setupHomeScreen() {
             const getIcon = (id) => db.customIcons[id] || defaultIcons[id].url;
@@ -7808,6 +8415,22 @@ return Promise.resolve();
                 addCharModal.classList.add('visible');
                 addCharForm.reset();
             });
+
+            // --- 新增：导入角色卡按钮事件 ---
+            const importBtn = document.getElementById('import-character-card-btn');
+            const cardInput = document.getElementById('character-card-input');
+            importBtn.addEventListener('click', () => {
+                cardInput.click();
+            });
+            cardInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    handleCharacterImport(file);
+                }
+                // 重置输入框，以便可以再次选择相同的文件
+                e.target.value = null;
+            });
+            // --- 新增结束 ---
             chatListContainer.addEventListener('click', (e) => {
                 const chatItem = e.target.closest('.chat-item');
                 if (chatItem) {
@@ -7960,12 +8583,40 @@ if (htmlRegex.test(text)) {
                 const avatarClass = chat.type === 'group' ? 'group-avatar' : '';
                 const itemName = chat.type === 'private' ? chat.remarkName : chat.name;
                 const pinBadgeHTML = chat.isPinned ? '<span class="pin-badge">置顶</span>' : '';
-                li.innerHTML = `
-                <img src="${chat.avatar}" alt="${itemName}" class="chat-avatar ${avatarClass}">
-                <div class="item-details">
-                    <div class="item-details-row"><div class="item-name">${itemName}</div></div>
-                    <div class="item-preview-wrapper"><div class="item-preview">${lastMessageText}</div>${pinBadgeHTML}</div>
-                </div>`;
+let timeString = '';
+const lastMessage = chat.history && chat.history.length > 0 ? chat.history[chat.history.length - 1] : null;
+if (lastMessage) {
+    const date = new Date(lastMessage.timestamp);
+    const now = new Date();
+    if (date.toDateString() === now.toDateString()) {
+        timeString = `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    } else {
+        timeString = `${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    }
+}
+
+const unreadCount = chat.unreadCount || 0;
+const unreadBadgeHTML = unreadCount > 0 
+    ? `<span class="unread-badge visible">${unreadCount > 99 ? '99+' : unreadCount}</span>`
+    : `<span class="unread-badge"></span>`;
+
+li.innerHTML = `
+<img src="${chat.avatar}" alt="${itemName}" class="chat-avatar ${avatarClass}">
+<div class="item-details">
+    <div class="item-details-row">
+        <div class="item-name">${itemName}</div>
+        <div class="item-meta">
+            <span class="item-time">${timeString}</span>
+        </div>
+    </div>
+    <div class="item-preview-wrapper">
+        <div class="item-preview">${lastMessageText}</div>
+        ${pinBadgeHTML}
+    </div>
+</div>
+${unreadBadgeHTML}`; /* <-- 将红点元素移动到这里 */
+
+
                 chatListContainer.appendChild(li);
             });
         }
@@ -7991,6 +8642,7 @@ if (htmlRegex.test(text)) {
                     worldBookIds: [],
                     useCustomBubbleCss: false,
                     customBubbleCss: '',
+                    unreadCount: 0,
                     memoryJournals: [],
                     journalWorldBookIds: [], // 新增
                     peekScreenSettings: { wallpaper: '', customIcons: {}, unlockAvatar: '' }, // 新增
@@ -8027,7 +8679,7 @@ if (htmlRegex.test(text)) {
             messageInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !isGenerating) sendMessage();
             });
-            getReplyBtn.addEventListener('click', getAiReply);
+            getReplyBtn.addEventListener('click', () => getAiReply(currentChatId, currentChatType));
             regenerateBtn.addEventListener('click', handleRegenerate);
             messageArea.addEventListener('click', (e) => {
                 // --- Close any open panels when clicking message area ---
@@ -8104,6 +8756,9 @@ if (htmlRegex.test(text)) {
             cancelEditBtn.addEventListener('click', cancelMessageEdit);
             cancelMultiSelectBtn.addEventListener('click', exitMultiSelectMode);
             deleteSelectedBtn.addEventListener('click', deleteSelectedMessages);
+            
+            // 新增：绑定取消引用按钮事件
+            document.getElementById('cancel-reply-btn').addEventListener('click', cancelQuoteReply);
         }
 
         function handleMessageLongPress(messageWrapper, x, y) {
@@ -8126,12 +8781,77 @@ if (htmlRegex.test(text)) {
             if (!isImageRecognitionMsg && !isVoiceMessage && !isStickerMessage && !isPhotoVideoMessage && !isTransferMessage && !isGiftMessage && !isInvisibleMessage) {
                 menuItems.push({label: '编辑', action: () => startMessageEdit(messageId)});
             }
+            
+            // 新增：添加引用菜单项
+            if (!isInvisibleMessage) {
+                menuItems.push({label: '引用', action: () => startQuoteReply(messageId)});
+            }
+
             menuItems.push({label: '删除', action: () => enterMultiSelectMode(messageId)});
 
             if (menuItems.length > 0) {
                 createContextMenu(menuItems, x, y);
             }
         }
+
+        // --- 新增：引用功能相关函数 ---
+    function startQuoteReply(messageId) {
+        const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
+        const message = chat.history.find(m => m.id === messageId);
+        if (!message) return;
+
+        let senderName = '';
+        let senderId = '';
+        if (message.role === 'user') {
+            senderName = (currentChatType === 'private') ? chat.myName : chat.me.nickname;
+            senderId = 'user_me';
+        } else { // assistant
+            if (currentChatType === 'private') {
+                senderName = chat.remarkName;
+                senderId = chat.id;
+            } else {
+                const sender = chat.members.find(m => m.id === message.senderId);
+                senderName = sender ? sender.groupNickname : '未知成员';
+                senderId = sender ? sender.id : 'unknown';
+            }
+        }
+        
+        // 提取纯文本内容用于预览
+        let previewContent = message.content;
+        const textMatch = message.content.match(/\[.*?的消息：([\s\S]+?)\]/);
+        if (textMatch) {
+            previewContent = textMatch[1];
+        } else if (/\[.*?的表情包：.*?\]/.test(message.content)) {
+            previewContent = '[表情包]';
+        } else if (/\[.*?的语音：.*?\]/.test(message.content)) {
+            previewContent = '[语音]';
+        } else if (/\[.*?发来的照片\/视频：.*?\]/.test(message.content)) {
+            previewContent = '[照片/视频]';
+        } else if (message.parts && message.parts.some(p => p.type === 'image')) {
+            previewContent = '[图片]';
+        }
+        
+        currentQuoteInfo = {
+            id: message.id,
+            senderId: senderId,
+            senderName: senderName,
+            content: previewContent.substring(0, 100) // 截断以防过长
+        };
+
+        const previewBar = document.getElementById('reply-preview-bar');
+        previewBar.querySelector('.reply-preview-name').textContent = `回复 ${senderName}`;
+        previewBar.querySelector('.reply-preview-text').textContent = currentQuoteInfo.content;
+        previewBar.classList.add('visible');
+        
+        messageInput.focus();
+    }
+
+    function cancelQuoteReply() {
+        currentQuoteInfo = null;
+        const previewBar = document.getElementById('reply-preview-bar');
+        previewBar.classList.remove('visible');
+    }
+    // --- 引用功能函数结束 ---
 
         function startMessageEdit(messageId) {
             exitMultiSelectMode();
@@ -8255,6 +8975,13 @@ if (newTextRaw) {
         function openChatRoom(chatId, type) {
             const chat = (type === 'private') ? db.characters.find(c => c.id === chatId) : db.groups.find(g => g.id === chatId);
             if (!chat) return;
+                // --- 从这里开始是新增的代码 ---
+            if (chat.unreadCount && chat.unreadCount > 0) {
+                chat.unreadCount = 0;
+                saveData();
+                renderChatList(); // 重新渲染列表，清除红点
+            }
+    // --- 新增代码结束 ---
             exitMultiSelectMode();
             cancelMessageEdit();
             chatRoomTitle.textContent = (type === 'private') ? chat.remarkName : chat.name;
@@ -8322,7 +9049,7 @@ if (newTextRaw) {
 
         function createMessageBubbleElement(message) {
             const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
-            const {role, content, timestamp, id, transferStatus, giftStatus, stickerData, senderId} = message;
+            const {role, content, timestamp, id, transferStatus, giftStatus, stickerData, senderId, quote} = message;
 
             const timeSkipRegex = /\[system-display:([\s\S]+?)\]/;
             const inviteRegex = /\[(.*?)邀请(.*?)加入了群聊\]/;
@@ -8537,22 +9264,18 @@ if (newTextRaw) {
             } else if (textMatch) {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
-
-let userText = textMatch[1].trim().replace(/\[发送时间:.*?\]/g, '').trim();
-const htmlRegex = /<[a-z][\s\S]*>/i;
-if (htmlRegex.test(userText)) {
-    bubbleElement.innerHTML = userText;
-} else {
-    bubbleElement.textContent = userText;
-}
+                let userText = textMatch[1].trim().replace(/\[发送时间:.*?\]/g, '').trim();
+                // 使用 DOMPurify 清理和渲染 HTML
+                bubbleElement.innerHTML = DOMPurify.sanitize(userText);
                 if (!chat.useCustomBubbleCss) {
                     bubbleElement.style.backgroundColor = bubbleTheme.bg;
                     bubbleElement.style.color = bubbleTheme.text;
                 }
-            }else if(message && Array.isArray( message.parts) && message.parts[0].type === 'html'){
+            } else if (message && Array.isArray(message.parts) && message.parts[0].type === 'html') {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
-                bubbleElement.innerHTML = message.parts[0].text;
+                // 使用 DOMPurify 清理和渲染 HTML
+                bubbleElement.innerHTML = DOMPurify.sanitize(message.parts[0].text);
             } else {
                 bubbleElement = document.createElement('div');
                 bubbleElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
@@ -8563,12 +9286,9 @@ if (htmlRegex.test(userText)) {
                 }
                 displayedContent = displayedContent.replace(/\[发送时间:.*?\]/g, '').trim();
 
-                const htmlRegex = /<[a-z][\s\S]*>/i;
-                if (htmlRegex.test(displayedContent)) {
-                    bubbleElement.innerHTML = displayedContent;
-                } else {
-                    bubbleElement.textContent = displayedContent;
-                }
+                // 默认使用 DOMPurify 清理和渲染所有内容
+                bubbleElement.innerHTML = DOMPurify.sanitize(displayedContent);
+
                 if (!chat.useCustomBubbleCss) {
                     bubbleElement.style.backgroundColor = bubbleTheme.bg;
                     bubbleElement.style.color = bubbleTheme.text;
@@ -8577,6 +9297,32 @@ if (htmlRegex.test(userText)) {
             const nicknameHTML = (currentChatType === 'group' && !isSent && senderNickname) ? `<div class="group-nickname">${senderNickname}</div>` : '';
             bubbleRow.innerHTML = `<div class="message-info">${nicknameHTML}<img src="${avatarUrl}" class="message-avatar"><span class="message-time">${timeString}</span></div>`;
             if (bubbleElement) {
+                // 新增：如果消息包含引用，则创建并预置引用块
+                if (quote) {
+                    let quotedSenderName = '';
+                    // 根据senderId查找被引用消息的发送者昵称
+                    if (quote.senderId === 'user_me') {
+                        quotedSenderName = (currentChatType === 'private') ? chat.myName : chat.me.nickname;
+                    } else {
+                        if (currentChatType === 'private') {
+                            quotedSenderName = chat.remarkName;
+                        } else { // group
+                            const sender = chat.members.find(m => m.id === quote.senderId);
+                            quotedSenderName = sender ? sender.groupNickname : '未知成员';
+                        }
+                    }
+
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'quoted-message';
+                    // 使用DOMPurify清理内容, 只保留纯文本
+                    const sanitizedQuotedText = DOMPurify.sanitize(quote.content, {ALLOWED_TAGS: []});
+                    quoteDiv.innerHTML = `
+                        <span class="quoted-sender">回复 ${quotedSenderName}</span>
+                        <p class="quoted-text">${sanitizedQuotedText}</p>
+                    `;
+                    // 将引用块插入到气泡内容的顶部
+                    bubbleElement.prepend(quoteDiv);
+                }
                 bubbleRow.appendChild(bubbleElement);
             }
             wrapper.prepend(bubbleRow);
@@ -8584,15 +9330,72 @@ if (htmlRegex.test(userText)) {
         }
 
 
-        async function addMessageBubble(message) {
+        async function addMessageBubble(message, targetChatId, targetChatType) {
+            // If the target chat is not the current chat, show a toast notification and do nothing else.
+            if (targetChatId !== currentChatId || targetChatType !== currentChatType) {
+                const senderChat = (targetChatType === 'private')
+                    ? db.characters.find(c => c.id === targetChatId)
+                    : db.groups.find(g => g.id === targetChatId);
+                
+                if (senderChat) {
+        // --- 从这里开始是新增的代码 ---
+        // 如果消息不是系统内部不可见的消息，才增加未读计数
+                    const invisibleRegex = /\[system:.*?\]|\[.*?更新状态为：.*?\]|\[.*?已接收礼物\]|\[.*?(?:接收|退回).*?的转账\]/;
+                    if (!invisibleRegex.test(message.content)) {
+                        senderChat.unreadCount = (senderChat.unreadCount || 0) + 1;
+                        saveData(); // 保存数据
+                        renderChatList(); // 重新渲染列表以显示红点
+                    }
+        // --- 新增代码结束 ---
+                    
+                    let senderName, senderAvatar;
+                    if (targetChatType === 'private') {
+                        senderName = senderChat.remarkName;
+                        senderAvatar = senderChat.avatar;
+                    } else { // Group chat
+                        const sender = senderChat.members.find(m => m.id === message.senderId);
+                        if (sender) {
+                            senderName = sender.groupNickname;
+                            senderAvatar = sender.avatar;
+                        } else { // Fallback for unknown sender (e.g. system message in group)
+                            senderName = senderChat.name;
+                            senderAvatar = senderChat.avatar;
+                        }
+                    }
+
+                    let previewText = message.content;
+
+                    // Extract clean text for preview
+                    const textMatch = previewText.match(/\[.*?的消息：([\s\S]+?)\]/);
+                    if (textMatch) {
+                        previewText = textMatch[1];
+                    } else {
+                        // Handle other message types for preview
+                        if (/\[.*?的表情包：.*?\]/.test(previewText)) previewText = '[表情包]';
+                        else if (/\[.*?的语音：.*?\]/.test(previewText)) previewText = '[语音]';
+                        else if (/\[.*?发来的照片\/视频：.*?\]/.test(previewText)) previewText = '[照片/视频]';
+                        else if (/\[.*?的转账：.*?\]/.test(previewText)) previewText = '[转账]';
+                        else if (/\[.*?送来的礼物：.*?\]/.test(previewText)) previewText = '[礼物]';
+                        else if (/\[.*?发来了一张图片：\]/.test(previewText)) previewText = '[图片]';
+                        else if (message.parts && message.parts.some(p => p.type === 'html')) previewText = '[互动]';
+                    }
+                    
+                    showToast({
+                        avatar: senderAvatar,
+                        name: senderName,
+                        message: previewText.substring(0, 30)
+                    });
+                }
+                return; // IMPORTANT: Stop further execution
+            }
+
+            // --- Original logic for when the chat is active ---
             if (currentChatType === 'private') {
                 const character = db.characters.find(c => c.id === currentChatId);
-                // const systemMessageRegex = /\[system:.*?\]|\[system-display:.*?\]/;
                 const updateStatusRegex = new RegExp(`\\[${character.realName}更新状态为：(.*?)\\]`);
                 const transferActionRegex = new RegExp(`\\[${character.realName}(接收|退回)${character.myName}的转账\\]`);
                 const giftReceivedRegex = new RegExp(`\\[${character.realName}已接收礼物\\]`);
-                // if (systemMessageRegex.test(message.content)) { /* Do nothing for context messages */
-                // }
+                
                 if (message.content.match(updateStatusRegex)) {
                     character.status = message.content.match(updateStatusRegex)[1];
                     chatRoomStatusText.textContent = character.status;
@@ -8650,7 +9453,9 @@ if (htmlRegex.test(userText)) {
     const text = messageInput.value.trim();
     if (!text || isGenerating) return;
     messageInput.value = ''; // Clear input immediately for better UX
-    const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);// --- 时间感知功能注入点 开始 ---
+    const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
+
+    // --- 时间感知功能注入点 开始 ---
 if (db.apiSettings && db.apiSettings.timePerceptionEnabled) {
     const now = new Date();
 
@@ -8706,13 +9511,28 @@ const message = {
     parts: [{type: 'text', text: messageContent}],
     timestamp: Date.now()
 };
+
+    // 新增：附加引用信息
+    if (currentQuoteInfo) {
+        message.quote = {
+            messageId: currentQuoteInfo.id,
+            senderId: currentQuoteInfo.senderId, // 存储senderId用于查找昵称
+            content: currentQuoteInfo.content
+        };
+    }
+
 if (currentChatType === 'group') {
     message.senderId = 'user_me';
 }
 chat.history.push(message);
-addMessageBubble(message);
+addMessageBubble(message, currentChatId, currentChatType);
 await saveData();
 renderChatList();
+
+    // 新增：发送后清空引用状态
+    if (currentQuoteInfo) {
+        cancelQuoteReply();
+    }
 }
 // 辅助函数1：格式化时间戳 YYYY-MM-DD HH:MM:SS
 function getFormattedTimestamp(date) {
@@ -8753,7 +9573,7 @@ return `${seconds}秒`;
                 message.senderId = 'user_me';
             }
             chat.history.push(message);
-            addMessageBubble(message);
+            addMessageBubble(message, currentChatId, currentChatType);
             await saveData();
             renderChatList();
         }
@@ -8774,7 +9594,7 @@ return `${seconds}秒`;
                 message.senderId = 'user_me';
             }
             chat.history.push(message);
-            addMessageBubble(message);
+            addMessageBubble(message, currentChatId, currentChatType);
             await saveData();
             renderChatList();
             stickerModal.classList.remove('visible');
@@ -8796,7 +9616,7 @@ return `${seconds}秒`;
                 message.senderId = 'user_me';
             }
             chat.history.push(message);
-            addMessageBubble(message);
+            addMessageBubble(message, currentChatId, currentChatType);
             await saveData();
             renderChatList();
             sendVoiceModal.classList.remove('visible');
@@ -8818,7 +9638,7 @@ return `${seconds}秒`;
                 message.senderId = 'user_me';
             }
             chat.history.push(message);
-            addMessageBubble(message);
+            addMessageBubble(message, currentChatId, currentChatType);
             await saveData();
             renderChatList();
             sendPvModal.classList.remove('visible');
@@ -9067,75 +9887,105 @@ return `${seconds}秒`;
         }
 
         function getMixedContent(responseData) {
-            // const mixedContent = [];
-            //
-            // // 提取消息及其位置
-            // const messageRegex = new RegExp(regex, "g");
-            // let messageMatch;
-            // while ((messageMatch = messageRegex.exec(responseData)) !== null) {
-            //     mixedContent.push({
-            //         type: 'text',
-            //         content: messageMatch[0],
-            //         index: messageMatch.index,
-            //     });
-            // }
-            //
-            // // 提取HTML及其位置
-            // const htmlRegex = /<orange(?:\s+char=["']([^"']*?)["'])?\s*>([\s\S]*?)<\/orange>/g
-            // let htmlMatch;
-            // while ((htmlMatch = htmlRegex.exec(responseData)) !== null) {
-            //     mixedContent.push({
-            //         type: 'html',
-            //         content: htmlMatch[2].trim(), // HTML内容在第二个捕获组
-            //         char: htmlMatch[1] || '', // char属性值，如果没有则为空字符串
-            //         index: htmlMatch.index,
-            //     });
-            // }
-            //
-            // // 按出现顺序排序
-            // mixedContent.sort((a, b) => a.index - b.index);
-            //
-            // return mixedContent;
-
-            // 最终结果数组
             const results = [];
-            const regex = /<(orange|div)(?:[^>]*?\s+char="([^"]*)"[^>]*?|[^>]*?)>([\s\S]*?)<\/\1>|(\[[\s\S]*?\])/g;
+            let i = 0;
 
-            let lastIndex = 0;
-            let match;
+            while (i < responseData.length) {
+                const nextTagStart = responseData.indexOf('<', i);
+                const nextBracketStart = responseData.indexOf('[', i);
 
-            while ((match = regex.exec(responseData)) !== null) {
-                // 捕获两个匹配项之间的普通文本
-                if (match.index > lastIndex) {
-                    const textPart = responseData.substring(lastIndex, match.index).trim();
-                    if (textPart) {
-                        results.push({ type: 'text', content: `[unknown的消息：${textPart}]` });
+                // Find the start of the next special block
+                let firstSpecialIndex = -1;
+                if (nextTagStart !== -1 && nextBracketStart !== -1) {
+                    firstSpecialIndex = Math.min(nextTagStart, nextBracketStart);
+                } else {
+                    firstSpecialIndex = Math.max(nextTagStart, nextBracketStart);
+                }
+
+                // If no special blocks left, the rest is plain text
+                if (firstSpecialIndex === -1) {
+                    const text = responseData.substring(i).trim();
+                    if (text) results.push({ type: 'text', content: `[unknown的消息：${text}]` });
+                    break;
+                }
+
+                // If there's plain text before the special block, add it
+                if (firstSpecialIndex > i) {
+                    const text = responseData.substring(i, firstSpecialIndex).trim();
+                    if (text) results.push({ type: 'text', content: `[unknown的消息：${text}]` });
+                }
+
+                i = firstSpecialIndex;
+
+                // Process the block
+                if (responseData[i] === '<') {
+                    // Potential HTML block
+                    const tagMatch = responseData.substring(i).match(/^<([a-zA-Z0-9]+)/);
+                    if (tagMatch) {
+                        const tagName = tagMatch[1];
+                        let openCount = 0;
+                        let searchIndex = i;
+                        let blockEnd = -1;
+
+                        // Find the end of the outermost tag
+                        while (searchIndex < responseData.length) {
+                            const openTagPos = responseData.indexOf('<' + tagName, searchIndex);
+                            const closeTagPos = responseData.indexOf('</' + tagName, searchIndex);
+
+                            if (openTagPos !== -1 && (closeTagPos === -1 || openTagPos < closeTagPos)) {
+                                openCount++;
+                                searchIndex = openTagPos + 1;
+                            } else if (closeTagPos !== -1) {
+                                openCount--;
+                                searchIndex = closeTagPos + 1;
+                                if (openCount === 0) {
+                                    blockEnd = closeTagPos + `</${tagName}>`.length;
+                                    break;
+                                }
+                            } else {
+                                break; // Malformed, no closing tag
+                            }
+                        }
+
+                        if (blockEnd !== -1) {
+                            const htmlBlock = responseData.substring(i, blockEnd);
+                            const charMatch = htmlBlock.match(/<[a-z][a-z0-9]*\s+char="([^"]*)"/i);
+                            const char = charMatch ? charMatch[1] : null;
+                            results.push({ type: 'html', char: char, content: htmlBlock });
+                            i = blockEnd;
+                            continue;
+                        }
+                    }
+                }
+                
+                if (responseData[i] === '[') {
+                    // Potential [...] block
+                    const endBracket = responseData.indexOf(']', i);
+                    if (endBracket !== -1) {
+                        const text = responseData.substring(i, endBracket + 1);
+                        results.push({ type: 'text', content: text });
+                        i = endBracket + 1;
+                        continue;
                     }
                 }
 
-                if (match[3] !== undefined) { // Matched <orange> or <div> content
-                    results.push({
-                        type: 'html',
-                        char: match[2] || null,
-                        content: match[3].trim()
-                    });
-                } else if (match[4]) { // Matched [...]
-                    results.push({
-                        type: 'text',
-                        content: match[4]
-                    });
+                // If we got here, it was a false alarm (e.g., a lone '<' or '[').
+                // Treat it as plain text and move on.
+                const nextSpecial1 = responseData.indexOf('<', i + 1);
+                const nextSpecial2 = responseData.indexOf('[', i + 1);
+                let endOfText = -1;
+                if (nextSpecial1 !== -1 && nextSpecial2 !== -1) {
+                    endOfText = Math.min(nextSpecial1, nextSpecial2);
+                } else {
+                    endOfText = Math.max(nextSpecial1, nextSpecial2);
                 }
-                lastIndex = regex.lastIndex;
-            }
-
-            // 捕获最后一个匹配项之后的剩余文本
-            if (lastIndex < responseData.length) {
-                const textPart = responseData.substring(lastIndex).trim();
-                if (textPart) {
-                     results.push({ type: 'text', content: `[unknown的消息：${textPart}]` });
+                if (endOfText === -1) {
+                    endOfText = responseData.length;
                 }
+                const text = responseData.substring(i, endOfText).trim();
+                if (text) results.push({ type: 'text', content: `[unknown的消息：${text}]` });
+                i = endOfText;
             }
-
             return results;
         }
 
@@ -9202,7 +10052,7 @@ return `${seconds}秒`;
 
            const allWorldBookContent = worldBooksBefore + '\n' + worldBooksAfter;
            if (allWorldBookContent.includes('<orange>')) {
-               outputFormats += `\n     j) HTML模块: <orange>{HTML内容}</orange>。这是一种特殊的、用于展示丰富样式的小卡片消息，你可以用它来创造更有趣的互动。`;
+               outputFormats += `\n     j) HTML模块: {HTML内容}。这是一种特殊的、用于展示丰富样式的小卡片消息，格式必须为纯HTML+行内CSS，你可以用它来创造更有趣的互动。`;
            }
 
             prompt += `11. 你的输出格式必须严格遵循以下几种之一，可以组合使用：${outputFormats}\n`;
@@ -9276,7 +10126,7 @@ return `${seconds}秒`;
             return prompt;
         }
 
-        async function getAiReply() {
+        async function getAiReply(chatId, chatType) {
             if (isGenerating) return;
             const {url, key, model, provider} = db.apiSettings;
             if (!url || !key || !model) {
@@ -9284,18 +10134,18 @@ return `${seconds}秒`;
                 switchScreen('api-settings-screen');
                 return;
             }
-            const chat = (currentChatType === 'private') ? db.characters.find(c => c.id === currentChatId) : db.groups.find(g => g.id === currentChatId);
+            const chat = (chatType === 'private') ? db.characters.find(c => c.id === chatId) : db.groups.find(g => g.id === chatId);
             if (!chat) return;
             isGenerating = true;
             getReplyBtn.disabled = true;
             regenerateBtn.disabled = true;
-            const typingName = currentChatType === 'private' ? chat.remarkName : chat.name;
+            const typingName = chatType === 'private' ? chat.remarkName : chat.name;
             typingIndicator.textContent = `“${typingName}”正在输入中...`;
             typingIndicator.style.display = 'block';
             messageArea.scrollTop = messageArea.scrollHeight;
             try {
                 let systemPrompt, requestBody;
-                if (currentChatType === 'private') {
+                if (chatType === 'private') {
                     systemPrompt = generatePrivateSystemPrompt(chat);
                 } else {
                     systemPrompt = generateGroupSystemPrompt(chat);
@@ -9358,7 +10208,7 @@ return `${seconds}秒`;
                     body: JSON.stringify(requestBody)
                 });
                 if (!response.ok) throw new Error(`API Error: ${response.status} ${await response.text()}`);
-                await processStream(response, chat, provider);
+                await processStream(response, chat, provider, chatId, chatType);
             } catch (error) {
                 console.error('AI回复失败:', error);
                 showToast(`AI回复失败: ${error.message}`);
@@ -9370,7 +10220,7 @@ return `${seconds}秒`;
             }
         }
 
-                async function processStream(response, chat, apiType) {
+        async function processStream(response, chat, apiType, targetChatId, targetChatType) {
             const reader = response.body.getReader(), decoder = new TextDecoder();
             let fullResponse = "", accumulatedChunk = "";
             for (; ;) {
@@ -9406,8 +10256,17 @@ return `${seconds}秒`;
             if (fullResponse) {
                 // ▼▼▼▼▼▼▼▼▼▼ 核心修改从这里开始 ▼▼▼▼▼▼▼▼▼▼
 
-                // 从完整的回复中，拆分出所有消息（包括普通文本和HTML小剧场），并过滤掉空消息
-                const messages = getMixedContent(fullResponse).filter(item => item.content.trim() !== '');
+                const trimmedResponse = fullResponse.trim();
+                let messages;
+
+                // 新增：判断回复是否可能是一个完整的HTML块
+                if (trimmedResponse.startsWith('<') && trimmedResponse.endsWith('>')) {
+                    // 如果是，则将其视为单个HTML消息，避免被错误切分
+                    messages = [{ type: 'html', content: trimmedResponse }];
+                } else {
+                    // 否则，使用原有的逻辑来处理可能混合了多种格式的文本
+                    messages = getMixedContent(fullResponse).filter(item => item.content.trim() !== '');
+                }
 
                 let firstMessageProcessed = false; // 用于标记是否是第一条消息
 
@@ -9419,7 +10278,7 @@ return `${seconds}秒`;
                     firstMessageProcessed = true;
 
 
-                    if (currentChatType === 'private') {
+                    if (targetChatType === 'private') {
                         const character = chat;
                         const myName = character.myName;
 
@@ -9441,9 +10300,9 @@ return `${seconds}秒`;
                         }
 
                         chat.history.push(message);
-                        addMessageBubble(message);
+                        addMessageBubble(message, targetChatId, targetChatType);
 
-                    } else if (currentChatType === 'group') {
+                    } else if (targetChatType === 'group') {
                         const group = chat;
                         const r = /\[(.*?)((?:的消息|的语音|发送的表情包|发来的照片\/视频))：/;
                         const nameMatch = item.content.match(r);
@@ -9462,7 +10321,7 @@ return `${seconds}秒`;
                                 };
                                 // console.log(message)
                                 group.history.push(message);
-                                addMessageBubble(message);
+                                addMessageBubble(message, targetChatId, targetChatType);
                             }
                         }
                     }
@@ -9510,7 +10369,7 @@ return `${seconds}秒`;
             renderMessages(false, true); // 重新渲染并滚动到底部
 
             // 4. 重新触发AI回复
-            await getAiReply();
+            await getAiReply(currentChatId, currentChatType);
         }
 
         // --- Other Sub-systems Setup (Stickers, Voice, etc.) ---
@@ -10168,6 +11027,86 @@ return `${seconds}秒`;
             });
         }
 
+        function renderCategorizedWorldBookList(container, books, selectedIds, idPrefix) {
+            container.innerHTML = '';
+            if (!books || books.length === 0) {
+                container.innerHTML = '<li style="color: #888; text-align: center; padding: 15px;">暂无世界书条目</li>';
+                return;
+            }
+
+            const groupedBooks = books.reduce((acc, book) => {
+                const category = book.category || '未分类';
+                if (!acc[category]) {
+                    acc[category] = [];
+                }
+                acc[category].push(book);
+                return acc;
+            }, {});
+
+            const sortedCategories = Object.keys(groupedBooks).sort((a, b) => {
+                if (a === '未分类') return 1;
+                if (b === '未分类') return -1;
+                return a.localeCompare(b);
+            });
+
+            sortedCategories.forEach(category => {
+                const categoryBooks = groupedBooks[category];
+                const allInCategorySelected = categoryBooks.every(book => selectedIds.includes(book.id));
+
+                const groupEl = document.createElement('div');
+                groupEl.className = 'world-book-category-group';
+
+                groupEl.innerHTML = `
+                    <div class="world-book-category-header">
+                        <input type="checkbox" class="category-checkbox" ${allInCategorySelected ? 'checked' : ''}>
+                        <span class="category-name">${category}</span>
+                        <span class="category-arrow">▼</span>
+                    </div>
+                    <ul class="world-book-items-list">
+                        ${categoryBooks.map(book => {
+                            const isChecked = selectedIds.includes(book.id);
+                            return `
+                                <li class="world-book-select-item">
+                                    <input type="checkbox" class="item-checkbox" id="${idPrefix}-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}>
+                                    <label for="${idPrefix}-${book.id}">${book.name}</label>
+                                </li>
+                            `;
+                        }).join('')}
+                    </ul>
+                `;
+                container.appendChild(groupEl);
+            });
+
+            // Add event listeners
+            container.querySelectorAll('.world-book-category-header').forEach(header => {
+                header.addEventListener('click', (e) => {
+                    if (e.target.type === 'checkbox') return; // Don't toggle if clicking checkbox
+                    const group = header.closest('.world-book-category-group');
+                    group.classList.toggle('open');
+                });
+            });
+
+            container.querySelectorAll('.category-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const group = e.target.closest('.world-book-category-group');
+                    const itemCheckboxes = group.querySelectorAll('.item-checkbox');
+                    itemCheckboxes.forEach(itemCb => {
+                        itemCb.checked = e.target.checked;
+                    });
+                });
+            });
+
+            container.querySelectorAll('.item-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const group = e.target.closest('.world-book-category-group');
+                    const categoryCheckbox = group.querySelector('.category-checkbox');
+                    const allItems = group.querySelectorAll('.item-checkbox');
+                    const allChecked = Array.from(allItems).every(item => item.checked);
+                    categoryCheckbox.checked = allChecked;
+                });
+            });
+        }
+
         function setupChatSettings() {
             const themeSelect = document.getElementById('setting-theme-color');
             themeSelect.innerHTML = '';
@@ -10279,9 +11218,14 @@ return `${seconds}秒`;
                 if (!character) return;
                 if (confirm(`你确定要清空与“${character.remarkName}”的所有聊天记录吗？这个操作是不可恢复的！`)) {
                     character.history = [];
+                    character.status = '在线'; // 重置状态
                     await saveData();
                     renderMessages(false, true);
                     renderChatList();
+                    // 更新聊天室顶部的状态显示
+                    if (currentChatId === character.id) {
+                        document.getElementById('chat-room-status-text').textContent = '在线';
+                    }
                     settingsSidebar.classList.remove('open');
                     showToast('聊天记录已清空');
                 }
@@ -10289,19 +11233,12 @@ return `${seconds}秒`;
             linkWorldBookBtn.addEventListener('click', () => {
                 const character = db.characters.find(c => c.id === currentChatId);
                 if (!character) return;
-                worldBookSelectionList.innerHTML = '';
-                db.worldBooks.forEach(book => {
-                    const li = document.createElement('li');
-                    li.className = 'world-book-select-item';
-                    const isChecked = (character.worldBookIds || []).includes(book.id);
-                    li.innerHTML = `<input type="checkbox" id="wb-select-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}><label for="wb-select-${book.id}">${book.name}</label>`;
-                    worldBookSelectionList.appendChild(li);
-                });
+                renderCategorizedWorldBookList(worldBookSelectionList, db.worldBooks, character.worldBookIds || [], 'wb-select');
                 worldBookSelectionModal.classList.add('visible');
             });
 
             saveWorldBookSelectionBtn.addEventListener('click', async () => {
-                const selectedIds = Array.from(worldBookSelectionList.querySelectorAll('input:checked')).map(input => input.value);
+                const selectedIds = Array.from(worldBookSelectionList.querySelectorAll('.item-checkbox:checked')).map(input => input.value);
                 if (currentChatType === 'private') {
                     const character = db.characters.find(c => c.id === currentChatId);
                     if (character) character.worldBookIds = selectedIds;
@@ -10524,6 +11461,7 @@ return `${seconds}秒`;
                     chatBg: '',
                     history: [],
                     isPinned: false,
+                    unreadCount: 0,
                     useCustomBubbleCss: false,
                     customBubbleCss: '',
                     worldBookIds: []
@@ -10761,14 +11699,7 @@ return `${seconds}秒`;
             linkGroupWorldBookBtn.addEventListener('click', () => {
                 const group = db.groups.find(g => g.id === currentChatId);
                 if (!group) return;
-                worldBookSelectionList.innerHTML = '';
-                db.worldBooks.forEach(book => {
-                    const li = document.createElement('li');
-                    li.className = 'world-book-select-item';
-                    const isChecked = (group.worldBookIds || []).includes(book.id);
-                    li.innerHTML = `<input type="checkbox" id="wb-select-group-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}><label for="wb-select-group-${book.id}">${book.name}</label>`;
-                    worldBookSelectionList.appendChild(li);
-                });
+                renderCategorizedWorldBookList(worldBookSelectionList, db.worldBooks, group.worldBookIds || [], 'wb-select-group');
                 worldBookSelectionModal.classList.add('visible');
             });
         }
@@ -11274,7 +12205,7 @@ return `${seconds}秒`;
                 const userList = document.getElementById('forum-user-list');
 
                 // 收集所有选中的ID
-                const selectedWorldBookIds = Array.from(worldBookList.querySelectorAll('input:checked')).map(input => input.value);
+                const selectedWorldBookIds = Array.from(worldBookList.querySelectorAll('.item-checkbox:checked')).map(input => input.value);
                 const selectedCharIds = Array.from(charList.querySelectorAll('input:checked')).map(input => input.value);
                 const selectedUserPersonaIds = Array.from(userList.querySelectorAll('input:checked')).map(input => input.value);
 
@@ -11303,20 +12234,7 @@ return `${seconds}秒`;
                 const currentBindings = db.forumBindings || { worldBookIds: [], charIds: [], userPersonaIds: [] };
 
                 // 填充世界书列表
-                if (db.worldBooks.length > 0) {
-                    db.worldBooks.forEach(book => {
-                        const isChecked = currentBindings.worldBookIds.includes(book.id);
-                        const li = document.createElement('li');
-                        li.className = 'binding-list-item';
-                        li.innerHTML = `
-                            <input type="checkbox" id="wb-bind-${book.id}" value="${book.id}" ${isChecked ? 'checked' : ''}>
-                            <label for="wb-bind-${book.id}">${book.name}</label>
-                        `;
-                        worldBookList.appendChild(li);
-                    });
-                } else {
-                    worldBookList.innerHTML = '<li>暂无世界书设定</li>';
-                }
+                renderCategorizedWorldBookList(worldBookList, db.worldBooks, currentBindings.worldBookIds, 'wb-bind');
 
                 // 填充Char列表
                 if (db.characters.length > 0) {
@@ -11853,6 +12771,18 @@ function renderForumPosts(posts) {
 
             let prompt = `你正在模拟一个名为 ${char.realName} 的角色的手机内部信息。`;
             prompt += `该角色的核心人设是：${char.persona}。\n`;
+
+            // 新增：获取并注入世界书和用户人设
+            const associatedWorldBooks = (char.worldBookIds || []).map(id => db.worldBooks.find(wb => wb.id === id)).filter(Boolean);
+            if (associatedWorldBooks.length > 0) {
+                const worldBookContext = associatedWorldBooks.map(wb => `设定名: ${wb.name}\n内容: ${wb.content}`).join('\n\n');
+                prompt += `\n为了更好地理解背景，请参考以下世界观设定：\n---\n${worldBookContext}\n---\n`;
+            }
+            if (char.myPersona) {
+                prompt += `\n作为参考，我（用户）的人设是：${char.myPersona}\n`;
+            }
+            // 新增结束
+
             prompt += `最近，我（称呼为 ${char.myName}）和 ${char.realName} 的对话如下（这是你们关系和当前状态的核心参考）：\n---\n${mainChatContext}\n---\n`;
             prompt += `现在，我正在偷看Ta手机上的“${appName}”。请你基于Ta的人设和我们最近的聊天内容，生成符合该应用场景的、高度相关且富有沉浸感的内容。\n`;
             prompt += `你的输出必须是一个JSON对象，且只包含JSON内容，不要有任何额外的解释或标记。根据应用类型，JSON结构如下：\n`;
