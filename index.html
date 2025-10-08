@@ -6670,6 +6670,9 @@ return Promise.resolve();
             }
 
             const { nickname, handle, bio, posts } = data;
+            const __safeNickname = DOMPurify.sanitize(String(nickname||''));
+            const __safeHandle = DOMPurify.sanitize(String(handle||''));
+            const __safeBio = DOMPurify.sanitize(String(bio||''));
             const character = db.characters.find(c => c.id === currentChatId);
             const peekSettings = character?.peekScreenSettings || { unlockAvatar: '' };
             const fixedAvatar = peekSettings.unlockAvatar || 'https://i.postimg.cc/SNwL1XwR/chan-11.png';
@@ -6688,12 +6691,12 @@ return Promise.resolve();
                             <div class="unlock-post-card-header">
                                 <img src="${fixedAvatar}" alt="Profile Avatar">
                                 <div class="unlock-post-card-author-info">
-                                    <span class="username">${nickname}</span>
+                                    <span class="username">${__safeNickname}</span>
                                     <span class="timestamp">${post.timestamp}</span>
                                 </div>
                             </div>
                             <div class="unlock-post-card-content">
-                                ${post.content.replace(/\n/g, '<br>')}
+                                ${DOMPurify.sanitize(post.content).replace(/\n/g, \'<br>\')}
                             </div>
                             <div class="unlock-post-card-actions">
                                 <div class="action"><svg viewBox="0 0 24 24"><path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z"></path></svg> <span>分享</span></div>
@@ -6709,7 +6712,7 @@ return Promise.resolve();
                 <header class="app-header">
                     <button class="back-btn" data-target="peek-screen">‹</button>
                     <div class="title-container">
-                        <h1 class="title">${nickname}</h1>
+                        <h1 class="title">${__safeNickname}</h1>
                     </div>
                     <button class="action-btn" id="refresh-unlock-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg></button>
                 </header>
@@ -6717,8 +6720,8 @@ return Promise.resolve();
                     <div class="unlock-profile-header">
                         <img src="${fixedAvatar}" alt="Profile Avatar" class="unlock-profile-avatar">
                         <div class="unlock-profile-info">
-                            <h2 class="unlock-profile-username">${nickname}</h2>
-                            <p class="unlock-profile-handle">${handle}</p>
+                            <h2 class="unlock-profile-username">${__safeNickname}</h2>
+                            <p class="unlock-profile-handle">${__safeHandle}</p>
                         </div>
                     </div>
                     <div class="unlock-profile-bio">
@@ -6882,10 +6885,10 @@ return Promise.resolve();
                 listHtml = '<p class="placeholder-text">正在生成备忘录...</p>';
             } else {
                 memos.forEach(memo => {
-                    const firstLine = memo.content.split('\n')[0];
+                    const firstLine = DOMPurify.sanitize(memo.content).replace(/<[^>]*>/g,'').split('\n')[0];
                     listHtml += `
                         <li class="memo-item" data-id="${memo.id}">
-                            <h3 class="memo-item-title">${memo.title}</h3>
+                            <h3 class="memo-item-title">${DOMPurify.sanitize(String(memo.title||''))}</h3>
                             <p class="memo-item-preview">${firstLine}</p>
                         </li>
                     `;
@@ -6920,11 +6923,11 @@ return Promise.resolve();
         function renderMemoDetail(memo) {
             const screen = document.getElementById('peek-memo-detail-screen');
             if (!memo) return;
-            const contentHtml = memo.content.replace(/\n/g, '<br>');
+            const contentHtml = DOMPurify.sanitize(memo.content).replace(/\n/g, '<br>');
             screen.innerHTML = `
                 <header class="app-header">
                     <button class="back-btn" data-target="peek-memos-screen">‹</button>
-                    <div class="title-container"><h1 class="title">${memo.title}</h1></div>
+                    <div class="title-container"><h1 class="title">${DOMPurify.sanitize(String(memo.title||''))}</h1></div>
                     <button class="action-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg></button>
                 </header>
                 <main class="content" style="padding: 20px; line-height: 1.6;">${contentHtml}</main>
@@ -12562,7 +12565,7 @@ function renderPostDetail(post) {
                     </div>
                 </div>
                 <h2 class="post-detail-title">${post.title}</h2>
-                <div class="post-detail-content-body">${post.content.replace(/\n/g, '<br>')}</div>
+                <div class="post-detail-content-body">${DOMPurify.sanitize(post.content).replace(/\n/g, \'<br>\')}</div>
                 <div class="post-detail-actions">
                     <div class="action-item">
                         <svg viewBox="0 0 24 24"><path d="M20,8H4V6H20V8M18,10H6V12H18V10M16,14H8V16H16V14M22,4V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V4A2,2 0 0,1 4,2H20A2,2 0 0,1 22,4Z" /></svg>
@@ -13123,7 +13126,33 @@ function renderForumPosts(posts) {
             return prompt;
         }
 
-        async function generateAndRenderPeekContent(appType, options = {}) {
+        async 
+// === Safe JSON extractor: prefers ```json code fences, falls back to brace balancing ===
+function __extractJson(contentStr) {
+  try {
+    const fence = contentStr.match(/```json([\s\S]*?)```|```([\s\S]*?)```/i);
+    const candidate = fence ? (fence[1] || fence[2]) : contentStr;
+    const start = candidate.indexOf('{');
+    if (start === -1) throw new Error('未找到“{”');
+    let depth = 0, end = -1;
+    for (let i = start; i < candidate.length; i++) {
+      const ch = candidate[i];
+      if (ch === '{') depth++;
+      else if (ch === '}') {
+        depth--;
+        if (depth === 0) { end = i; break; }
+      }
+    }
+    if (end === -1) throw new Error('大括号不配平');
+    const jsonSlice = candidate.slice(start, end + 1);
+    return JSON.parse(jsonSlice);
+  } catch (e) {
+    console.error('[extractJson] 解析失败：', e, contentStr.slice(0, 400));
+    throw e;
+  }
+}
+
+function generateAndRenderPeekContent(appType, options = {}) {
             const { forceRefresh = false } = options;
 
             if (generatingPeekApps.has(appType)) {
